@@ -1,219 +1,242 @@
-// Datos de los productos con precios actualizados
-        const products = [
+// Products with your brainrots
+        let products = [
             {
                 id: 1,
                 name: "TRALALITA TRALALA",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/15/Tralalita.png/revision/latest?cb=",
-                price: 2000
+                price: "$2.000",
+                image: "https://static.wikia.nocookie.net/stealabr/images/1/15/Tralalita.png/revision/latest?cb=20241201234500",
+                description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!"
             },
             {
                 id: 2,
                 name: "TRALALERO TRALALA",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/16/TralaleroTralala.png/revision/latest?cb=",
-                price: 2000
+                price: "$2.000",
+                image: "https://static.wikia.nocookie.net/stealabr/images/1/16/TralaleroTralala.png/revision/latest?cb=20241201234500",
+                description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!"
             },
             {
                 id: 3,
                 name: "LOS BOMBINITOS",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/16/Alvin_and_the_chipmunks.png/revision/latest?cb=",
-                price: 4000
+                price: "$4.000",
+                image: "https://static.wikia.nocookie.net/stealabr/images/1/16/Alvin_and_the_chipmunks.png/revision/latest?cb=20241201234500",
+                description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!"
             },
             {
                 id: 4,
                 name: "LOS COCODRILITOS",
+                price: "$2.500",
                 image: "https://tr.rbxcdn.com/180DAY-5f80d101723edef6ddda7aeda132dee8/420/420/BackAccessory/Webp/noFilter",
-                price: 2500
+                description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!"
             },
             {
                 id: 5,
                 name: "LOS ORCALITOS",
-                image: "https://static.wikia.nocookie.net/stealabr/images/2/27/Los_orcalitos.png/revision/latest?cb=",
-                price: 6000
+                price: "$6.000",
+                image: "https://static.wikia.nocookie.net/stealabr/images/2/27/Los_orcalitos.png/revision/latest?cb=20241201234500",
+                description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!"
             },
             {
                 id: 6,
                 name: "JOB JOB JOB SAHUR",
-                image: "https://static.wikia.nocookie.net/stealabr/images/0/03/Job.webp/revision/latest?cb=",
-                price: 10000
+                price: "$6.000",
+                image: "https://static.wikia.nocookie.net/stealabr/images/0/03/Job.webp/revision/latest?cb=20241201234500",
+                description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!"
             },
             {
                 id: 7,
                 name: "MATEO",
-                image: "https://static.wikia.nocookie.net/stealabr/images/7/7d/Matteofr.png/revision/latest?cb=",
-                price: 3000
+                price: "$2.500",
+                image: "https://static.wikia.nocookie.net/stealabr/images/7/7d/Matteofr.png/revision/latest?cb=20241201234500",
+                description: "¡El increíble MATEO! ¡Súper único y especial!"
             },
             {
                 id: 8,
                 name: "PAKRAHMATMAMAT",
-                image: "https://static.wikia.nocookie.net/stealabr/images/e/e7/Pakrah.png/revision/latest?cb=",
-                price: 3000
+                price: "$4.000",
+                image: "https://static.wikia.nocookie.net/stealabr/images/e/e7/Pakrah.png/revision/latest?cb=20241201234500",
+                description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!"
             },
             {
                 id: 9,
                 name: "LA VACA SATURNO SATURNITA",
+                price: "$4.000",
                 image: "https://images.cults3d.com/sc1lg1j6HDg5yTcrRX172eYVYxE=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/13440098/illustration-file/7ad3e540-865e-4ccb-bcff-b8380a99c160/vaca-saturno.webp",
-                price: 5000
+                description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!"
             }
         ];
 
-        let currentSection = 'catalog'; // 'catalog' o 'purchase'
+        // Get all the elements we need
+        const productsGrid = document.getElementById('productsGrid');
+        const purchaseSection = document.getElementById('purchaseSection');
+        const selectedProductInfo = document.getElementById('selectedProductInfo');
+        const backToProducts = document.getElementById('backToProducts');
+        const purchaseForm = document.getElementById('purchaseForm');
+        const successMessage = document.getElementById('successMessage');
 
-        let selectedProduct = null;
+        let currentProduct = null;
 
-        // Generar productos dinámicamente
-        function generateProducts() {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = '';
+        // Back to products button
+        backToProducts.addEventListener('click', () => {
+            purchaseSection.classList.add('hidden');
+            document.getElementById('productsGrid').parentElement.classList.remove('hidden');
+        });
 
-            products.forEach((product, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card bg-gradient-to-br from-purple-800 to-blue-800 rounded-3xl p-6 text-center border-4 border-purple-500 hover:border-yellow-400 bounce-in';
-  
-                
-                productCard.innerHTML = `
-                    <div class="mb-4">
-                        <img src="${product.image}" alt="${product.name}" 
-                             class="w-32 h-32 mx-auto rounded-2xl border-4 border-yellow-400 object-cover float-animation"
-                             onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';">
+        // Show all products in the new layout: NAME - IMAGE - PRICE - BUTTON
+        function renderProducts() {
+            productsGrid.innerHTML = products.map((product, index) => `
+                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl bounce-in" style="animation-delay: ${index * 0.2}s">
+                    <!-- NAME AT TOP -->
+                    <div class="p-6 pb-4">
+                        <h3 class="text-2xl font-black text-yellow-300 text-center">${product.name}</h3>
                     </div>
-                    <h3 class="text-xl font-black text-yellow-300 mb-4 min-h-[3rem] flex items-center justify-center">
-                        ${product.name}
-                    </h3>
-                    <div class="space-y-3">
-                        <div class="text-2xl font-black text-green-400">💰 $${product.price.toLocaleString()} COP</div>
-                        <button onclick="showPurchase(${product.id})" 
-                                class="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-3 px-6 rounded-xl pulse-glow transform hover:scale-105 transition-all duration-300">
-                            🛒 COMPRAR AHORA
+                    
+                    <!-- IMAGE IN MIDDLE -->
+                    <div class="relative overflow-hidden mx-6 mb-4">
+                        <div class="w-full h-56 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
+                            <div class="flex flex-col items-center justify-center text-white w-full h-full">
+                                <span class="text-4xl mb-2">🖼</span>
+                                <span class="font-bold text-center px-4">${product.name}</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full font-black text-sm">
+                            ¡NUEVO!
+                        </div>
+                    </div>
+                    
+                    <!-- PRICE -->
+                    <div class="px-6 pb-4">
+                        <div class="text-center bg-green-500/20 rounded-xl py-3">
+                            <span class="text-3xl font-black text-green-300">${product.price}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- BUTTON AT BOTTOM -->
+                    <div class="p-6 pt-0">
+                        <button onclick="buyProduct(${product.id}, '${product.name}', '${product.price}')" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
+                            <span class="emoji-spin">💳</span> ¡COMPRAR AHORA!
                         </button>
                     </div>
-                `;
-                
-                grid.appendChild(productCard);
-            });
+                </div>
+            `).join('');
         }
 
-        // Mostrar sección de catálogo
-        function showCatalog() {
-            document.getElementById('catalog-section').classList.remove('hidden');
-            document.getElementById('purchase-section').classList.add('hidden');
-            document.getElementById('order-confirmation-section').classList.add('hidden');
-            currentSection = 'catalog';
-            
-            // Scroll suave al catálogo
-            document.getElementById('catalog-section').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        }
-
-        // Mostrar sección de compra
-        function showPurchase(productId) {
-            selectedProduct = products.find(p => p.id === productId);
-            if (!selectedProduct) return;
-
-            // Actualizar información del producto en la sección de compra
-            const productInfo = document.getElementById('purchase-product-info');
-            productInfo.innerHTML = `
-                <img src="${selectedProduct.image}" alt="${selectedProduct.name}" 
-                     class="w-32 h-32 mx-auto rounded-2xl mb-4 border-4 border-yellow-400 float-animation"
-                     onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';">
-                <h3 class="text-2xl font-bold text-yellow-300 mb-2">${selectedProduct.name}</h3>
-                <p class="text-3xl font-black text-green-400">💰 $${selectedProduct.price.toLocaleString()} COP</p>
-            `;
-
-            // Cambiar secciones
-            document.getElementById('catalog-section').classList.add('hidden');
-            document.getElementById('purchase-section').classList.remove('hidden');
-            currentSection = 'purchase';
-            
-            // Scroll suave a la sección de compra
-            document.getElementById('purchase-section').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        }
-
-        // Mostrar confirmación del pedido
-        function showOrderConfirmation(order) {
-            // Llenar los detalles del pedido
-            const orderDetails = document.getElementById('order-details');
-            orderDetails.innerHTML = `
-                <h3 class="text-2xl font-bold text-yellow-300 mb-4 text-center">📋 DETALLES DEL PEDIDO</h3>
-                <div class="space-y-3 text-lg">
-                    <div class="flex justify-between">
-                        <span class="text-gray-300">📅 Fecha:</span>
-                        <span class="text-white font-bold">${order.date}</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-300">🕐 Hora:</span>
-                        <span class="text-white font-bold">${order.time}</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-300">🎮 Producto:</span>
-                        <span class="text-white font-bold">${order.product}</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-300">💰 Precio:</span>
-                        <span class="text-green-400 font-bold text-xl">$${order.price.toLocaleString()} COP</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-300">👤 Usuario Roblox:</span>
-                        <span class="text-white font-bold">${order.robloxUser}</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-300">🆔 ID Pedido:</span>
-                        <span class="text-purple-400 font-bold">#${order.id.toString().slice(-6)}</span>
-                    </div>
+        // Buy product function
+        function buyProduct(id, name, price) {
+            currentProduct = { id, name, price };
+            selectedProductInfo.innerHTML = `
+                <div class="bg-white/10 rounded-xl p-4">
+                    <h3 class="text-3xl font-black text-yellow-300">${name}</h3>
+                    <p class="text-2xl font-bold text-green-400">${price}</p>
                 </div>
             `;
             
-            // Cambiar a la sección de confirmación
-            document.getElementById('catalog-section').classList.add('hidden');
-            document.getElementById('purchase-section').classList.add('hidden');
-            document.getElementById('order-confirmation-section').classList.remove('hidden');
-            
-            // Scroll suave a la confirmación
-            document.getElementById('order-confirmation-section').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
+            // Hide products and show purchase section
+            document.getElementById('productsGrid').parentElement.classList.add('hidden');
+            purchaseSection.classList.remove('hidden');
+            purchaseSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Manejar envío del formulario
-        document.getElementById('purchase-form').addEventListener('submit', function(e) {
+  // Handle purchase form
+        purchaseForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const robloxName = document.getElementById('roblox-name').value.trim();
+            const customerName = document.getElementById('customerName').value;
+            const robloxName = document.getElementById('robloxName').value;
             
-            if (!robloxName || !selectedProduct) return;
+            // Tu número de WhatsApp
+            const whatsappNumber = "573245640954";
+            
+            // --- VERIFICACIÓN CRÍTICA ---
+            // Asegúrate de que un producto fue seleccionado antes de continuar
+            if (!currentProduct) {
+                console.error("Error: No se ha seleccionado un producto.");
+                alert("Por favor, selecciona un producto para realizar la compra.");
+                return;
+            }
+            
+            // 1. Creación del Mensaje de WhatsApp
+            // ¡IMPORTANTE! Uso de comillas invertidas (backticks: `) para interpolar variables ${...}
+            // ✅ CORRECCIÓN: Usar backticks (comillas invertidas)
+const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
-            // Preparar datos del pedido con fecha y hora exacta
-            const now = new Date();
-            const currentDate = now.toLocaleDateString('es-CO');
-            const currentTime = now.toLocaleTimeString('es-CO', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: true 
-            });
-            
-            // Crear objeto del pedido
-            const orderObj = {
-                id: Date.now(),
-                date: currentDate,
-                time: currentTime,
-                product: selectedProduct.name,
-                price: selectedProduct.price,
-                robloxUser: robloxName,
-                timestamp: now.getTime()
-            };
+📦 PRODUCTO: ${currentProduct.name}
+💰 PRECIO: ${currentProduct.price}
 
-            // Mostrar confirmación del pedido
-            showOrderConfirmation(orderObj);
+👤 DATOS DEL CLIENTE:
+• Nombre Real: ${customerName}
+• Usuario Roblox: ${robloxName}
+
+📅 Fecha del pedido: ${new Date().toLocaleString('es-ES')}
+
+¡Hola! Quiero hacer este pedido de brainrot 🚀`;
+            // 2. Creación del Enlace de WhatsApp (LA CORRECCIÓN)
+            // Se usan backticks y la función encodeURIComponent() para el 'cifrado'
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
             
-            // Limpiar formulario
-            document.getElementById('purchase-form').reset();
+            // Try to open WhatsApp with multiple fallbacks
+            try {
+                // Method 1: Direct window.open
+                const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+                
+                // Method 2: If blocked, try location change
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.href = whatsappLink;
+                }
+            } catch (error) {
+                // Method 3: Fallback - create and click link
+                const link = document.createElement('a');
+                link.href = whatsappLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            purchaseForm.reset();
+            showSuccess('¡Abriendo WhatsApp! Si no se abre, haz clic en el enlace que aparece 📱');
+            
+            // Show WhatsApp link as backup
+            setTimeout(() => {
+                const linkElement = document.createElement('div');
+                linkElement.innerHTML = `
+                    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-6 rounded-2xl shadow-2xl z-50 max-w-md text-center">
+                        <h3 class="text-xl font-bold mb-4">¿No se abrió WhatsApp?</h3>
+                        <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="bg-white text-green-500 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors">
+                            📱 Abrir WhatsApp Manualmente
+                        </a>
+                        <button onclick="this.parentElement.parentElement.remove()" class="block mt-4 text-white underline">Cerrar</button>
+                    </div>
+                `;
+                document.body.appendChild(linkElement);
+                
+                // Auto remove after 10 seconds
+                setTimeout(() => {
+                    if (linkElement.parentElement) {
+                        linkElement.remove();
+                    }
+                }, 10000);
+            }, 2000);
+            
+            // Go back to products after 6 seconds
+            setTimeout(() => {
+                purchaseSection.classList.add('hidden');
+                document.getElementById('productsGrid').parentElement.classList.remove('hidden');
+            }, 6000);
         });
 
+        // Show success message with cool animation
+        function showSuccess(message) {
+            const msgElement = successMessage.querySelector('p');
+            msgElement.textContent =  {message};
+            successMessage.classList.remove('hidden');
+            
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 4000);
+        }
 
+        // Start the magic!
+        renderProducts();
 
-        // Inicializar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            generateProducts();
-        });
