@@ -1,1 +1,0 @@
-```yaml - '_sass' - exclude - Gemfile - Gemfile.lock settings: markdown: kramdown highlighter: rouge extensions: autolink: true tables: true fenced_code_blocks: true
