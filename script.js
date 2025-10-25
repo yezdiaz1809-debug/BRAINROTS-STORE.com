@@ -1,4 +1,4 @@
-    // Products with your brainrots
+// Products with your brainrots
         let products = [
             {
                 id: 1,
@@ -239,4 +239,3 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
-    
