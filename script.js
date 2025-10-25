@@ -4,14 +4,14 @@
                 id: 1,
                 name: "TRALALITA TRALALA",
                 price: "$2.000",
-                image: "Tralalita.jpg",
+                image: "tralalita.jpg",
                 description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!"
             },
             {
                 id: 2,
                 name: "TRALALERO TRALALA",
                 price: "$2.000",
-                image: "TralaleroTralala.jpg",
+                image: "tralaleroTralala.jpg",
                 description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!"
             },
             {
@@ -39,21 +39,21 @@
                 id: 6,
                 name: "JOB JOB JOB SAHUR",
                 price: "$6.000",
-                image: "Job.jpg",
+                image: "job.jpg",
                 description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!"
             },
             {
                 id: 7,
                 name: "MATEO",
                 price: "$2.500",
-                image: "Matteofr.jpg",
+                image: "matteofr.jpg",
                 description: "¡El increíble MATEO! ¡Súper único y especial!"
             },
             {
                 id: 8,
                 name: "PAKRAHMATMAMAT",
                 price: "$4.000",
-                image: "Pakrah.jpg",
+                image: "pakrah.jpg",
                 description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!"
             },
             {
@@ -238,6 +238,7 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
 
 
 
