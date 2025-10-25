@@ -62,6 +62,12 @@
                 price: "$4.000",
                 image: "noFilter (2).jpg",
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!"
+            },
+            {  
+                id: 10,
+                name: "LOS TIPI TACOS",
+                price: "10.000",
+                image: "Los_tipi_tacos.jpg"
             }
         ];
        
@@ -220,5 +226,6 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
         // Start the magic!
         renderProducts();
     
+
 
 
