@@ -64,7 +64,8 @@
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!"
             }
         ];
-       // Get all the elements we need
+       
+// Get all the elements we need
         const productsGrid = document.getElementById('productsGrid');
         const purchaseSection = document.getElementById('purchaseSection');
         const selectedProductInfo = document.getElementById('selectedProductInfo');
@@ -239,3 +240,4 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
         // Start the magic!
         renderProducts();
     
+
