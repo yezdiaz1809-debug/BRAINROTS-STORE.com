@@ -4,63 +4,63 @@
                 id: 1,
                 name: "TRALALITA TRALALA",
                 price: "$2.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/15/Tralalita.png/revision/latest?cb=20241201234500",
+                image: "Tralalita.jpg",
                 description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!"
             },
             {
                 id: 2,
                 name: "TRALALERO TRALALA",
                 price: "$2.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/16/TralaleroTralala.png/revision/latest?cb=20241201234500",
+                image: "TralaleroTralala.jpg",
                 description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!"
             },
             {
                 id: 3,
                 name: "LOS BOMBINITOS",
                 price: "$4.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/16/Alvin_and_the_chipmunks.png/revision/latest?cb=20241201234500",
+                image: "los bombinitos.jpg",
                 description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!"
             },
             {
                 id: 4,
                 name: "LOS COCODRILITOS",
                 price: "$2.500",
-                image: "https://tr.rbxcdn.com/180DAY-5f80d101723edef6ddda7aeda132dee8/420/420/BackAccessory/Webp/noFilter",
+                image: "noFilter.jpg",
                 description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!"
             },
             {
                 id: 5,
                 name: "LOS ORCALITOS",
                 price: "$6.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/2/27/Los_orcalitos.png/revision/latest?cb=20241201234500",
+                image: "noFilter (1).jpg",
                 description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!"
             },
             {
                 id: 6,
                 name: "JOB JOB JOB SAHUR",
                 price: "$6.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/0/03/Job.webp/revision/latest?cb=20241201234500",
+                image: "Job.jpg",
                 description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!"
             },
             {
                 id: 7,
                 name: "MATEO",
                 price: "$2.500",
-                image: "https://static.wikia.nocookie.net/stealabr/images/7/7d/Matteofr.png/revision/latest?cb=20241201234500",
+                image: "Matteofr.jpg",
                 description: "¡El increíble MATEO! ¡Súper único y especial!"
             },
             {
                 id: 8,
                 name: "PAKRAHMATMAMAT",
                 price: "$4.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/e/e7/Pakrah.png/revision/latest?cb=20241201234500",
+                image: "Pakrah.jpg",
                 description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!"
             },
             {
                 id: 9,
                 name: "LA VACA SATURNO SATURNITA",
                 price: "$4.000",
-                image: "https://images.cults3d.com/sc1lg1j6HDg5yTcrRX172eYVYxE=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/13440098/illustration-file/7ad3e540-865e-4ccb-bcff-b8380a99c160/vaca-saturno.webp",
+                image: "noFilter (2).jpg",
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!"
             }
         ];
@@ -238,6 +238,7 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
 
 
 
