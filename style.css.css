@@ -1,0 +1,75 @@
+    body {
+            box-sizing: border-box;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(90deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        @keyframes slide-in {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .float { animation: float 3s ease-in-out infinite; }
+        .bounce-in { animation: bounce-in 0.8s ease-out; }
+        .slide-in { animation: slide-in 0.6s ease-out; }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        
+        .rainbow-bg {
+            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            animation: rainbow 4s ease infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-bounce {
+            transition: all 0.2s ease;
+        }
+        
+        .btn-bounce:hover {
+            transform: scale(1.1);
+        }
+        
+        .btn-bounce:active {
+            transform: scale(0.95);
+        }
+        
+        .emoji-spin {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .emoji-spin:hover {
+            transform: rotate(360deg);
+        }
+        
+        .notification {
+            animation: slide-in 0.5s ease-out;
+        }
