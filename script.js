@@ -153,10 +153,16 @@
                 alert("Por favor, selecciona un producto para realizar la compra.");
                 return;
             }
-            
-            // 1. Creación del Mensaje de WhatsApp
-            // ¡IMPORTANTE! Uso de comillas invertidas (backticks: `) para interpolar variables ${...}
-            // ✅ CORRECCIÓN: Usar backticks (comillas invertidas)
+             } catch (error) {
+                // Method 3: Fallback - create and click link
+                const link = document.createElement('a');
+                link.href = whatsappLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
 const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
 📦 PRODUCTO: ${currentProduct.name}
@@ -201,6 +207,7 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
 
 
 
