@@ -4,7 +4,7 @@
                 id: 1,
                 name: "TRALALITA TRALALA",
                 price: "$2.000",
-                image: "Tralalita.jpg",
+                image: "Tralalita",
                 description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!"
             },
             {
@@ -238,5 +238,6 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
 
 
