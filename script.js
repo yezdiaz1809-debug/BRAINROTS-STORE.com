@@ -4,7 +4,7 @@
                 id: 1,
                 name: "TRALALITA TRALALA",
                 price: "$2.000",
-                image: "https://static.wikia.nocookie.net/stealabr/images/1/15/Tralalita.png/revision/latest?cb=20241201234500",
+                image: "tralalita tralala.jpg",
                 description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!"
             },
             {
@@ -239,3 +239,4 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
