@@ -193,9 +193,6 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
                 document.body.removeChild(link);
             }
             
-            purchaseForm.reset();
-            showSuccess('¡Abriendo WhatsApp! Si no se abre, haz clic en el enlace que aparece 📱');
-            
             // Show WhatsApp link as backup
             setTimeout(() => {
                 const linkElement = document.createElement('div');
@@ -238,6 +235,7 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
 
 
 
