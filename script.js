@@ -3,63 +3,63 @@
             {
                 id: 1,
                 name: "TRALALITA TRALALA",
-                price: "$2.000",
+                price: "$3.000",
                 image: "tralalita.jpg",
                 description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!"
             },
             {
                 id: 2,
                 name: "TRALALERO TRALALA",
-                price: "$2.000",
+                price: "$3.000",
                 image: "tralaleroTralala.jpg",
                 description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!"
             },
             {
                 id: 3,
                 name: "LOS BOMBINITOS",
-                price: "$4.000",
+                price: "$6.000",
                 image: "los bombinitos.jpg",
                 description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!"
             },
             {
                 id: 4,
                 name: "LOS COCODRILITOS",
-                price: "$2.500",
+                price: "$3.500",
                 image: "noFilter.jpg",
                 description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!"
             },
             {
                 id: 5,
                 name: "LOS ORCALITOS",
-                price: "$6.000",
+                price: "$8.000",
                 image: "noFilter (1).jpg",
                 description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!"
             },
             {
                 id: 6,
                 name: "JOB JOB JOB SAHUR",
-                price: "$6.000",
+                price: "$10.000",
                 image: "job.jpg",
                 description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!"
             },
             {
                 id: 7,
                 name: "MATEO",
-                price: "$2.500",
+                price: "$3.500",
                 image: "matteofr.jpg",
                 description: "¡El increíble MATEO! ¡Súper único y especial!"
             },
             {
                 id: 8,
                 name: "PAKRAHMATMAMAT",
-                price: "$4.000",
+                price: "$5.000",
                 image: "pakrah.jpg",
                 description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!"
             },
             {
                 id: 9,
                 name: "LA VACA SATURNO SATURNITA",
-                price: "$4.000",
+                price: "$7.000",
                 image: "noFilter (2).jpg",
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!"
             },
@@ -226,6 +226,7 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
         // Start the magic!
         renderProducts();
     
+
 
 
 
