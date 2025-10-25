@@ -172,19 +172,8 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
             // 2. Creación del Enlace de WhatsApp (LA CORRECCIÓN)
             // Se usan backticks y la función encodeURIComponent() para el 'cifrado'
             const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
-            
-            // Try to open WhatsApp with multiple fallbacks
-            try {
-                // Method 1: Direct window.open
-                const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
-                
-                // Method 2: If blocked, try location change
-                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-                    window.location.href = whatsappLink;
                 }
-            
-          
-            // Go back to products after 6 seconds
+             // Go back to products after 6 seconds
             setTimeout(() => {
                 purchaseSection.classList.add('hidden');
                 document.getElementById('productsGrid').parentElement.classList.remove('hidden');
@@ -204,6 +193,7 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
+
 
 
 
