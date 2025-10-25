@@ -64,7 +64,7 @@
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!"
             }
         ];
-        // Get all the elements we need
+       // Get all the elements we need
         const productsGrid = document.getElementById('productsGrid');
         const purchaseSection = document.getElementById('purchaseSection');
         const selectedProductInfo = document.getElementById('selectedProductInfo');
@@ -153,18 +153,8 @@
                 alert("Por favor, selecciona un producto para realizar la compra.");
                 return;
             }
-        
-        } catch (error) {
-                // Method 3: Fallback - create and click link
-                const link = document.createElement('a');
-                link.href = whatsappLink;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
- // 1. Creación del Mensaje de WhatsApp
+            
+            // 1. Creación del Mensaje de WhatsApp
             // ¡IMPORTANTE! Uso de comillas invertidas (backticks: `) para interpolar variables ${...}
             // ✅ CORRECCIÓN: Usar backticks (comillas invertidas)
 const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
@@ -204,8 +194,29 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
             }
             
             purchaseForm.reset();
-            showSuccess('¡pedido listo! abriendo whatsApp..📱');
-         
+            showSuccess('¡Abriendo WhatsApp! Si no se abre, haz clic en el enlace que aparece 📱');
+            
+            // Show WhatsApp link as backup
+            setTimeout(() => {
+                const linkElement = document.createElement('div');
+                linkElement.innerHTML = `
+                    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-6 rounded-2xl shadow-2xl z-50 max-w-md text-center">
+                        <h3 class="text-xl font-bold mb-4">¿No se abrió WhatsApp?</h3>
+                        <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="bg-white text-green-500 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors">
+                            📱 Abrir WhatsApp Manualmente
+                        </a>
+                        <button onclick="this.parentElement.parentElement.remove()" class="block mt-4 text-white underline">Cerrar</button>
+                    </div>
+                `;
+                document.body.appendChild(linkElement);
+                
+                // Auto remove after 10 seconds
+                setTimeout(() => {
+                    if (linkElement.parentElement) {
+                        linkElement.remove();
+                    }
+                }, 10000);
+            }, 2000);
             
             // Go back to products after 6 seconds
             setTimeout(() => {
@@ -227,13 +238,4 @@ const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
         // Start the magic!
         renderProducts();
-
-
-
-
-
-
-
-
-
-
+    
