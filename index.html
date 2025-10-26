@@ -1,110 +1,1359 @@
+ <!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧠 BRAINROTS STORE 🎮</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(90deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        @keyframes slide-in {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes colorShift {
+            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            20% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+            40% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+            60% { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+            80% { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+            100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        }
+        
+        .dynamic-bg {
+            animation: colorShift 15s ease-in-out infinite;
+        }
+        
+        .float { animation: float 3s ease-in-out infinite; }
+        .bounce-in { animation: bounce-in 0.8s ease-out; }
+        .slide-in { animation: slide-in 0.6s ease-out; }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        
+        .rainbow-bg {
+            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            animation: rainbow 4s ease infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-bounce {
+            transition: all 0.2s ease;
+        }
+        
+        .btn-bounce:hover {
+            transform: scale(1.1);
+        }
+        
+        .btn-bounce:active {
+            transform: scale(0.95);
+        }
+        
+        .emoji-spin {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .emoji-spin:hover {
+            transform: rotate(360deg);
+        }
+        
+        .notification {
+            animation: slide-in 0.5s ease-out;
+        }
 
-<!DOCTYPE html>
-<html lang="es" class="h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 Brainrots Store - ¡La Tienda Más Genial!</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="h-full rainbow-bg text-white overflow-x-hidden">
-    <div class="min-h-full">
-        <!-- Floating Header -->
-        <header class="sticky top-0 z-40 bg-black/30 backdrop-blur-xl border-b-2 border-white/20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                <div class="flex justify-between items-center">
-                    <div class="float">
-                        <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
-                            <span class="emoji-spin">🧠</span> BRAINROTS STORE
-                        </h1>
-                        <p class="text-lg text-yellow-200 font-semibold mt-1 slide-in">
-                            ✨ ¡Los productos más increíbles del universo! ✨
-                        </p>
-                    </div>
+        .sold-out-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
 
-                </div>
-            </div>
-        </header>
+        .admin-tab.active {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6) !important;
+        }
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        .discount-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: linear-gradient(45deg, #ff4444, #ff6b6b);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 5;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="min-h-full dynamic-bg"><!-- Header -->
+  <header class="text-center py-8 px-4">
+   <div class="float">
+    <h1 class="text-6xl font-black text-transparent bg-clip-text rainbow-bg mb-4">BRAINROTS STORE 🎮</h1>
+   </div>
+   <p class="text-2xl text-white font-bold slide-in">La forma más fácil de conseguir tus brainrots favoritos🤑</p>
+  </header><!-- Main Catalog Section -->
+  <main id="catalogSection" class="container mx-auto px-4 pb-12">
+   <div class="text-center mb-12">
+    <h2 class="text-4xl font-black text-yellow-300 mb-4 pulse-glow">👻 CATÁLOGO DE BRAINROTS 👻</h2>
+   </div>
+   <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"><!-- Products will be rendered here -->
+   </div><!-- Gift Button at the bottom -->
+   <div class="text-center mt-16"><button id="showGiftsBtn" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-8 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg"> <span class="emoji-spin">🎁</span> CANJEAR REGALOS </button>
+   </div>
+  </main><!-- Product Versions Section -->
+  <section id="versionsSection" class="hidden container mx-auto px-4 pb-12">
+   <div class="text-center mb-8"><button id="backToCatalog" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
+    <div id="selectedProductHeader" class="mb-8"><!-- Selected product info will be shown here -->
+    </div>
+   </div>
+   <div id="versionsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><!-- Product versions will be rendered here -->
+   </div>
+  </section><!-- Gifts Section -->
+  <section id="giftsSection" class="hidden container mx-auto px-4 pb-12">
+   <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-8"><button id="backToCatalogFromGifts" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
+     <h2 class="text-4xl font-black text-yellow-300 mb-4">🎁 CANJEAR REGALOS</h2>
+     <p class="text-xl text-white">¡Ingresa tu código y obtén productos gratis!</p>
+    </div>
+    <form id="giftForm" class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border-4 border-yellow-300">
+     <div class="mb-6"><label for="giftCode" class="block text-xl font-bold text-yellow-300 mb-2"> 🎫 Código de Regalo: </label> <input type="text" id="giftCode" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg" placeholder="Ingresa tu código aquí">
+     </div>
+     <div class="mb-6"><label for="giftCustomerName" class="block text-xl font-bold text-yellow-300 mb-2"> 👤 Tu Nombre Real: </label> <input type="text" id="giftCustomerName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
+     </div>
+     <div class="mb-8"><label for="giftRobloxName" class="block text-xl font-bold text-yellow-300 mb-2"> 🎮 Tu Usuario de Roblox: </label> <input type="text" id="giftRobloxName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
+     </div><button type="submit" class="w-full bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 px-8 py-4 rounded-xl font-black text-2xl btn-bounce"> <span class="emoji-spin">🎁</span> CANJEAR REGALO </button>
+    </form>
+   </div>
+  </section><!-- Purchase Form Section -->
+  <section id="purchaseSection" class="hidden container mx-auto px-4 pb-12">
+   <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-8"><button id="backToVersions" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER A VERSIONES </button>
+     <h2 class="text-4xl font-black text-yellow-300 mb-4">🛒 FINALIZAR COMPRA</h2>
+     <div id="selectedVersionInfo" class="bg-white/10 rounded-xl p-6 mb-8"><!-- Selected version info will be shown here -->
+     </div>
+    </div>
+    <form id="purchaseForm" class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border-4 border-yellow-300">
+     <div class="mb-6"><label for="customerName" class="block text-xl font-bold text-yellow-300 mb-2"> 👤 Tu Nombre Real: </label> <input type="text" id="customerName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
+     </div>
+     <div class="mb-8"><label for="robloxName" class="block text-xl font-bold text-yellow-300 mb-2"> 🎮 Tu Usuario de Roblox: </label> <input type="text" id="robloxName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
+     </div><button type="submit" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-8 py-4 rounded-xl font-black text-2xl btn-bounce"> <span class="emoji-spin">📱</span> HACER EL PEDIDO🥳 </button>
+    </form>
+   </div>
+  </section><!-- Success Message -->
+  <div id="successMessage" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-green-400 to-blue-500 text-white px-8 py-6 rounded-3xl shadow-2xl z-50 notification">
+   <div class="text-center">
+    <div class="text-4xl mb-4">
+     🎉
+    </div>
+    <p class="text-xl font-bold">MUCHAS GRACIAS POR EL PEDIDO, TE CONTACTAREMOS PRONTO👻👾</p>
+   </div>
+  </div><!-- Admin Access Button (Fixed Position) -->
+  <div class="fixed top-4 right-4 z-40"><button id="adminAccessBtn" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full shadow-lg opacity-30 hover:opacity-100 transition-all text-sm"> ⚙️ </button>
+  </div><!-- Admin Login Modal -->
+  <div id="adminLoginModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+   <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-3xl border-4 border-yellow-300 max-w-md w-full mx-4">
+    <h2 class="text-3xl font-black text-yellow-300 text-center mb-6">🔐 ACCESO ADMIN</h2>
+    <form id="adminLoginForm"><input type="password" id="adminCode" placeholder="Código de acceso" class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg mb-4">
+     <div class="flex gap-4"><button type="submit" class="flex-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-3 rounded-xl font-black text-white"> ENTRAR </button> <button type="button" id="cancelAdminLogin" class="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white"> CANCELAR </button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Admin Panel -->
+  <div id="adminPanel" class="hidden fixed inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 z-50 overflow-y-auto">
+   <div class="container mx-auto px-4 py-8"><!-- Admin Header -->
+    <div class="flex justify-between items-center mb-8">
+     <h1 class="text-4xl font-black text-yellow-300">🛠️ PANEL DE ADMINISTRADOR</h1><button id="closeAdminPanel" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white"> ❌ CERRAR </button>
+    </div><!-- Admin Tabs -->
+    <div class="flex gap-4 mb-8"><button id="ordersTab" class="admin-tab active bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-xl font-black text-white"> 📋 PEDIDOS </button> <button id="discountsTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 💰 DESCUENTOS </button> <button id="codesTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 🎁 CÓDIGOS </button>
+    </div><!-- Orders Section -->
+    <div id="ordersSection" class="admin-section">
+     <div class="bg-white/10 rounded-3xl p-6 mb-6">
+      <h2 class="text-2xl font-black text-yellow-300 mb-4">📊 ESTADÍSTICAS</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+       <div class="bg-green-500/20 rounded-xl p-4 text-center">
+        <div class="text-3xl font-black text-green-400" id="totalOrders">
+         0
+        </div>
+        <div class="text-white">
+         Total Pedidos
+        </div>
+       </div>
+       <div class="bg-blue-500/20 rounded-xl p-4 text-center">
+        <div class="text-3xl font-black text-blue-400" id="todayOrders">
+         0
+        </div>
+        <div class="text-white">
+         Hoy
+        </div>
+       </div>
+       <div class="bg-purple-500/20 rounded-xl p-4 text-center">
+        <div class="text-3xl font-black text-purple-400" id="totalRevenue">
+         $0
+        </div>
+        <div class="text-white">
+         Ingresos
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white/10 rounded-3xl p-6">
+      <h2 class="text-2xl font-black text-yellow-300 mb-4">📋 HISTORIAL DE PEDIDOS</h2>
+      <div id="ordersList" class="space-y-4">
+       <p class="text-gray-400 text-center py-8">No hay pedidos registrados</p>
+      </div>
+     </div>
+    </div><!-- Discounts Section -->
+    <div id="discountsSection" class="admin-section hidden">
+     <div class="bg-white/10 rounded-3xl p-6">
+      <h2 class="text-2xl font-black text-yellow-300 mb-6">💰 GESTIÓN DE DESCUENTOS</h2>
+      <div id="discountsList" class="space-y-6"><!-- Discount controls will be rendered here -->
+      </div>
+     </div>
+    </div><!-- Gift Codes Section -->
+    <div id="codesSection" class="admin-section hidden">
+     <div class="bg-white/10 rounded-3xl p-6 mb-6">
+      <h2 class="text-2xl font-black text-yellow-300 mb-6">🎁 CREAR CÓDIGO DE REGALO</h2>
+      <form id="createCodeForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div><label class="block text-white font-bold mb-2">Código:</label> <input type="text" id="newCodeName" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none">
+       </div>
+       <div><label class="block text-white font-bold mb-2">Stock:</label> <input type="number" id="newCodeStock" min="1" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none">
+       </div>
+       <div><label class="block text-white font-bold mb-2">Producto:</label> <select id="newCodeProduct" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none"> <option value="">Seleccionar producto</option> </select>
+       </div>
+       <div><label class="block text-white font-bold mb-2">Versión:</label> <select id="newCodeVersion" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none"> <option value="">Seleccionar versión</option> </select>
+       </div>
+       <div class="md:col-span-2"><button type="submit" class="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 px-6 py-3 rounded-xl font-black text-white"> ➕ CREAR CÓDIGO </button>
+       </div>
+      </form>
+     </div>
+     <div class="bg-white/10 rounded-3xl p-6">
+      <h2 class="text-2xl font-black text-yellow-300 mb-6">📋 CÓDIGOS ACTIVOS</h2>
+      <div id="codesList" class="space-y-4">
+       <p class="text-gray-400 text-center py-8">No hay códigos creados</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        // Products with versions and stock
+        let products = [
+            {
+                id: 1,
+                name: "TRALALITA TRALALA",
+                image: "tralalita.jpg", // 🔥 CAMBIA AQUÍ: Imagen que aparece en el catálogo principal
+                description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!",
+                discount: 0, // Descuento del producto principal
+                versions: [
+                    {
+                        id: "1-base",
+                        name: "Base",
+                        price: 3000, // Precio numérico para cálculos
+                        image: "tralalita-base.jpg", // 🔥 CAMBIA AQUÍ: Imagen de la versión BASE cuando seleccionas el producto
+                        stock: 5,
+                        discount: 0 // Descuento específico de la versión
+                    },
+                    {
+                        id: "1-mutada",
+                        name: "Mutada",
+                        price: 4500,
+                        image: "tralalita-mutada.jpg", // 🔥 CAMBIA AQUÍ: Imagen de la versión MUTADA cuando seleccionas el producto
+                        stock: 3,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "TRALALERO TRALALA",
+                image: "tralaleroTralala.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "2-base",
+                        name: "Base",
+                        price: 3000,
+                        image: "tralalero-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 4,
+                        discount: 0
+                    },
+                    {
+                        id: "2-mutada",
+                        name: "Mutada",
+                        price: 4500,
+                        image: "tralalero-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 2,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "LOS BOMBINITOS",
+                image: "los bombinitos.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "3-base",
+                        name: "Base",
+                        price: 6000,
+                        image: "bombinitos-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 6,
+                        discount: 0
+                    },
+                    {
+                        id: "3-mutada",
+                        name: "Mutada",
+                        price: 8000,
+                        image: "bombinitos-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 0, // EJEMPLO: AGOTADO
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: "LOS COCODRILITOS",
+                image: "noFilter.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "4-base",
+                        name: "Base",
+                        price: 3500,
+                        image: "cocodrilitos-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 7,
+                        discount: 0
+                    },
+                    {
+                        id: "4-mutada",
+                        name: "Mutada",
+                        price: 5000,
+                        image: "cocodrilitos-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 1,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "LOS ORCALITOS",
+                image: "noFilter (1).jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "5-base",
+                        name: "Base",
+                        price: 8000,
+                        image: "orcalitos-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 3,
+                        discount: 0
+                    },
+                    {
+                        id: "5-mutada",
+                        name: "Mutada",
+                        price: 10000,
+                        image: "orcalitos-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 2,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: "JOB JOB JOB SAHUR",
+                image: "job.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "6-base",
+                        name: "Base",
+                        price: 10000,
+                        image: "job-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 2,
+                        discount: 0
+                    },
+                    {
+                        id: "6-mutada",
+                        name: "Mutada",
+                        price: 15000,
+                        image: "job-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 1,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 7,
+                name: "MATEO",
+                image: "matteofr.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡El increíble MATEO! ¡Súper único y especial!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "7-base",
+                        name: "Base",
+                        price: 3500,
+                        image: "mateo-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 4,
+                        discount: 0
+                    },
+                    {
+                        id: "7-mutada",
+                        name: "Mutada",
+                        price: 5000,
+                        image: "mateo-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 3,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 8,
+                name: "PAKRAHMATMAMAT",
+                image: "pakrah.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "8-base",
+                        name: "Base",
+                        price: 5000,
+                        image: "pakrah-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 5,
+                        discount: 0
+                    },
+                    {
+                        id: "8-mutada",
+                        name: "Mutada",
+                        price: 7500,
+                        image: "pakrah-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 2,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 9,
+                name: "LA VACA SATURNO SATURNITA",
+                image: "noFilter (2).jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "9-base",
+                        name: "Base",
+                        price: 7000,
+                        image: "vaca-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 3,
+                        discount: 0
+                    },
+                    {
+                        id: "9-mutada",
+                        name: "Mutada",
+                        price: 9000,
+                        image: "vaca-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 1,
+                        discount: 0
+                    }
+                ]
+            },
+            {
+                id: 10,
+                name: "LOS TIPI TACOS",
+                image: "Los_tipi_tacos.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                description: "¡Los increíbles TIPI TACOS! ¡Súper sabrosos y geniales!",
+                discount: 0,
+                versions: [
+                    {
+                        id: "10-base",
+                        name: "Base",
+                        price: 10000,
+                        image: "tipi-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
+                        stock: 4,
+                        discount: 0
+                    },
+                    {
+                        id: "10-mutada",
+                        name: "Mutada",
+                        price: 12000,
+                        image: "tipi-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
+                        stock: 2,
+                        discount: 0
+                    }
+                ]
+            }
+        ];
 
+        // Get all the elements we need
+        const catalogSection = document.getElementById('catalogSection');
+        const versionsSection = document.getElementById('versionsSection');
+        const purchaseSection = document.getElementById('purchaseSection');
+        const productsGrid = document.getElementById('productsGrid');
+        const versionsGrid = document.getElementById('versionsGrid');
+        const selectedProductHeader = document.getElementById('selectedProductHeader');
+        const selectedVersionInfo = document.getElementById('selectedVersionInfo');
+        const backToCatalog = document.getElementById('backToCatalog');
+        const backToVersions = document.getElementById('backToVersions');
+        const purchaseForm = document.getElementById('purchaseForm');
+        const successMessage = document.getElementById('successMessage');
 
-            <!-- Amazing Products Section -->
-            <div class="mb-16">
-                <div class="text-center mb-12 float">
-                    <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 bg-clip-text text-transparent">
-                        <span class="emoji-spin">🛍</span> PRODUCTOS INCREÍBLES
-                    </h2>
-                    <p class="text-2xl font-bold text-yellow-200">¡Elige tu favorito y haz tu pedido!</p>
-                </div>
-                
-                <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Products will be loaded here -->
-                </div>
-            </div>
+        // Admin elements
+        const adminAccessBtn = document.getElementById('adminAccessBtn');
+        const adminLoginModal = document.getElementById('adminLoginModal');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const cancelAdminLogin = document.getElementById('cancelAdminLogin');
+        const closeAdminPanel = document.getElementById('closeAdminPanel');
+        const ordersTab = document.getElementById('ordersTab');
+        const discountsTab = document.getElementById('discountsTab');
+        const codesTab = document.getElementById('codesTab');
+        const ordersSection = document.getElementById('ordersSection');
+        const discountsSection = document.getElementById('discountsSection');
+        const codesSection = document.getElementById('codesSection');
 
-            <!-- Purchase Section (Hidden by default) -->
-            <div id="purchaseSection" class="hidden mb-16">
-                <div class="bg-gradient-to-r from-pink-900/80 to-purple-900/80 backdrop-blur-xl rounded-3xl p-8 border-4 border-yellow-300 shadow-2xl bounce-in">
-                    <div class="text-center mb-8 float">
-                        <h2 class="text-5xl font-black mb-4 text-yellow-300">
-                            <span class="emoji-spin">💳</span> ¡COMPRAR BRAINROT!
-                        </h2>
-                        <div id="selectedProductInfo" class="text-2xl font-bold text-pink-200 mb-4"></div>
-                        <button id="backToProducts" class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-6 py-3 rounded-xl font-bold btn-bounce">
-                            <span class="emoji-spin">⬅</span> Volver al Catálogo
-                        </button>
+        // Gift elements
+        const showGiftsBtn = document.getElementById('showGiftsBtn');
+        const giftsSection = document.getElementById('giftsSection');
+        const backToCatalogFromGifts = document.getElementById('backToCatalogFromGifts');
+        const giftForm = document.getElementById('giftForm');
+
+        let currentProduct = null;
+        let currentVersion = null;
+        let orders = []; // Array para almacenar pedidos
+        let giftCodes = []; // Array para almacenar códigos de regalo
+        let isAdminLoggedIn = false;
+
+        // Utility functions
+        function formatPrice(price) {
+            return `$${price.toLocaleString('es-CO')}`;
+        }
+
+        function calculateDiscountedPrice(originalPrice, discountPercent) {
+            return Math.round(originalPrice * (1 - discountPercent / 100));
+        }
+
+        function getEffectiveDiscount(product, version) {
+            return Math.max(product.discount || 0, version.discount || 0);
+        }
+
+        function showSuccessOnReturn() {
+            // Detectar cuando el usuario regresa de WhatsApp
+            let isHidden = false;
+            
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    isHidden = true;
+                } else if (isHidden) {
+                    // Usuario regresó a la página
+                    showSuccess();
+                    isHidden = false;
+                }
+            });
+
+            // También detectar con focus
+            window.addEventListener('blur', function() {
+                isHidden = true;
+            });
+
+            window.addEventListener('focus', function() {
+                if (isHidden) {
+                    showSuccess();
+                    isHidden = false;
+                }
+            });
+        }
+
+        // Admin event listeners
+        adminAccessBtn.addEventListener('click', () => {
+            adminLoginModal.classList.remove('hidden');
+        });
+
+        cancelAdminLogin.addEventListener('click', () => {
+            adminLoginModal.classList.add('hidden');
+            document.getElementById('adminCode').value = '';
+        });
+
+        closeAdminPanel.addEventListener('click', () => {
+            adminPanel.classList.add('hidden');
+            isAdminLoggedIn = false;
+        });
+
+        adminLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const code = document.getElementById('adminCode').value;
+            
+            if (code === '160923') {
+                adminLoginModal.classList.add('hidden');
+                adminPanel.classList.remove('hidden');
+                isAdminLoggedIn = true;
+                renderAdminDashboard();
+                document.getElementById('adminCode').value = '';
+            } else {
+                alert('Código incorrecto');
+            }
+        });
+
+        // Gift navigation
+        showGiftsBtn.addEventListener('click', () => {
+            catalogSection.classList.add('hidden');
+            giftsSection.classList.remove('hidden');
+        });
+
+        backToCatalogFromGifts.addEventListener('click', () => {
+            giftsSection.classList.add('hidden');
+            catalogSection.classList.remove('hidden');
+        });
+
+        // Admin tabs
+        ordersTab.addEventListener('click', () => {
+            setActiveTab('orders');
+        });
+
+        discountsTab.addEventListener('click', () => {
+            setActiveTab('discounts');
+        });
+
+        codesTab.addEventListener('click', () => {
+            setActiveTab('codes');
+        });
+
+        function setActiveTab(tab) {
+            // Reset all tabs
+            document.querySelectorAll('.admin-tab').forEach(t => {
+                t.classList.remove('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
+                t.classList.add('bg-gray-600');
+            });
+            
+            // Hide all sections
+            ordersSection.classList.add('hidden');
+            discountsSection.classList.add('hidden');
+            codesSection.classList.add('hidden');
+            
+            // Activate selected tab and section
+            if (tab === 'orders') {
+                ordersTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
+                ordersTab.classList.remove('bg-gray-600');
+                ordersSection.classList.remove('hidden');
+            } else if (tab === 'discounts') {
+                discountsTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
+                discountsTab.classList.remove('bg-gray-600');
+                discountsSection.classList.remove('hidden');
+                renderDiscountsPanel();
+            } else if (tab === 'codes') {
+                codesTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
+                codesTab.classList.remove('bg-gray-600');
+                codesSection.classList.remove('hidden');
+                renderCodesPanel();
+            }
+        }
+
+        // Navigation event listeners
+        backToCatalog.addEventListener('click', () => {
+            versionsSection.classList.add('hidden');
+            catalogSection.classList.remove('hidden');
+            currentProduct = null;
+        });
+
+        backToVersions.addEventListener('click', () => {
+            purchaseSection.classList.add('hidden');
+            versionsSection.classList.remove('hidden');
+            currentVersion = null;
+        });
+
+        // Render main catalog (only image + name + "Me interesa" button)
+        function renderCatalog() {
+            productsGrid.innerHTML = products.map((product, index) => {
+                const hasDiscount = product.discount > 0;
+                return `
+                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl bounce-in" style="animation-delay: ${index * 0.1}s">
+                    <!-- PRODUCT NAME -->
+                    <div class="p-6 pb-4">
+                        <h3 class="text-2xl font-black text-yellow-300 text-center">${product.name}</h3>
                     </div>
                     
-                    <div class="max-w-2xl mx-auto">
-                        <!-- Purchase Form -->
-                        <div class="slide-in">
-                            <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
-                                <h3 class="text-4xl font-black mb-8 text-center text-yellow-300">
-                                    <span class="emoji-spin">🎮</span> DATOS DE COMPRA
-                                </h3>
-                                <form id="purchaseForm" class="space-y-6">
-                                    <div>
-                                        <label for="customerName" class="block text-lg font-bold mb-2 text-pink-200">
-                                            <span class="emoji-spin">👤</span> Tu Nombre Real
-                                        </label>
-                                        <input type="text" id="customerName" required class="w-full px-4 py-3 bg-white/20 border-2 border-pink-300 rounded-xl focus:ring-4 focus:ring-yellow-400 focus:border-yellow-400 text-white placeholder-gray-300 font-semibold" placeholder="Escribe tu nombre completo">
-                                    </div>
-                                    
-                                    <div>
-                                        <label for="robloxName" class="block text-lg font-bold mb-2 text-pink-200">
-                                            <span class="emoji-spin">🎮</span> Tu Nombre en Roblox
-                                        </label>
-                                        <input type="text" id="robloxName" required class="w-full px-4 py-3 bg-white/20 border-2 border-pink-300 rounded-xl focus:ring-4 focus:ring-yellow-400 focus:border-yellow-400 text-white placeholder-gray-300 font-semibold" placeholder="Tu usuario de Roblox">
-                                    </div>
-                                    
-
-                                    
-                                    <button type="submit" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-xl">
-                                        <span class="emoji-spin">🚀</span> ¡CONFIRMAR COMPRA!
-                                    </button>
-                                </form>
+                    <!-- PRODUCT IMAGE -->
+                    <div class="relative overflow-hidden mx-6 mb-4 cursor-pointer" onclick="showVersions(${product.id})">
+                        ${hasDiscount ? `<div class="discount-badge">🔥 ${product.discount}% OFF</div>` : ''}
+                        <div class="w-full h-56 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
+                            <div class="flex flex-col items-center justify-center text-white w-full h-full">
+                                <span class="text-4xl mb-2">🖼</span>
+                                <span class="font-bold text-center px-4">${product.name}</span>
                             </div>
                         </div>
+                        ${!hasDiscount ? `
+                            <div class="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full font-black text-sm">
+                                ¡NUEVO!
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- ME INTERESA BUTTON -->
+                    <div class="p-6 pt-0">
+                        <button onclick="showVersions(${product.id})" class="w-full bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
+                            <span class="emoji-spin">👀</span> ¡ME INTERESA!
+                        </button>
                     </div>
                 </div>
-            </div>
+            `;}).join('');
+        }
 
+        // Show product versions
+        function showVersions(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            if (!currentProduct) return;
 
-        </main>
+            // Update header
+            selectedProductHeader.innerHTML = `
+                <div class="bg-white/10 rounded-xl p-6">
+                    <h2 class="text-4xl font-black text-yellow-300 mb-2">${currentProduct.name}</h2>
+                    <p class="text-lg text-white">${currentProduct.description}</p>
+                    <p class="text-xl text-green-400 font-bold mt-4">¡Elige tu versión favorita!</p>
+                </div>
+            `;
 
-        <!-- Super Cool Success Message -->
-        <div id="successMessage" class="hidden fixed top-20 right-4 bg-gradient-to-r from-green-400 to-blue-500 text-white px-8 py-4 rounded-2xl shadow-2xl z-50 notification border-4 border-yellow-300">
-            <p class="font-black text-lg">✅ ¡Genial! Todo salió perfecto</p>
-        </div>
-    </div>
+            // Render versions
+            versionsGrid.innerHTML = currentProduct.versions.map(version => {
+                const effectiveDiscount = getEffectiveDiscount(currentProduct, version);
+                const originalPrice = version.price;
+                const discountedPrice = effectiveDiscount > 0 ? calculateDiscountedPrice(originalPrice, effectiveDiscount) : originalPrice;
+                const hasDiscount = effectiveDiscount > 0;
+                
+                return `
+                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl relative">
+                    ${version.stock === 0 ? `
+                        <div class="sold-out-overlay rounded-3xl">
+                            <div class="text-center">
+                                <div class="text-6xl mb-4">😵</div>
+                                <div class="text-3xl font-black text-red-400">AGOTADO</div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- VERSION NAME -->
+                    <div class="p-6 pb-4">
+                        <h3 class="text-3xl font-black text-center ${version.name === 'Base' ? 'text-blue-300' : 'text-purple-300'}">${version.name.toUpperCase()}</h3>
+                    </div>
+                    
+                    <!-- VERSION IMAGE -->
+                    <div class="relative overflow-hidden mx-6 mb-4">
+                        ${hasDiscount ? `<div class="discount-badge">🔥 ${effectiveDiscount}% OFF</div>` : ''}
+                        <div class="w-full h-64 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
+                            <img src="${version.image}" alt="${currentProduct.name} - ${version.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
+                            <div class="flex flex-col items-center justify-center text-white w-full h-full">
+                                <span class="text-4xl mb-2">🖼</span>
+                                <span class="font-bold text-center px-4">${currentProduct.name}<br>${version.name}</span>
+                            </div>
+                        </div>
+                        ${version.name === 'Mutada' && !hasDiscount ? `
+                            <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full font-black text-sm">
+                                ✨ ESPECIAL
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- PRICE AND STOCK -->
+                    <div class="px-6 pb-4">
+                        <div class="text-center bg-green-500/20 rounded-xl py-3 mb-4">
+                            ${hasDiscount ? `
+                                <div class="text-lg font-bold text-red-400 line-through">${formatPrice(originalPrice)}</div>
+                                <div class="text-3xl font-black text-green-300">${formatPrice(discountedPrice)}</div>
+                            ` : `
+                                <span class="text-3xl font-black text-green-300">${formatPrice(originalPrice)}</span>
+                            `}
+                        </div>
+                        <div class="text-center mb-4">
+                            <span class="text-lg font-bold ${version.stock > 3 ? 'text-green-400' : version.stock > 0 ? 'text-yellow-400' : 'text-red-400'}">
+                                📦 Stock: ${version.stock} ${version.stock === 1 ? 'unidad' : 'unidades'}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- BUY BUTTON -->
+                    <div class="p-6 pt-0">
+                        ${version.stock > 0 ? `
+                            <button onclick="buyVersion('${version.id}')" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
+                                <span class="emoji-spin">💳</span> ¡COMPRAR AHORA!
+                            </button>
+                        ` : `
+                            <button disabled class="w-full bg-gray-600 px-6 py-4 rounded-xl font-black text-xl opacity-50 cursor-not-allowed">
+                                😵 AGOTADO
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;}).join('');
 
-    <script src="script.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'993b157270a8f77e',t:'MTc2MTMyNTc4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+            // Show versions section
+            catalogSection.classList.add('hidden');
+            versionsSection.classList.remove('hidden');
+            versionsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Buy specific version
+        function buyVersion(versionId) {
+            const version = currentProduct.versions.find(v => v.id === versionId);
+            if (!version || version.stock === 0) return;
+
+            currentVersion = version;
+            
+            const effectiveDiscount = getEffectiveDiscount(currentProduct, version);
+            const originalPrice = version.price;
+            const discountedPrice = effectiveDiscount > 0 ? calculateDiscountedPrice(originalPrice, effectiveDiscount) : originalPrice;
+            const hasDiscount = effectiveDiscount > 0;
+            
+            selectedVersionInfo.innerHTML = `
+                <h3 class="text-3xl font-black text-yellow-300 mb-2">${currentProduct.name}</h3>
+                <p class="text-xl font-bold ${version.name === 'Base' ? 'text-blue-400' : 'text-purple-400'} mb-2">Versión: ${version.name}</p>
+                ${hasDiscount ? `
+                    <div class="mb-2">
+                        <span class="text-lg text-red-400 line-through">${formatPrice(originalPrice)}</span>
+                        <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">🔥 ${effectiveDiscount}% OFF</span>
+                    </div>
+                    <p class="text-2xl font-bold text-green-400">${formatPrice(discountedPrice)}</p>
+                ` : `
+                    <p class="text-2xl font-bold text-green-400">${formatPrice(originalPrice)}</p>
+                `}
+                <p class="text-lg text-white mt-2">Stock disponible: ${version.stock} ${version.stock === 1 ? 'unidad' : 'unidades'}</p>
+            `;
+            
+            // Show purchase section
+            versionsSection.classList.add('hidden');
+            purchaseSection.classList.remove('hidden');
+            purchaseSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle gift form
+        giftForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const giftCode = document.getElementById('giftCode').value.toLowerCase();
+            const customerName = document.getElementById('giftCustomerName').value;
+            const robloxName = document.getElementById('giftRobloxName').value;
+            
+            // Buscar código
+            const code = giftCodes.find(c => c.code.toLowerCase() === giftCode && c.stock > 0);
+            
+            if (!code) {
+                alert('Código inválido o ya se acabó este regalo 😥');
+                return;
+            }
+            
+            // Buscar producto y versión
+            const product = products.find(p => p.id === code.productId);
+            const version = product.versions.find(v => v.id === code.versionId);
+            
+            if (!product || !version) {
+                alert('Error: Producto no encontrado');
+                return;
+            }
+            
+            // Tu número de WhatsApp
+            const whatsappNumber = "573245640954";
+            
+            // Crear mensaje de WhatsApp para regalo
+            const whatsappMessage = `🎁 REGALO CANJEADO - BRAINROT GRATIS 🎮
+
+📦 PRODUCTO: ${product.name}
+🎯 VERSIÓN: ${version.name}
+💰 PRECIO: GRATIS 🎉
+🎫 CÓDIGO CANJEADO: ${code.code}
+
+👤 DATOS DEL CLIENTE:
+• Nombre Real: ${customerName}
+• Usuario Roblox: ${robloxName}
+
+📅 Fecha del canje: ${new Date().toLocaleString('es-ES')}
+
+¡Hola! He canjeado este código de regalo 🚀`;
+
+            // Crear enlace de WhatsApp
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Reducir stock del código
+            code.stock--;
+            
+            // Registrar pedido de regalo
+            const order = {
+                id: Date.now(),
+                date: new Date().toLocaleString('es-ES'),
+                product: product.name,
+                version: version.name,
+                customer: customerName,
+                robloxUser: robloxName,
+                originalPrice: 0,
+                discount: 0,
+                finalPrice: 0,
+                hasDiscount: false,
+                isGift: true,
+                giftCode: code.code
+            };
+            orders.push(order);
+            
+            // Abrir WhatsApp
+            try {
+                const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+                
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.href = whatsappLink;
+                }
+            } catch (error) {
+                const link = document.createElement('a');
+                link.href = whatsappLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            giftForm.reset();
+            
+            // Activar detección de regreso para mostrar mensaje
+            showSuccessOnReturn();
+            
+            // Volver al catálogo después de 3 segundos
+            setTimeout(() => {
+                giftsSection.classList.add('hidden');
+                catalogSection.classList.remove('hidden');
+            }, 3000);
+        });
+
+        // Handle purchase form
+        purchaseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const customerName = document.getElementById('customerName').value;
+            const robloxName = document.getElementById('robloxName').value;
+            
+            // Verificación crítica
+            if (!currentProduct || !currentVersion) {
+                alert("Error: No se ha seleccionado un producto o versión.");
+                return;
+            }
+
+            if (currentVersion.stock === 0) {
+                alert("Lo sentimos, este producto está agotado.");
+                return;
+            }
+            
+            // Tu número de WhatsApp
+            const whatsappNumber = "573245640954";
+            
+            // Calcular precios con descuento
+            const effectiveDiscount = getEffectiveDiscount(currentProduct, currentVersion);
+            const originalPrice = currentVersion.price;
+            const discountedPrice = effectiveDiscount > 0 ? calculateDiscountedPrice(originalPrice, effectiveDiscount) : originalPrice;
+            const hasDiscount = effectiveDiscount > 0;
+            
+            // Crear mensaje de WhatsApp
+            const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
+
+📦 PRODUCTO: ${currentProduct.name}
+🎯 VERSIÓN: ${currentVersion.name}
+💰 PRECIO ORIGINAL: ${formatPrice(originalPrice)}${hasDiscount ? `
+🔥 DESCUENTO APLICADO: ${effectiveDiscount}%
+💸 PRECIO FINAL: ${formatPrice(discountedPrice)}` : ''}
+
+👤 DATOS DEL CLIENTE:
+• Nombre Real: ${customerName}
+• Usuario Roblox: ${robloxName}
+
+📅 Fecha del pedido: ${new Date().toLocaleString('es-ES')}
+
+¡Hola! Quiero hacer este pedido de brainrot 🚀`;
+
+            // Crear enlace de WhatsApp
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Reducir stock
+            currentVersion.stock--;
+            
+            // Registrar pedido
+            const order = {
+                id: Date.now(),
+                date: new Date().toLocaleString('es-ES'),
+                product: currentProduct.name,
+                version: currentVersion.name,
+                customer: customerName,
+                robloxUser: robloxName,
+                originalPrice: originalPrice,
+                discount: effectiveDiscount,
+                finalPrice: discountedPrice,
+                hasDiscount: hasDiscount
+            };
+            orders.push(order);
+            
+            // Abrir WhatsApp
+            try {
+                const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+                
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.href = whatsappLink;
+                }
+            } catch (error) {
+                const link = document.createElement('a');
+                link.href = whatsappLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            purchaseForm.reset();
+            
+            // Activar detección de regreso para mostrar mensaje
+            showSuccessOnReturn();
+            
+            // Volver al catálogo después de 6 segundos
+            setTimeout(() => {
+                purchaseSection.classList.add('hidden');
+                catalogSection.classList.remove('hidden');
+                currentProduct = null;
+                currentVersion = null;
+            }, 6000);
+        });
+
+        // Show success message
+        function showSuccess() {
+            successMessage.classList.remove('hidden');
+            
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Admin functions
+        function renderAdminDashboard() {
+            updateOrdersStats();
+            renderOrdersList();
+        }
+
+        function updateOrdersStats() {
+            const today = new Date().toDateString();
+            const todayOrders = orders.filter(order => new Date(order.date).toDateString() === today);
+            const totalRevenue = orders.reduce((sum, order) => sum + order.finalPrice, 0);
+
+            document.getElementById('totalOrders').textContent = orders.length;
+            document.getElementById('todayOrders').textContent = todayOrders.length;
+            document.getElementById('totalRevenue').textContent = formatPrice(totalRevenue);
+        }
+
+        function renderOrdersList() {
+            const ordersList = document.getElementById('ordersList');
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<p class="text-gray-400 text-center py-8">No hay pedidos registrados</p>';
+                return;
+            }
+
+            ordersList.innerHTML = orders.slice().reverse().map(order => `
+                <div class="bg-white/5 rounded-xl p-4 border border-gray-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h4 class="text-lg font-bold text-yellow-300">${order.product}</h4>
+                            <p class="text-sm text-gray-300">Versión: ${order.version}</p>
+                            ${order.isGift ? `<p class="text-xs text-pink-400">🎁 REGALO - Código: ${order.giftCode}</p>` : ''}
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-400">${order.date}</p>
+                            ${order.hasDiscount && !order.isGift ? `
+                                <p class="text-xs text-red-400">Descuento: ${order.discount}%</p>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="text-gray-400">Cliente:</p>
+                            <p class="text-white">${order.customer}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400">Usuario Roblox:</p>
+                            <p class="text-white">${order.robloxUser}</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-gray-600">
+                        ${order.isGift ? `
+                            <div class="flex justify-between text-lg font-bold">
+                                <span class="text-gray-300">Precio:</span>
+                                <span class="text-pink-400">GRATIS 🎁</span>
+                            </div>
+                        ` : order.hasDiscount ? `
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Precio original:</span>
+                                <span class="text-red-400 line-through">${formatPrice(order.originalPrice)}</span>
+                            </div>
+                            <div class="flex justify-between text-lg font-bold">
+                                <span class="text-gray-300">Precio final:</span>
+                                <span class="text-green-400">${formatPrice(order.finalPrice)}</span>
+                            </div>
+                        ` : `
+                            <div class="flex justify-between text-lg font-bold">
+                                <span class="text-gray-300">Precio:</span>
+                                <span class="text-green-400">${formatPrice(order.finalPrice)}</span>
+                            </div>
+                        `}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderDiscountsPanel() {
+            const discountsList = document.getElementById('discountsList');
+            
+            discountsList.innerHTML = products.map(product => `
+                <div class="bg-white/5 rounded-xl p-6 border border-gray-600">
+                    <h3 class="text-xl font-bold text-yellow-300 mb-4">${product.name}</h3>
+                    
+                    <!-- Product Discount -->
+                    <div class="mb-4 p-4 bg-blue-500/10 rounded-lg">
+                        <h4 class="text-lg font-bold text-blue-300 mb-2">Descuento del Producto</h4>
+                        <div class="flex gap-2 items-center">
+                            <input type="number" id="product-discount-${product.id}" min="0" max="99" value="${product.discount}" 
+                                   class="w-20 px-2 py-1 rounded bg-white/20 text-white border border-gray-500 focus:border-blue-400 focus:outline-none">
+                            <span class="text-white">%</span>
+                            <button onclick="updateProductDiscount(${product.id})" 
+                                    class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-white font-bold">
+                                Aplicar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Versions Discounts -->
+                    <div class="space-y-3">
+                        ${product.versions.map(version => `
+                            <div class="p-3 bg-purple-500/10 rounded-lg">
+                                <h5 class="font-bold text-purple-300 mb-2">Versión ${version.name}</h5>
+                                <div class="flex gap-2 items-center">
+                                    <input type="number" id="version-discount-${version.id}" min="0" max="99" value="${version.discount}" 
+                                           class="w-20 px-2 py-1 rounded bg-white/20 text-white border border-gray-500 focus:border-purple-400 focus:outline-none">
+                                    <span class="text-white">%</span>
+                                    <button onclick="updateVersionDiscount('${version.id}')" 
+                                            class="bg-purple-500 hover:bg-purple-600 px-3 py-1 rounded text-white font-bold">
+                                        Aplicar
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateProductDiscount(productId) {
+            const product = products.find(p => p.id === productId);
+            const newDiscount = parseInt(document.getElementById(`product-discount-${productId}`).value) || 0;
+            
+            product.discount = Math.max(0, Math.min(99, newDiscount));
+            
+            // Re-render catalog if visible
+            if (!catalogSection.classList.contains('hidden')) {
+                renderCatalog();
+            }
+            
+            // Re-render versions if this product is selected
+            if (currentProduct && currentProduct.id === productId) {
+                showVersions(productId);
+            }
+            
+            alert(`Descuento del producto actualizado a ${product.discount}%`);
+        }
+
+        function updateVersionDiscount(versionId) {
+            let version = null;
+            let product = null;
+            
+            // Find version and its product
+            for (let p of products) {
+                const v = p.versions.find(ver => ver.id === versionId);
+                if (v) {
+                    version = v;
+                    product = p;
+                    break;
+                }
+            }
+            
+            if (!version) return;
+            
+            const newDiscount = parseInt(document.getElementById(`version-discount-${versionId}`).value) || 0;
+            version.discount = Math.max(0, Math.min(99, newDiscount));
+            
+            // Re-render versions if this product is selected
+            if (currentProduct && currentProduct.id === product.id) {
+                showVersions(product.id);
+            }
+            
+            alert(`Descuento de la versión ${version.name} actualizado a ${version.discount}%`);
+        }
+
+        // Gift codes functions
+        function renderCodesPanel() {
+            // Populate product dropdown
+            const productSelect = document.getElementById('newCodeProduct');
+            productSelect.innerHTML = '<option value="">Seleccionar producto</option>' + 
+                products.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+            
+            // Handle product selection change
+            productSelect.addEventListener('change', function() {
+                const versionSelect = document.getElementById('newCodeVersion');
+                const selectedProductId = parseInt(this.value);
+                
+                if (selectedProductId) {
+                    const product = products.find(p => p.id === selectedProductId);
+                    versionSelect.innerHTML = '<option value="">Seleccionar versión</option>' + 
+                        product.versions.map(v => `<option value="${v.id}">${v.name}</option>`).join('');
+                } else {
+                    versionSelect.innerHTML = '<option value="">Seleccionar versión</option>';
+                }
+            });
+            
+            // Handle create code form
+            document.getElementById('createCodeForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const code = document.getElementById('newCodeName').value.toLowerCase();
+                const stock = parseInt(document.getElementById('newCodeStock').value);
+                const productId = parseInt(document.getElementById('newCodeProduct').value);
+                const versionId = document.getElementById('newCodeVersion').value;
+                
+                if (!code || !stock || !productId || !versionId) {
+                    alert('Por favor completa todos los campos');
+                    return;
+                }
+                
+                // Check if code already exists
+                if (giftCodes.find(c => c.code.toLowerCase() === code)) {
+                    alert('Este código ya existe');
+                    return;
+                }
+                
+                // Create new gift code
+                const newGiftCode = {
+                    id: Date.now(),
+                    code: code,
+                    stock: stock,
+                    originalStock: stock,
+                    productId: productId,
+                    versionId: versionId,
+                    createdAt: new Date().toLocaleString('es-ES')
+                };
+                
+                giftCodes.push(newGiftCode);
+                
+                // Reset form
+                this.reset();
+                document.getElementById('newCodeVersion').innerHTML = '<option value="">Seleccionar versión</option>';
+                
+                // Re-render codes list
+                renderCodesList();
+                
+                alert('Código creado exitosamente');
+            });
+            
+            renderCodesList();
+        }
+
+        function renderCodesList() {
+            const codesList = document.getElementById('codesList');
+            
+            if (giftCodes.length === 0) {
+                codesList.innerHTML = '<p class="text-gray-400 text-center py-8">No hay códigos creados</p>';
+                return;
+            }
+
+            codesList.innerHTML = giftCodes.map(code => {
+                const product = products.find(p => p.id === code.productId);
+                const version = product.versions.find(v => v.id === code.versionId);
+                
+                return `
+                    <div class="bg-white/5 rounded-xl p-4 border border-gray-600">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="text-lg font-bold text-yellow-300">${code.code.toUpperCase()}</h4>
+                                <p class="text-sm text-gray-300">${product.name} - ${version.name}</p>
+                                <p class="text-xs text-gray-400">Creado: ${code.createdAt}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-lg font-bold ${code.stock > 0 ? 'text-green-400' : 'text-red-400'}">
+                                    ${code.stock}/${code.originalStock}
+                                </p>
+                                <p class="text-xs text-gray-400">Stock</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm ${code.stock > 0 ? 'text-green-400' : 'text-red-400'}">
+                                ${code.stock > 0 ? '✅ Activo' : '❌ Agotado'}
+                            </span>
+                            <button onclick="deleteGiftCode(${code.id})" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-white text-sm font-bold">
+                                🗑️ Eliminar
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteGiftCode(codeId) {
+            if (confirm('¿Estás seguro de eliminar este código?')) {
+                giftCodes = giftCodes.filter(c => c.id !== codeId);
+                renderCodesList();
+            }
+        }
+
+        // Initialize the store
+        renderCatalog();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994c0bfc25c0f77e',t:'MTc2MTUwMzY1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-    
-
-
-
-
