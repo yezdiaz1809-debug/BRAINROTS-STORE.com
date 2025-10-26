@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> BRAINROTS STORE 🎮</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
   <style>
         body {
             box-sizing: border-box;
@@ -108,10 +110,6 @@
             z-index: 10;
         }
 
-        .admin-tab.active {
-            background: linear-gradient(to right, #3b82f6, #8b5cf6) !important;
-        }
-
         .discount-badge {
             position: absolute;
             top: 8px;
@@ -127,8 +125,6 @@
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
  <body class="min-h-full dynamic-bg"><!-- Header -->
   <header class="text-center py-8 px-4">
@@ -192,355 +188,339 @@
     </div>
     <p class="text-xl font-bold">MUCHAS GRACIAS POR EL PEDIDO, TE CONTACTAREMOS PRONTO👻👾</p>
    </div>
-  </div><!-- Admin Access Button (Fixed Position) -->
-  <div class="fixed top-4 right-4 z-40"><button id="adminAccessBtn" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full shadow-lg opacity-30 hover:opacity-100 transition-all text-sm"> ⚙️ </button>
-  </div><!-- Admin Login Modal -->
-  <div id="adminLoginModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-   <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-3xl border-4 border-yellow-300 max-w-md w-full mx-4">
-    <h2 class="text-3xl font-black text-yellow-300 text-center mb-6">🔐 ACCESO ADMIN</h2>
-    <form id="adminLoginForm"><input type="password" id="adminCode" placeholder="Código de acceso" class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg mb-4">
-     <div class="flex gap-4"><button type="submit" class="flex-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-3 rounded-xl font-black text-white"> ENTRAR </button> <button type="button" id="cancelAdminLogin" class="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white"> CANCELAR </button>
-     </div>
-    </form>
-   </div>
-  </div><!-- Admin Panel -->
-  <div id="adminPanel" class="hidden fixed inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 z-50 overflow-y-auto">
-   <div class="container mx-auto px-4 py-8"><!-- Admin Header -->
-    <div class="flex justify-between items-center mb-8">
-     <h1 class="text-4xl font-black text-yellow-300">🛠️ PANEL DE ADMINISTRADOR</h1><button id="closeAdminPanel" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white"> ❌ CERRAR </button>
-    </div><!-- Admin Tabs -->
-    <div class="flex gap-4 mb-8"><button id="ordersTab" class="admin-tab active bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-xl font-black text-white"> 📋 PEDIDOS </button> <button id="stockTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 📦 STOCK </button> <button id="discountsTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 💰 DESCUENTOS </button> <button id="codesTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 🎁 CÓDIGOS </button>
-    </div><!-- Orders Section -->
-    <div id="ordersSection" class="admin-section">
-     <div class="bg-white/10 rounded-3xl p-6 mb-6">
-      <h2 class="text-2xl font-black text-yellow-300 mb-4">📊 ESTADÍSTICAS</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-       <div class="bg-green-500/20 rounded-xl p-4 text-center">
-        <div class="text-3xl font-black text-green-400" id="totalOrders">
-         0
-        </div>
-        <div class="text-white">
-         Total Pedidos
-        </div>
-       </div>
-       <div class="bg-blue-500/20 rounded-xl p-4 text-center">
-        <div class="text-3xl font-black text-blue-400" id="todayOrders">
-         0
-        </div>
-        <div class="text-white">
-         Hoy
-        </div>
-       </div>
-       <div class="bg-purple-500/20 rounded-xl p-4 text-center">
-        <div class="text-3xl font-black text-purple-400" id="totalRevenue">
-         $0
-        </div>
-        <div class="text-white">
-         Ingresos
-        </div>
-       </div>
-      </div>
-     </div>
-     <div class="bg-white/10 rounded-3xl p-6">
-      <h2 class="text-2xl font-black text-yellow-300 mb-4">📋 HISTORIAL DE PEDIDOS</h2>
-      <div id="ordersList" class="space-y-4">
-       <p class="text-gray-400 text-center py-8">No hay pedidos registrados</p>
-      </div>
-     </div>
-    </div><!-- Stock Section -->
-    <div id="stockSection" class="admin-section hidden">
-     <div class="bg-white/10 rounded-3xl p-6">
-      <h2 class="text-2xl font-black text-yellow-300 mb-6">📦 GESTIÓN DE STOCK</h2>
-      <div id="stockList" class="space-y-6"><!-- Stock controls will be rendered here -->
-      </div>
-     </div>
-    </div><!-- Discounts Section -->
-    <div id="discountsSection" class="admin-section hidden">
-     <div class="bg-white/10 rounded-3xl p-6">
-      <h2 class="text-2xl font-black text-yellow-300 mb-6">💰 GESTIÓN DE DESCUENTOS</h2>
-      <div id="discountsList" class="space-y-6"><!-- Discount controls will be rendered here -->
-      </div>
-     </div>
-    </div><!-- Gift Codes Section -->
-    <div id="codesSection" class="admin-section hidden">
-     <div class="bg-white/10 rounded-3xl p-6 mb-6">
-      <h2 class="text-2xl font-black text-yellow-300 mb-6">🎁 CREAR CÓDIGO DE REGALO</h2>
-      <form id="createCodeForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-       <div><label class="block text-white font-bold mb-2">Código:</label> <input type="text" id="newCodeName" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none">
-       </div>
-       <div><label class="block text-white font-bold mb-2">Stock:</label> <input type="number" id="newCodeStock" min="1" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none">
-       </div>
-       <div><label class="block text-white font-bold mb-2">Producto:</label> <select id="newCodeProduct" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none"> <option value="">Seleccionar producto</option> </select>
-       </div>
-       <div><label class="block text-white font-bold mb-2">Versión:</label> <select id="newCodeVersion" required class="w-full px-3 py-2 rounded bg-white/20 text-white border border-gray-500 focus:border-yellow-300 focus:outline-none"> <option value="">Seleccionar versión</option> </select>
-       </div>
-       <div class="md:col-span-2"><button type="submit" class="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 px-6 py-3 rounded-xl font-black text-white"> ➕ CREAR CÓDIGO </button>
-       </div>
-      </form>
-     </div>
-     <div class="bg-white/10 rounded-3xl p-6">
-      <h2 class="text-2xl font-black text-yellow-300 mb-6">📋 CÓDIGOS ACTIVOS</h2>
-      <div id="codesList" class="space-y-4">
-       <p class="text-gray-400 text-center py-8">No hay códigos creados</p>
-      </div>
-     </div>
-    </div>
-   </div>
   </div>
   <script>
-        // Products with versions and stock
+        // ═══════════════════════════════════════════════════════════════
+        // 🎯 CONFIGURACIÓN SÚPER FÁCIL - CAMBIA AQUÍ TODO 🎯
+        // ═══════════════════════════════════════════════════════════════
+
+        // 📱 TU NÚMERO DE WHATSAPP (CAMBIA AQUÍ)
+        const WHATSAPP_NUMBER = "573245640954"; // 🔥 PON TU NÚMERO AQUÍ
+
+        // 🎁 CÓDIGOS DE REGALO ACTIVOS (AGREGA/QUITA AQUÍ)
+        let giftCodes = [
+            {
+                id: "code_1",
+                code: "REGALO2024", // 🎫 NOMBRE DEL CÓDIGO
+                stock: 3, // 📦 CUÁNTAS VECES SE PUEDE USAR
+                originalStock: 3,
+                productId: 1, // 🎮 ID DEL PRODUCTO (VER ABAJO)
+                versionId: "1-base", // 🎯 VERSIÓN (base o mutada)
+                createdAt: new Date().toISOString(),
+                type: 'gift_code'
+            },
+            {
+                id: "code_2",
+                code: "NAVIDAD", // 🎫 OTRO CÓDIGO
+                stock: 3, // 📦 STOCK
+                originalStock: 3,
+                productId: 6, // 🎮 JOB JOB JOB SAHUR
+                versionId: "6-mutada", // 🎯 VERSIÓN MUTADA
+                createdAt: new Date().toISOString(),
+                type: 'gift_code'
+            }
+            // 🔥 AGREGA MÁS CÓDIGOS COPIANDO EL FORMATO DE ARRIBA
+        ];
+
+        // ═══════════════════════════════════════════════════════════════
+        // 🎮 PRODUCTOS Y CONFIGURACIÓN - EDITA AQUÍ 🎮
+        // ═══════════════════════════════════════════════════════════════
+
+        // ┌─────────────────────────────────────────────────────────────┐
+        // │ 🎮 PRODUCTO 1: TRALALITA TRALALA                           │
+        // └─────────────────────────────────────────────────────────────┘
         let products = [
             {
                 id: 1,
                 name: "TRALALITA TRALALA",
-                image: "tralalita.jpg", // 🔥 CAMBIA AQUÍ: Imagen que aparece en el catálogo principal
+                image: "tralalita.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!",
-                discount: 0, // Descuento del producto principal
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "1-base",
                         name: "Base",
-                        price: 3000, // Precio numérico para cálculos
-                        image: "tralalita-base.jpg", // 🔥 CAMBIA AQUÍ: Imagen de la versión BASE cuando seleccionas el producto
-                        stock: 5,
-                        discount: 0 // Descuento específico de la versión
+                        price: 3000, // 💰 PRECIO BASE
+                        image: "tralalita-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 5, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "1-mutada",
                         name: "Mutada",
-                        price: 4500,
-                        image: "tralalita-mutada.jpg", // 🔥 CAMBIA AQUÍ: Imagen de la versión MUTADA cuando seleccionas el producto
-                        stock: 3,
-                        discount: 0
+                        price: 4500, // 💰 PRECIO MUTADA
+                        image: "tralalita-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 3, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 2: TRALALERO TRALALA                           │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 2,
                 name: "TRALALERO TRALALA",
-                image: "tralaleroTralala.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "tralaleroTralala.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "2-base",
                         name: "Base",
-                        price: 3000,
-                        image: "tralalero-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 4,
-                        discount: 0
+                        price: 3000, // 💰 PRECIO BASE
+                        image: "tralalero-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 4, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "2-mutada",
                         name: "Mutada",
-                        price: 4500,
-                        image: "tralalero-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 2,
-                        discount: 0
+                        price: 4500, // 💰 PRECIO MUTADA
+                        image: "tralalero-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 2, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 3: LOS BOMBINITOS                               │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 3,
                 name: "LOS BOMBINITOS",
-                image: "los bombinitos.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "los bombinitos.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "3-base",
                         name: "Base",
-                        price: 6000,
-                        image: "bombinitos-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 6,
-                        discount: 0
+                        price: 6000, // 💰 PRECIO BASE
+                        image: "bombinitos-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 6, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "3-mutada",
                         name: "Mutada",
-                        price: 8000,
-                        image: "bombinitos-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 0, // EJEMPLO: AGOTADO
-                        discount: 0
+                        price: 8000, // 💰 PRECIO MUTADA
+                        image: "bombinitos-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 0, // 📦 AGOTADO
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 4: LOS COCODRILITOS                             │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 4,
                 name: "LOS COCODRILITOS",
-                image: "noFilter.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "noFilter.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "4-base",
                         name: "Base",
-                        price: 3500,
-                        image: "cocodrilitos-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 7,
-                        discount: 0
+                        price: 3500, // 💰 PRECIO BASE
+                        image: "cocodrilitos-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 7, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "4-mutada",
                         name: "Mutada",
-                        price: 5000,
-                        image: "cocodrilitos-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 1,
-                        discount: 0
+                        price: 5000, // 💰 PRECIO MUTADA
+                        image: "cocodrilitos-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 1, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 5: LOS ORCALITOS                                │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 5,
                 name: "LOS ORCALITOS",
-                image: "noFilter (1).jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "noFilter (1).jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "5-base",
                         name: "Base",
-                        price: 8000,
-                        image: "orcalitos-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 3,
-                        discount: 0
+                        price: 8000, // 💰 PRECIO BASE
+                        image: "orcalitos-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 3, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "5-mutada",
                         name: "Mutada",
-                        price: 10000,
-                        image: "orcalitos-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 2,
-                        discount: 0
+                        price: 10000, // 💰 PRECIO MUTADA
+                        image: "orcalitos-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 2, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 6: JOB JOB JOB SAHUR                            │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 6,
                 name: "JOB JOB JOB SAHUR",
-                image: "job.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "job.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "6-base",
                         name: "Base",
-                        price: 10000,
-                        image: "job-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 2,
-                        discount: 0
+                        price: 10000, // 💰 PRECIO BASE
+                        image: "job-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 2, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "6-mutada",
                         name: "Mutada",
-                        price: 15000,
-                        image: "job-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 1,
-                        discount: 0
+                        price: 15000, // 💰 PRECIO MUTADA
+                        image: "job-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 1, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 7: MATEO                                        │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 7,
                 name: "MATEO",
-                image: "matteofr.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "matteofr.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡El increíble MATEO! ¡Súper único y especial!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "7-base",
                         name: "Base",
-                        price: 3500,
-                        image: "mateo-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 4,
-                        discount: 0
+                        price: 3500, // 💰 PRECIO BASE
+                        image: "mateo-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 4, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "7-mutada",
                         name: "Mutada",
-                        price: 5000,
-                        image: "mateo-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 3,
-                        discount: 0
+                        price: 5000, // 💰 PRECIO MUTADA
+                        image: "mateo-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 3, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 8: PAKRAHMATMAMAT                               │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 8,
                 name: "PAKRAHMATMAMAT",
-                image: "pakrah.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "pakrah.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "8-base",
                         name: "Base",
-                        price: 5000,
-                        image: "pakrah-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 5,
-                        discount: 0
+                        price: 5000, // 💰 PRECIO BASE
+                        image: "pakrah-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 5, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "8-mutada",
                         name: "Mutada",
-                        price: 7500,
-                        image: "pakrah-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 2,
-                        discount: 0
+                        price: 7500, // 💰 PRECIO MUTADA
+                        image: "pakrah-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 2, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 9: LA VACA SATURNO SATURNITA                    │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 9,
                 name: "LA VACA SATURNO SATURNITA",
-                image: "noFilter (2).jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "noFilter (2).jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "9-base",
                         name: "Base",
-                        price: 7000,
-                        image: "vaca-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 3,
-                        discount: 0
+                        price: 7000, // 💰 PRECIO BASE
+                        image: "vaca-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 3, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "9-mutada",
                         name: "Mutada",
-                        price: 9000,
-                        image: "vaca-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 1,
-                        discount: 0
+                        price: 9000, // 💰 PRECIO MUTADA
+                        image: "vaca-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 1, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             },
+
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ 🎮 PRODUCTO 10: LOS TIPI TACOS                              │
+            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 10,
                 name: "LOS TIPI TACOS",
-                image: "Los_tipi_tacos.jpg", // 📸 IMAGEN PRINCIPAL DEL CATÁLOGO
+                image: "Los_tipi_tacos.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
                 description: "¡Los increíbles TIPI TACOS! ¡Súper sabrosos y geniales!",
-                discount: 0,
+                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
                 versions: [
                     {
                         id: "10-base",
                         name: "Base",
-                        price: 10000,
-                        image: "tipi-base.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN BASE
-                        stock: 4,
-                        discount: 0
+                        price: 10000, // 💰 PRECIO BASE
+                        image: "tipi-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
+                        stock: 4, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     },
                     {
                         id: "10-mutada",
                         name: "Mutada",
-                        price: 12000,
-                        image: "tipi-mutada.jpg", // 📸 PON AQUÍ LA IMAGEN DE LA VERSIÓN MUTADA
-                        stock: 2,
-                        discount: 0
+                        price: 12000, // 💰 PRECIO MUTADA
+                        image: "tipi-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
+                        stock: 2, // 📦 STOCK DISPONIBLE
+                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
                     }
                 ]
             }
         ];
+
+        // ═══════════════════════════════════════════════════════════════
+        // 🚀 NO TOQUES NADA DE AQUÍ PARA ABAJO (CÓDIGO AUTOMÁTICO) 🚀
+        // ═══════════════════════════════════════════════════════════════
 
         // Get all the elements we need
         const catalogSection = document.getElementById('catalogSection');
@@ -555,22 +535,6 @@
         const purchaseForm = document.getElementById('purchaseForm');
         const successMessage = document.getElementById('successMessage');
 
-        // Admin elements
-        const adminAccessBtn = document.getElementById('adminAccessBtn');
-        const adminLoginModal = document.getElementById('adminLoginModal');
-        const adminPanel = document.getElementById('adminPanel');
-        const adminLoginForm = document.getElementById('adminLoginForm');
-        const cancelAdminLogin = document.getElementById('cancelAdminLogin');
-        const closeAdminPanel = document.getElementById('closeAdminPanel');
-        const ordersTab = document.getElementById('ordersTab');
-        const stockTab = document.getElementById('stockTab');
-        const discountsTab = document.getElementById('discountsTab');
-        const codesTab = document.getElementById('codesTab');
-        const ordersSection = document.getElementById('ordersSection');
-        const stockSection = document.getElementById('stockSection');
-        const discountsSection = document.getElementById('discountsSection');
-        const codesSection = document.getElementById('codesSection');
-
         // Gift elements
         const showGiftsBtn = document.getElementById('showGiftsBtn');
         const giftsSection = document.getElementById('giftsSection');
@@ -580,8 +544,91 @@
         let currentProduct = null;
         let currentVersion = null;
         let orders = []; // Array para almacenar pedidos
-        let giftCodes = []; // Array para almacenar códigos de regalo
-        let isAdminLoggedIn = false;
+        let allData = []; // Todos los datos del SDK
+
+        // Configuración por defecto
+        const defaultConfig = {
+            store_title: "BRAINROTS STORE 🎮",
+            store_subtitle: "La forma más fácil de conseguir tus brainrots favoritos🤑",
+            whatsapp_number: WHATSAPP_NUMBER
+        };
+
+        // Data SDK Handler
+        const dataHandler = {
+            onDataChanged(data) {
+                allData = data;
+                
+                // Separar pedidos y códigos de regalo
+                orders = data.filter(item => item.type === 'order');
+                const serverGiftCodes = data.filter(item => item.type === 'gift_code');
+                
+                // Sincronizar códigos de regalo con el servidor
+                if (serverGiftCodes.length > 0) {
+                    giftCodes = serverGiftCodes;
+                }
+            }
+        };
+
+        // Inicializar SDKs
+        async function initializeSDKs() {
+            try {
+                // Inicializar Data SDK
+                if (window.dataSdk) {
+                    const initResult = await window.dataSdk.init(dataHandler);
+                    if (!initResult.isOk) {
+                        console.error("Error inicializando Data SDK:", initResult.error);
+                    }
+                    
+                    // Crear códigos de regalo iniciales si no existen
+                    if (giftCodes.length > 0 && allData.filter(item => item.type === 'gift_code').length === 0) {
+                        for (const code of giftCodes) {
+                            await window.dataSdk.create(code);
+                        }
+                    }
+                }
+
+                // Inicializar Element SDK
+                if (window.elementSdk) {
+                    await window.elementSdk.init({
+                        defaultConfig,
+                        onConfigChange: async (config) => {
+                            // Actualizar título de la tienda
+                            const titleElement = document.querySelector('h1');
+                            if (titleElement) {
+                                titleElement.textContent = config.store_title || defaultConfig.store_title;
+                            }
+                            
+                            // Actualizar subtítulo
+                            const subtitleElement = document.querySelector('header p');
+                            if (subtitleElement) {
+                                subtitleElement.textContent = config.store_subtitle || defaultConfig.store_subtitle;
+                            }
+                        },
+                        mapToCapabilities: (config) => ({
+                            recolorables: [],
+                            borderables: [],
+                            fontEditable: undefined,
+                            fontSizeable: undefined
+                        }),
+                        mapToEditPanelValues: (config) => new Map([
+                            ["store_title", config.store_title || defaultConfig.store_title],
+                            ["store_subtitle", config.store_subtitle || defaultConfig.store_subtitle],
+                            ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number]
+                        ])
+                    });
+                }
+            } catch (error) {
+                console.error("Error inicializando SDKs:", error);
+            }
+        }
+
+        // Función para obtener número de WhatsApp
+        function getWhatsAppNumber() {
+            if (window.elementSdk && window.elementSdk.config) {
+                return window.elementSdk.config.whatsapp_number || WHATSAPP_NUMBER;
+            }
+            return WHATSAPP_NUMBER;
+        }
 
         // Utility functions
         function formatPrice(price) {
@@ -623,36 +670,6 @@
             });
         }
 
-        // Admin event listeners
-        adminAccessBtn.addEventListener('click', () => {
-            adminLoginModal.classList.remove('hidden');
-        });
-
-        cancelAdminLogin.addEventListener('click', () => {
-            adminLoginModal.classList.add('hidden');
-            document.getElementById('adminCode').value = '';
-        });
-
-        closeAdminPanel.addEventListener('click', () => {
-            adminPanel.classList.add('hidden');
-            isAdminLoggedIn = false;
-        });
-
-        adminLoginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const code = document.getElementById('adminCode').value;
-            
-            if (code === '160923') {
-                adminLoginModal.classList.add('hidden');
-                adminPanel.classList.remove('hidden');
-                isAdminLoggedIn = true;
-                renderAdminDashboard();
-                document.getElementById('adminCode').value = '';
-            } else {
-                alert('Código incorrecto');
-            }
-        });
-
         // Gift navigation
         showGiftsBtn.addEventListener('click', () => {
             catalogSection.classList.add('hidden');
@@ -663,59 +680,6 @@
             giftsSection.classList.add('hidden');
             catalogSection.classList.remove('hidden');
         });
-
-        // Admin tabs
-        ordersTab.addEventListener('click', () => {
-            setActiveTab('orders');
-        });
-
-        stockTab.addEventListener('click', () => {
-            setActiveTab('stock');
-        });
-
-        discountsTab.addEventListener('click', () => {
-            setActiveTab('discounts');
-        });
-
-        codesTab.addEventListener('click', () => {
-            setActiveTab('codes');
-        });
-
-        function setActiveTab(tab) {
-            // Reset all tabs
-            document.querySelectorAll('.admin-tab').forEach(t => {
-                t.classList.remove('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
-                t.classList.add('bg-gray-600');
-            });
-            
-            // Hide all sections
-            ordersSection.classList.add('hidden');
-            stockSection.classList.add('hidden');
-            discountsSection.classList.add('hidden');
-            codesSection.classList.add('hidden');
-            
-            // Activate selected tab and section
-            if (tab === 'orders') {
-                ordersTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
-                ordersTab.classList.remove('bg-gray-600');
-                ordersSection.classList.remove('hidden');
-            } else if (tab === 'stock') {
-                stockTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
-                stockTab.classList.remove('bg-gray-600');
-                stockSection.classList.remove('hidden');
-                renderStockPanel();
-            } else if (tab === 'discounts') {
-                discountsTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
-                discountsTab.classList.remove('bg-gray-600');
-                discountsSection.classList.remove('hidden');
-                renderDiscountsPanel();
-            } else if (tab === 'codes') {
-                codesTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
-                codesTab.classList.remove('bg-gray-600');
-                codesSection.classList.remove('hidden');
-                renderCodesPanel();
-            }
-        }
 
         // Navigation event listeners
         backToCatalog.addEventListener('click', () => {
@@ -894,7 +858,7 @@
         }
 
         // Handle gift form
-        giftForm.addEventListener('submit', (e) => {
+        giftForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const giftCode = document.getElementById('giftCode').value.toLowerCase();
@@ -919,7 +883,7 @@
             }
             
             // Tu número de WhatsApp
-            const whatsappNumber = "573245640954";
+            const whatsappNumber = getWhatsAppNumber();
             
             // Crear mensaje de WhatsApp para regalo
             const whatsappMessage = `🎁 REGALO CANJEADO - BRAINROT GRATIS 🎮
@@ -940,13 +904,22 @@
             // Crear enlace de WhatsApp
             const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
             
-            // Reducir stock del código
+            // Reducir stock del código y guardar
             code.stock--;
+            
+            // Actualizar código en la base de datos
+            if (window.dataSdk) {
+                const codeData = allData.find(item => item.type === 'gift_code' && item.code === code.code);
+                if (codeData) {
+                    codeData.stock = code.stock;
+                    await window.dataSdk.update(codeData);
+                }
+            }
             
             // Registrar pedido de regalo
             const order = {
-                id: Date.now(),
-                date: new Date().toLocaleString('es-ES'),
+                id: `gift_${Date.now()}`,
+                date: new Date().toISOString(),
                 product: product.name,
                 version: version.name,
                 customer: customerName,
@@ -956,9 +929,16 @@
                 finalPrice: 0,
                 hasDiscount: false,
                 isGift: true,
-                giftCode: code.code
+                giftCode: code.code,
+                type: 'order'
             };
-            orders.push(order);
+            
+            // Guardar pedido en la base de datos
+            if (window.dataSdk) {
+                await window.dataSdk.create(order);
+            } else {
+                orders.push(order);
+            }
             
             // Abrir WhatsApp
             try {
@@ -990,7 +970,7 @@
         });
 
         // Handle purchase form
-        purchaseForm.addEventListener('submit', (e) => {
+        purchaseForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const customerName = document.getElementById('customerName').value;
@@ -1008,7 +988,7 @@
             }
             
             // Tu número de WhatsApp
-            const whatsappNumber = "573245640954";
+            const whatsappNumber = getWhatsAppNumber();
             
             // Calcular precios con descuento
             const effectiveDiscount = getEffectiveDiscount(currentProduct, currentVersion);
@@ -1041,8 +1021,8 @@
             
             // Registrar pedido
             const order = {
-                id: Date.now(),
-                date: new Date().toLocaleString('es-ES'),
+                id: `order_${Date.now()}`,
+                date: new Date().toISOString(),
                 product: currentProduct.name,
                 version: currentVersion.name,
                 customer: customerName,
@@ -1050,9 +1030,18 @@
                 originalPrice: originalPrice,
                 discount: effectiveDiscount,
                 finalPrice: discountedPrice,
-                hasDiscount: hasDiscount
+                hasDiscount: hasDiscount,
+                isGift: false,
+                giftCode: null,
+                type: 'order'
             };
-            orders.push(order);
+            
+            // Guardar pedido en la base de datos
+            if (window.dataSdk) {
+                await window.dataSdk.create(order);
+            } else {
+                orders.push(order);
+            }
             
             // Abrir WhatsApp
             try {
@@ -1094,403 +1083,11 @@
             }, 5000);
         }
 
-        // Admin functions
-        function renderAdminDashboard() {
-            updateOrdersStats();
-            renderOrdersList();
-        }
-
-        function updateOrdersStats() {
-            const today = new Date().toDateString();
-            const todayOrders = orders.filter(order => new Date(order.date).toDateString() === today);
-            const totalRevenue = orders.reduce((sum, order) => sum + order.finalPrice, 0);
-
-            document.getElementById('totalOrders').textContent = orders.length;
-            document.getElementById('todayOrders').textContent = todayOrders.length;
-            document.getElementById('totalRevenue').textContent = formatPrice(totalRevenue);
-        }
-
-        function renderOrdersList() {
-            const ordersList = document.getElementById('ordersList');
-            
-            if (orders.length === 0) {
-                ordersList.innerHTML = '<p class="text-gray-400 text-center py-8">No hay pedidos registrados</p>';
-                return;
-            }
-
-            ordersList.innerHTML = orders.slice().reverse().map(order => `
-                <div class="bg-white/5 rounded-xl p-4 border border-gray-600">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <h4 class="text-lg font-bold text-yellow-300">${order.product}</h4>
-                            <p class="text-sm text-gray-300">Versión: ${order.version}</p>
-                            ${order.isGift ? `<p class="text-xs text-pink-400">🎁 REGALO - Código: ${order.giftCode}</p>` : ''}
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm text-gray-400">${order.date}</p>
-                            ${order.hasDiscount && !order.isGift ? `
-                                <p class="text-xs text-red-400">Descuento: ${order.discount}%</p>
-                            ` : ''}
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <p class="text-gray-400">Cliente:</p>
-                            <p class="text-white">${order.customer}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-400">Usuario Roblox:</p>
-                            <p class="text-white">${order.robloxUser}</p>
-                        </div>
-                    </div>
-                    <div class="mt-3 pt-3 border-t border-gray-600">
-                        ${order.isGift ? `
-                            <div class="flex justify-between text-lg font-bold">
-                                <span class="text-gray-300">Precio:</span>
-                                <span class="text-pink-400">GRATIS 🎁</span>
-                            </div>
-                        ` : order.hasDiscount ? `
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Precio original:</span>
-                                <span class="text-red-400 line-through">${formatPrice(order.originalPrice)}</span>
-                            </div>
-                            <div class="flex justify-between text-lg font-bold">
-                                <span class="text-gray-300">Precio final:</span>
-                                <span class="text-green-400">${formatPrice(order.finalPrice)}</span>
-                            </div>
-                        ` : `
-                            <div class="flex justify-between text-lg font-bold">
-                                <span class="text-gray-300">Precio:</span>
-                                <span class="text-green-400">${formatPrice(order.finalPrice)}</span>
-                            </div>
-                        `}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderStockPanel() {
-            const stockList = document.getElementById('stockList');
-            
-            stockList.innerHTML = products.map(product => `
-                <div class="bg-white/5 rounded-xl p-6 border border-gray-600">
-                    <h3 class="text-xl font-bold text-yellow-300 mb-4">${product.name}</h3>
-                    
-                    <!-- Versions Stock -->
-                    <div class="space-y-4">
-                        ${product.versions.map(version => `
-                            <div class="p-4 bg-blue-500/10 rounded-lg">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h5 class="font-bold text-blue-300">Versión ${version.name}</h5>
-                                    <span class="text-lg font-bold ${version.stock > 3 ? 'text-green-400' : version.stock > 0 ? 'text-yellow-400' : 'text-red-400'}">
-                                        📦 ${version.stock} unidades
-                                    </span>
-                                </div>
-                                <div class="flex gap-2 items-center">
-                                    <label class="text-white font-bold">Nuevo Stock:</label>
-                                    <input type="number" id="version-stock-${version.id}" min="0" max="999" value="${version.stock}" 
-                                           class="w-20 px-2 py-1 rounded bg-white/20 text-white border border-gray-500 focus:border-blue-400 focus:outline-none">
-                                    <button onclick="updateVersionStock('${version.id}')" 
-                                            class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-white font-bold">
-                                        ✅ Actualizar
-                                    </button>
-                                    <button onclick="addVersionStock('${version.id}', 1)" 
-                                            class="bg-green-500 hover:bg-green-600 px-2 py-1 rounded text-white font-bold">
-                                        +1
-                                    </button>
-                                    <button onclick="addVersionStock('${version.id}', 5)" 
-                                            class="bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-white font-bold">
-                                        +5
-                                    </button>
-                                    <button onclick="addVersionStock('${version.id}', 10)" 
-                                            class="bg-green-700 hover:bg-green-800 px-2 py-1 rounded text-white font-bold">
-                                        +10
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderDiscountsPanel() {
-            const discountsList = document.getElementById('discountsList');
-            
-            discountsList.innerHTML = products.map(product => `
-                <div class="bg-white/5 rounded-xl p-6 border border-gray-600">
-                    <h3 class="text-xl font-bold text-yellow-300 mb-4">${product.name}</h3>
-                    
-                    <!-- Product Discount -->
-                    <div class="mb-4 p-4 bg-blue-500/10 rounded-lg">
-                        <h4 class="text-lg font-bold text-blue-300 mb-2">Descuento del Producto</h4>
-                        <div class="flex gap-2 items-center">
-                            <input type="number" id="product-discount-${product.id}" min="0" max="99" value="${product.discount}" 
-                                   class="w-20 px-2 py-1 rounded bg-white/20 text-white border border-gray-500 focus:border-blue-400 focus:outline-none">
-                            <span class="text-white">%</span>
-                            <button onclick="updateProductDiscount(${product.id})" 
-                                    class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-white font-bold">
-                                Aplicar
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Versions Discounts -->
-                    <div class="space-y-3">
-                        ${product.versions.map(version => `
-                            <div class="p-3 bg-purple-500/10 rounded-lg">
-                                <h5 class="font-bold text-purple-300 mb-2">Versión ${version.name}</h5>
-                                <div class="flex gap-2 items-center">
-                                    <input type="number" id="version-discount-${version.id}" min="0" max="99" value="${version.discount}" 
-                                           class="w-20 px-2 py-1 rounded bg-white/20 text-white border border-gray-500 focus:border-purple-400 focus:outline-none">
-                                    <span class="text-white">%</span>
-                                    <button onclick="updateVersionDiscount('${version.id}')" 
-                                            class="bg-purple-500 hover:bg-purple-600 px-3 py-1 rounded text-white font-bold">
-                                        Aplicar
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function updateProductDiscount(productId) {
-            const product = products.find(p => p.id === productId);
-            const newDiscount = parseInt(document.getElementById(`product-discount-${productId}`).value) || 0;
-            
-            product.discount = Math.max(0, Math.min(99, newDiscount));
-            
-            // Re-render catalog if visible
-            if (!catalogSection.classList.contains('hidden')) {
-                renderCatalog();
-            }
-            
-            // Re-render versions if this product is selected
-            if (currentProduct && currentProduct.id === productId) {
-                showVersions(productId);
-            }
-            
-            alert(`Descuento del producto actualizado a ${product.discount}%`);
-        }
-
-        function updateVersionDiscount(versionId) {
-            let version = null;
-            let product = null;
-            
-            // Find version and its product
-            for (let p of products) {
-                const v = p.versions.find(ver => ver.id === versionId);
-                if (v) {
-                    version = v;
-                    product = p;
-                    break;
-                }
-            }
-            
-            if (!version) return;
-            
-            const newDiscount = parseInt(document.getElementById(`version-discount-${versionId}`).value) || 0;
-            version.discount = Math.max(0, Math.min(99, newDiscount));
-            
-            // Re-render versions if this product is selected
-            if (currentProduct && currentProduct.id === product.id) {
-                showVersions(product.id);
-            }
-            
-            alert(`Descuento de la versión ${version.name} actualizado a ${version.discount}%`);
-        }
-
-        // Gift codes functions
-        function renderCodesPanel() {
-            // Populate product dropdown
-            const productSelect = document.getElementById('newCodeProduct');
-            productSelect.innerHTML = '<option value="">Seleccionar producto</option>' + 
-                products.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-            
-            // Handle product selection change
-            productSelect.addEventListener('change', function() {
-                const versionSelect = document.getElementById('newCodeVersion');
-                const selectedProductId = parseInt(this.value);
-                
-                if (selectedProductId) {
-                    const product = products.find(p => p.id === selectedProductId);
-                    versionSelect.innerHTML = '<option value="">Seleccionar versión</option>' + 
-                        product.versions.map(v => `<option value="${v.id}">${v.name}</option>`).join('');
-                } else {
-                    versionSelect.innerHTML = '<option value="">Seleccionar versión</option>';
-                }
-            });
-            
-            // Handle create code form
-            document.getElementById('createCodeForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const code = document.getElementById('newCodeName').value.toLowerCase();
-                const stock = parseInt(document.getElementById('newCodeStock').value);
-                const productId = parseInt(document.getElementById('newCodeProduct').value);
-                const versionId = document.getElementById('newCodeVersion').value;
-                
-                if (!code || !stock || !productId || !versionId) {
-                    alert('Por favor completa todos los campos');
-                    return;
-                }
-                
-                // Check if code already exists
-                if (giftCodes.find(c => c.code.toLowerCase() === code)) {
-                    alert('Este código ya existe');
-                    return;
-                }
-                
-                // Create new gift code
-                const newGiftCode = {
-                    id: Date.now(),
-                    code: code,
-                    stock: stock,
-                    originalStock: stock,
-                    productId: productId,
-                    versionId: versionId,
-                    createdAt: new Date().toLocaleString('es-ES')
-                };
-                
-                giftCodes.push(newGiftCode);
-                
-                // Reset form
-                this.reset();
-                document.getElementById('newCodeVersion').innerHTML = '<option value="">Seleccionar versión</option>';
-                
-                // Re-render codes list
-                renderCodesList();
-                
-                alert('Código creado exitosamente');
-            });
-            
-            renderCodesList();
-        }
-
-        function renderCodesList() {
-            const codesList = document.getElementById('codesList');
-            
-            if (giftCodes.length === 0) {
-                codesList.innerHTML = '<p class="text-gray-400 text-center py-8">No hay códigos creados</p>';
-                return;
-            }
-
-            codesList.innerHTML = giftCodes.map(code => {
-                const product = products.find(p => p.id === code.productId);
-                const version = product.versions.find(v => v.id === code.versionId);
-                
-                return `
-                    <div class="bg-white/5 rounded-xl p-4 border border-gray-600">
-                        <div class="flex justify-between items-start mb-3">
-                            <div>
-                                <h4 class="text-lg font-bold text-yellow-300">${code.code.toUpperCase()}</h4>
-                                <p class="text-sm text-gray-300">${product.name} - ${version.name}</p>
-                                <p class="text-xs text-gray-400">Creado: ${code.createdAt}</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-lg font-bold ${code.stock > 0 ? 'text-green-400' : 'text-red-400'}">
-                                    ${code.stock}/${code.originalStock}
-                                </p>
-                                <p class="text-xs text-gray-400">Stock</p>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm ${code.stock > 0 ? 'text-green-400' : 'text-red-400'}">
-                                ${code.stock > 0 ? '✅ Activo' : '❌ Agotado'}
-                            </span>
-                            <button onclick="deleteGiftCode(${code.id})" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-white text-sm font-bold">
-                                🗑️ Eliminar
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function updateVersionStock(versionId) {
-            let version = null;
-            let product = null;
-            
-            // Find version and its product
-            for (let p of products) {
-                const v = p.versions.find(ver => ver.id === versionId);
-                if (v) {
-                    version = v;
-                    product = p;
-                    break;
-                }
-            }
-            
-            if (!version) return;
-            
-            const newStock = parseInt(document.getElementById(`version-stock-${versionId}`).value) || 0;
-            version.stock = Math.max(0, Math.min(999, newStock));
-            
-            // Re-render catalog if visible
-            if (!catalogSection.classList.contains('hidden')) {
-                renderCatalog();
-            }
-            
-            // Re-render versions if this product is selected
-            if (currentProduct && currentProduct.id === product.id) {
-                showVersions(product.id);
-            }
-            
-            // Re-render stock panel
-            renderStockPanel();
-            
-            alert(`Stock de ${product.name} - ${version.name} actualizado a ${version.stock} unidades`);
-        }
-
-        function addVersionStock(versionId, amount) {
-            let version = null;
-            let product = null;
-            
-            // Find version and its product
-            for (let p of products) {
-                const v = p.versions.find(ver => ver.id === versionId);
-                if (v) {
-                    version = v;
-                    product = p;
-                    break;
-                }
-            }
-            
-            if (!version) return;
-            
-            version.stock = Math.min(999, version.stock + amount);
-            
-            // Update the input field
-            document.getElementById(`version-stock-${versionId}`).value = version.stock;
-            
-            // Re-render catalog if visible
-            if (!catalogSection.classList.contains('hidden')) {
-                renderCatalog();
-            }
-            
-            // Re-render versions if this product is selected
-            if (currentProduct && currentProduct.id === product.id) {
-                showVersions(product.id);
-            }
-            
-            // Re-render stock panel
-            renderStockPanel();
-            
-            alert(`Se agregaron ${amount} unidades a ${product.name} - ${version.name}. Stock actual: ${version.stock}`);
-        }
-
-        function deleteGiftCode(codeId) {
-            if (confirm('¿Estás seguro de eliminar este código?')) {
-                giftCodes = giftCodes.filter(c => c.id !== codeId);
-                renderCodesList();
-            }
-        }
-
         // Initialize the store
-        renderCatalog();
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initializeSDKs();
+            renderCatalog();
+        });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994c435b115d0da0',t:'MTc2MTUwNTkyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994c727df52af77e',t:'MTc2MTUwNzg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
