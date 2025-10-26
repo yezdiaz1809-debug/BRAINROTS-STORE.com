@@ -1,9 +1,9 @@
- <!doctype html>
+<!doctype html>
 <html lang="es">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🧠 BRAINROTS STORE 🎮</title>
+  <title> BRAINROTS STORE 🎮</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
         body {
@@ -209,7 +209,7 @@
     <div class="flex justify-between items-center mb-8">
      <h1 class="text-4xl font-black text-yellow-300">🛠️ PANEL DE ADMINISTRADOR</h1><button id="closeAdminPanel" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white"> ❌ CERRAR </button>
     </div><!-- Admin Tabs -->
-    <div class="flex gap-4 mb-8"><button id="ordersTab" class="admin-tab active bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-xl font-black text-white"> 📋 PEDIDOS </button> <button id="discountsTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 💰 DESCUENTOS </button> <button id="codesTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 🎁 CÓDIGOS </button>
+    <div class="flex gap-4 mb-8"><button id="ordersTab" class="admin-tab active bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-xl font-black text-white"> 📋 PEDIDOS </button> <button id="stockTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 📦 STOCK </button> <button id="discountsTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 💰 DESCUENTOS </button> <button id="codesTab" class="admin-tab bg-gray-600 hover:bg-gray-500 px-6 py-3 rounded-xl font-black text-white"> 🎁 CÓDIGOS </button>
     </div><!-- Orders Section -->
     <div id="ordersSection" class="admin-section">
      <div class="bg-white/10 rounded-3xl p-6 mb-6">
@@ -245,6 +245,13 @@
       <h2 class="text-2xl font-black text-yellow-300 mb-4">📋 HISTORIAL DE PEDIDOS</h2>
       <div id="ordersList" class="space-y-4">
        <p class="text-gray-400 text-center py-8">No hay pedidos registrados</p>
+      </div>
+     </div>
+    </div><!-- Stock Section -->
+    <div id="stockSection" class="admin-section hidden">
+     <div class="bg-white/10 rounded-3xl p-6">
+      <h2 class="text-2xl font-black text-yellow-300 mb-6">📦 GESTIÓN DE STOCK</h2>
+      <div id="stockList" class="space-y-6"><!-- Stock controls will be rendered here -->
       </div>
      </div>
     </div><!-- Discounts Section -->
@@ -556,9 +563,11 @@
         const cancelAdminLogin = document.getElementById('cancelAdminLogin');
         const closeAdminPanel = document.getElementById('closeAdminPanel');
         const ordersTab = document.getElementById('ordersTab');
+        const stockTab = document.getElementById('stockTab');
         const discountsTab = document.getElementById('discountsTab');
         const codesTab = document.getElementById('codesTab');
         const ordersSection = document.getElementById('ordersSection');
+        const stockSection = document.getElementById('stockSection');
         const discountsSection = document.getElementById('discountsSection');
         const codesSection = document.getElementById('codesSection');
 
@@ -660,6 +669,10 @@
             setActiveTab('orders');
         });
 
+        stockTab.addEventListener('click', () => {
+            setActiveTab('stock');
+        });
+
         discountsTab.addEventListener('click', () => {
             setActiveTab('discounts');
         });
@@ -677,6 +690,7 @@
             
             // Hide all sections
             ordersSection.classList.add('hidden');
+            stockSection.classList.add('hidden');
             discountsSection.classList.add('hidden');
             codesSection.classList.add('hidden');
             
@@ -685,6 +699,11 @@
                 ordersTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
                 ordersTab.classList.remove('bg-gray-600');
                 ordersSection.classList.remove('hidden');
+            } else if (tab === 'stock') {
+                stockTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
+                stockTab.classList.remove('bg-gray-600');
+                stockSection.classList.remove('hidden');
+                renderStockPanel();
             } else if (tab === 'discounts') {
                 discountsTab.classList.add('active', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
                 discountsTab.classList.remove('bg-gray-600');
@@ -1150,6 +1169,51 @@
             `).join('');
         }
 
+        function renderStockPanel() {
+            const stockList = document.getElementById('stockList');
+            
+            stockList.innerHTML = products.map(product => `
+                <div class="bg-white/5 rounded-xl p-6 border border-gray-600">
+                    <h3 class="text-xl font-bold text-yellow-300 mb-4">${product.name}</h3>
+                    
+                    <!-- Versions Stock -->
+                    <div class="space-y-4">
+                        ${product.versions.map(version => `
+                            <div class="p-4 bg-blue-500/10 rounded-lg">
+                                <div class="flex justify-between items-center mb-3">
+                                    <h5 class="font-bold text-blue-300">Versión ${version.name}</h5>
+                                    <span class="text-lg font-bold ${version.stock > 3 ? 'text-green-400' : version.stock > 0 ? 'text-yellow-400' : 'text-red-400'}">
+                                        📦 ${version.stock} unidades
+                                    </span>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <label class="text-white font-bold">Nuevo Stock:</label>
+                                    <input type="number" id="version-stock-${version.id}" min="0" max="999" value="${version.stock}" 
+                                           class="w-20 px-2 py-1 rounded bg-white/20 text-white border border-gray-500 focus:border-blue-400 focus:outline-none">
+                                    <button onclick="updateVersionStock('${version.id}')" 
+                                            class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-white font-bold">
+                                        ✅ Actualizar
+                                    </button>
+                                    <button onclick="addVersionStock('${version.id}', 1)" 
+                                            class="bg-green-500 hover:bg-green-600 px-2 py-1 rounded text-white font-bold">
+                                        +1
+                                    </button>
+                                    <button onclick="addVersionStock('${version.id}', 5)" 
+                                            class="bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-white font-bold">
+                                        +5
+                                    </button>
+                                    <button onclick="addVersionStock('${version.id}', 10)" 
+                                            class="bg-green-700 hover:bg-green-800 px-2 py-1 rounded text-white font-bold">
+                                        +10
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
         function renderDiscountsPanel() {
             const discountsList = document.getElementById('discountsList');
             
@@ -1345,6 +1409,78 @@
             }).join('');
         }
 
+        function updateVersionStock(versionId) {
+            let version = null;
+            let product = null;
+            
+            // Find version and its product
+            for (let p of products) {
+                const v = p.versions.find(ver => ver.id === versionId);
+                if (v) {
+                    version = v;
+                    product = p;
+                    break;
+                }
+            }
+            
+            if (!version) return;
+            
+            const newStock = parseInt(document.getElementById(`version-stock-${versionId}`).value) || 0;
+            version.stock = Math.max(0, Math.min(999, newStock));
+            
+            // Re-render catalog if visible
+            if (!catalogSection.classList.contains('hidden')) {
+                renderCatalog();
+            }
+            
+            // Re-render versions if this product is selected
+            if (currentProduct && currentProduct.id === product.id) {
+                showVersions(product.id);
+            }
+            
+            // Re-render stock panel
+            renderStockPanel();
+            
+            alert(`Stock de ${product.name} - ${version.name} actualizado a ${version.stock} unidades`);
+        }
+
+        function addVersionStock(versionId, amount) {
+            let version = null;
+            let product = null;
+            
+            // Find version and its product
+            for (let p of products) {
+                const v = p.versions.find(ver => ver.id === versionId);
+                if (v) {
+                    version = v;
+                    product = p;
+                    break;
+                }
+            }
+            
+            if (!version) return;
+            
+            version.stock = Math.min(999, version.stock + amount);
+            
+            // Update the input field
+            document.getElementById(`version-stock-${versionId}`).value = version.stock;
+            
+            // Re-render catalog if visible
+            if (!catalogSection.classList.contains('hidden')) {
+                renderCatalog();
+            }
+            
+            // Re-render versions if this product is selected
+            if (currentProduct && currentProduct.id === product.id) {
+                showVersions(product.id);
+            }
+            
+            // Re-render stock panel
+            renderStockPanel();
+            
+            alert(`Se agregaron ${amount} unidades a ${product.name} - ${version.name}. Stock actual: ${version.stock}`);
+        }
+
         function deleteGiftCode(codeId) {
             if (confirm('¿Estás seguro de eliminar este código?')) {
                 giftCodes = giftCodes.filter(c => c.id !== codeId);
@@ -1355,5 +1491,5 @@
         // Initialize the store
         renderCatalog();
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994c0bfc25c0f77e',t:'MTc2MTUwMzY1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994c435b115d0da0',t:'MTc2MTUwNTkyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
