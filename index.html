@@ -3,786 +3,780 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🧠 BRAINROTS STORE 🎮</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/_sdk/element_sdk.js"></script>
+  <title>BRAINROTS STORE</title>
   <style>
-        body {
-            box-sizing: border-box;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes bounce-in {
-            0% { transform: scale(0) rotate(180deg); opacity: 0; }
-            50% { transform: scale(1.2) rotate(90deg); opacity: 0.8; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-        
-        @keyframes slide-in {
-            0% { transform: translateX(-100px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
-        }
-        
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes colorShift {
-            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-            20% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-            40% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-            60% { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-            80% { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-            100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        }
-        
-        .dynamic-bg {
-            animation: colorShift 10s ease-in-out infinite;
-        }
-        
-        .float { animation: float 3s ease-in-out infinite; }
-        .bounce-in { animation: bounce-in 0.8s ease-out; }
-        .slide-in { animation: slide-in 0.6s ease-out; }
-        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-        
-        .rainbow-bg {
-            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
-            background-size: 400% 400%;
-            animation: rainbow 4s ease infinite;
-        }
-        
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn-bounce {
-            transition: all 0.2s ease;
-        }
-        
-        .btn-bounce:hover {
-            transform: scale(1.1);
-        }
-        
-        .btn-bounce:active {
-            transform: scale(0.95);
-        }
-        
-        .emoji-spin {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        
-        .emoji-spin:hover {
-            transform: rotate(360deg);
-        }
-        
-        .notification {
-            animation: slide-in 0.5s ease-out;
-        }
-
-        .sold-out-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: linear-gradient(45deg, #ff4444, #ff6b6b);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 5;
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-    </style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+      color: #333;
+      min-height: 100%;
+    }
+    
+    html {
+      height: 100%;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .header h1 {
+      font-size: 48px;
+      margin: 0;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    
+    .header p {
+      font-size: 20px;
+      margin: 15px 0;
+      opacity: 0.9;
+    }
+    
+    .search-box {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .search-box input {
+      padding: 15px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      width: 350px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .search-box input:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    }
+    
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    
+    .product {
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    
+    .product::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s;
+    }
+    
+    .product:hover::before {
+      left: 100%;
+    }
+    
+    .product:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .image-box {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+      border: 3px dashed #dee2e6;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      color: #6c757d;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .product:hover .image-box {
+      border-color: #667eea;
+      background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
+    }
+    
+    .discount {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(45deg, #ff4757, #ff3742);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255,71,87,0.4);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #2c3e50;
+    }
+    
+    .price {
+      margin: 15px 0;
+    }
+    
+    .old-price {
+      text-decoration: line-through;
+      color: #95a5a6;
+      margin-right: 8px;
+      font-size: 14px;
+    }
+    
+    .new-price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #27ae60;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .buy-btn {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+    }
+    
+    .buy-btn:hover {
+      background: linear-gradient(45deg, #5a6fd8, #6a42a0);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102,126,234,0.6);
+    }
+    
+    .buy-btn:active {
+      transform: translateY(0);
+    }
+    
+    .buy-btn:disabled {
+      background: linear-gradient(45deg, #bdc3c7, #95a5a6);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .out-of-stock {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    .promo-section {
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    
+    .promo-section h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 24px;
+    }
+    
+    .promo-form {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .promo-form input {
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 25px;
+      width: 250px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .promo-form input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102,126,234,0.3);
+    }
+    
+    .promo-form button {
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #ff6b6b, #ff5252);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+    }
+    
+    .promo-form button:hover {
+      background: linear-gradient(45deg, #ff5252, #ff4444);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,107,107,0.6);
+    }
+    
+    .message {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 15px;
+      display: none;
+      font-weight: 500;
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .message.success {
+      background: linear-gradient(45deg, #d4edda, #c3e6cb);
+      color: #155724;
+      border: 2px solid #b8dabd;
+    }
+    
+    .message.error {
+      background: linear-gradient(45deg, #f8d7da, #f5c6cb);
+      color: #721c24;
+      border: 2px solid #f1b0b7;
+    }
+    
+    .selector {
+      margin-top: 20px;
+      padding: 20px;
+      background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+      border-radius: 15px;
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .selector h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+    
+    .option {
+      padding: 15px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      border: 2px solid #dee2e6;
+      border-radius: 15px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .option:hover {
+      background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+      border-color: #2196f3;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(33,150,243,0.3);
+    }
+    
+    /* Estilos para la sección de compra */
+    .checkout-section {
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      display: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      animation: slideUp 0.4s ease;
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .checkout-section h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 28px;
+    }
+    
+    .product-info {
+      background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+      padding: 20px;
+      border-radius: 15px;
+      margin: 25px 0;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+      margin: 20px 0;
+      text-align: left;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 15px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .form-group input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102,126,234,0.3);
+    }
+    
+    .checkout-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .checkout-buttons button {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 150px;
+    }
+    
+    .btn-confirm {
+      background: linear-gradient(45deg, #27ae60, #2ecc71);
+      color: white;
+      box-shadow: 0 4px 15px rgba(39,174,96,0.4);
+    }
+    
+    .btn-confirm:hover {
+      background: linear-gradient(45deg, #219a52, #27ae60);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(39,174,96,0.6);
+    }
+    
+    .btn-cancel {
+      background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+      color: white;
+      box-shadow: 0 4px 15px rgba(149,165,166,0.4);
+    }
+    
+    .btn-cancel:hover {
+      background: linear-gradient(45deg, #7f8c8d, #6c7b7d);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(149,165,166,0.6);
+    }
+  </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body class="min-h-full dynamic-bg"><!-- Header -->
-  <header class="text-center py-8 px-4">
-   <div class="float">
-    <h1 id="storeTitle" class="text-6xl font-black text-transparent bg-clip-text rainbow-bg mb-4">BRAINROTS STORE 🎮</h1>
-   </div>
-   <p id="storeSubtitle" class="text-2xl text-white font-bold slide-in">La forma más fácil de conseguir tus brainrots favoritos🤑</p>
-  </header><!-- Main Catalog Section -->
-  <main id="catalogSection" class="container mx-auto px-4 pb-12">
-   <div class="text-center mb-12">
-    <h2 class="text-4xl font-black text-yellow-300 mb-4 pulse-glow">👻 CATÁLOGO DE BRAINROTS 👻</h2><!-- Search Bar -->
-    <div class="max-w-md mx-auto mb-8">
-     <div class="relative"><input type="text" id="searchInput" placeholder="🔍 Buscar brainrots..." class="w-full px-6 py-4 pl-12 rounded-2xl bg-white/20 backdrop-blur-xl text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg font-bold">
-      <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-2xl">
-       🔍
-      </div><button id="clearSearch" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl hover:scale-110 transition-transform hidden">❌</button>
+ <body>
+  <div class="container"><!-- Sección Principal -->
+   <div id="main-section"><!-- Título -->
+    <div class="header">
+     <h1> BRAINROTS STORE</h1>
+     <p> LA FORMA MAS FACIL DE CONSEGUIR TUS BRAINROTS FAVORITOS</p>
+    </div><!-- Búsqueda -->
+    <div class="search-box"><input type="text" id="search" placeholder="Buscar productos...">
+    </div><!-- Productos -->
+    <div class="products" id="products"></div><!-- Códigos -->
+    <div class="promo-section">
+     <h2>¿Tienes un código promocional?</h2>
+     <div class="promo-form"><input type="text" id="codigo" placeholder="Ingresa tu código"> <button onclick="canjearCodigo()">Canjear</button>
+     </div>
+     <div id="mensaje" class="message"></div>
+     <div id="selector" class="selector">
+      <h3 id="selector-titulo"></h3>
+      <div id="opciones" class="options"></div>
      </div>
     </div>
-   </div>
-   <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"><!-- Products will be rendered here -->
-   </div><!-- No Results Message -->
-   <div id="noResults" class="hidden text-center py-12">
-    <div class="text-6xl mb-4">
-     😵
+   </div><!-- Sección de Compra -->
+   <div id="checkout-section" class="checkout-section">
+    <h2>Confirmar Compra</h2>
+    <div id="product-info" class="product-info"></div>
+    <div class="form-group"><label for="roblox-user">Usuario de Roblox:</label> <input type="text" id="roblox-user" placeholder="Ingresa tu usuario de Roblox" required>
     </div>
-    <h3 class="text-3xl font-black text-yellow-300 mb-2">¡No encontramos nada!</h3>
-    <p class="text-xl text-white">Intenta buscar con otro nombre 🔍</p>
-   </div><!-- Gift Button at the bottom -->
-   <div class="text-center mt-16"><button id="showGiftsBtn" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-8 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg"> <span class="emoji-spin">🎁</span> CANJEAR REGALOS </button>
-   </div>
-  </main><!-- Gifts Section -->
-  <section id="giftsSection" class="hidden container mx-auto px-4 pb-12">
-   <div class="max-w-2xl mx-auto">
-    <div class="text-center mb-8"><button id="backToCatalogFromGifts" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
-     <h2 class="text-4xl font-black text-yellow-300 mb-4">🎁 CANJEAR REGALOS</h2>
-     <p class="text-xl text-white">¡Ingresa tu código y obtén productos gratis!</p>
+    <div class="checkout-buttons"><button class="btn-confirm" onclick="confirmarCompra()">Confirmar Compra</button> <button class="btn-cancel" onclick="cancelarCompra()">Cancelar</button>
     </div>
-    <form id="giftForm" class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border-4 border-yellow-300">
-     <div class="mb-6"><label for="giftCode" class="block text-xl font-bold text-yellow-300 mb-2"> 🎫 Código de Regalo: </label> <input type="text" id="giftCode" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg" placeholder="Ingresa tu código aquí">
-     </div>
-     <div class="mb-6"><label for="giftCustomerName" class="block text-xl font-bold text-yellow-300 mb-2"> 👤 Tu Nombre Real: </label> <input type="text" id="giftCustomerName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
-     </div>
-     <div class="mb-8"><label for="giftRobloxName" class="block text-xl font-bold text-yellow-300 mb-2"> 🎮 Tu Usuario de Roblox: </label> <input type="text" id="giftRobloxName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
-     </div><button type="submit" class="w-full bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 px-8 py-4 rounded-xl font-black text-2xl btn-bounce"> <span class="emoji-spin">🎁</span> CANJEAR REGALO </button>
-    </form>
-   </div>
-  </section><!-- Purchase Form Section -->
-  <section id="purchaseSection" class="hidden container mx-auto px-4 pb-12">
-   <div class="max-w-2xl mx-auto">
-    <div class="text-center mb-8"><button id="backToCatalog" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
-     <h2 class="text-4xl font-black text-yellow-300 mb-4">🛒 FINALIZAR COMPRA</h2>
-     <div id="selectedProductInfo" class="bg-white/10 rounded-xl p-6 mb-8"><!-- Selected product info will be shown here -->
-     </div>
-    </div>
-    <form id="purchaseForm" class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border-4 border-yellow-300">
-     <div class="mb-6"><label for="customerName" class="block text-xl font-bold text-yellow-300 mb-2"> 👤 Tu Nombre Real: </label> <input type="text" id="customerName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
-     </div>
-     <div class="mb-8"><label for="robloxName" class="block text-xl font-bold text-yellow-300 mb-2"> 🎮 Tu Usuario de Roblox: </label> <input type="text" id="robloxName" required class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg">
-     </div><button type="submit" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-8 py-4 rounded-xl font-black text-2xl btn-bounce"> <span class="emoji-spin">📱</span> HACER EL PEDIDO🥳 </button>
-    </form>
-   </div>
-  </section><!-- Success Message -->
-  <div id="successMessage" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-green-400 to-blue-500 text-white px-8 py-6 rounded-3xl shadow-2xl z-50 notification">
-   <div class="text-center">
-    <div class="text-4xl mb-4">
-     🎉
-    </div>
-    <p class="text-xl font-bold">MUCHAS GRACIAS POR EL PEDIDO, TE CONTACTAREMOS PRONTO👻👾</p>
    </div>
   </div>
   <script>
-        // ═══════════════════════════════════════════════════════════════
-        // 🎯 CONFIGURACIÓN SÚPER FÁCIL - CAMBIA AQUÍ TODO 🎯
-        // ═══════════════════════════════════════════════════════════════
-
-        // Configuración por defecto
-        const defaultConfig = {
-            store_title: "BRAINROTS STORE 🎮",
-            store_subtitle: "La forma más fácil de conseguir tus brainrots favoritos🤑",
-            whatsapp_number: "573245640954"
-        };
-
-        // 🎁 CÓDIGOS DE REGALO ACTIVOS (AGREGA/QUITA AQUÍ)
-        let giftCodes = [
-            {
-                code: "REGALO2024", // 🎫 NOMBRE DEL CÓDIGO
-                stock: 5, // 📦 CUÁNTAS VECES SE PUEDE USAR
-                productId: 1 // 🎮 ID DEL PRODUCTO
-            },
-            {
-                code: "NAVIDAD", // 🎫 OTRO CÓDIGO
-                stock: 3, // 📦 STOCK
-                productId: 6 // 🎮 JOB JOB JOB SAHUR
-            }
-        ];
-
-        // ═══════════════════════════════════════════════════════════════
-        // 🎮 PRODUCTOS SIMPLIFICADOS - EDITA AQUÍ 🎮
-        // ═══════════════════════════════════════════════════════════════
-
-        let products = [
-            {
-                id: 1,
-                name: "TRALALITA TRALALA",
-                image: "tralalita.jpg",
-                description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!",
-                price: 3000,
-                stock: 5,
-                discount: 0
-            },
-            {
-                id: 2,
-                name: "TRALALERO TRALALA",
-                image: "tralaleroTralala.jpg",
-                description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!",
-                price: 3000,
-                stock: 4,
-                discount: 0
-            },
-            {
-                id: 3,
-                name: "LOS BOMBINITOS",
-                image: "los bombinitos.jpg",
-                description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!",
-                price: 6000,
-                stock: 0,
-                discount: 0
-            },
-            {
-                id: 4,
-                name: "LOS COCODRILITOS",
-                image: "noFilter.jpg",
-                description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!",
-                price: 3500,
-                stock: 7,
-                discount: 0
-            },
-            {
-                id: 5,
-                name: "LOS ORCALITOS",
-                image: "noFilter (1).jpg",
-                description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!",
-                price: 8000,
-                stock: 3,
-                discount: 0
-            },
-            {
-                id: 6,
-                name: "JOB JOB JOB SAHUR",
-                image: "job.jpg",
-                description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!",
-                price: 10000,
-                stock: 2,
-                discount: 0
-            },
-            {
-                id: 7,
-                name: "MATEO",
-                image: "matteofr.jpg",
-                description: "¡El increíble MATEO! ¡Súper único y especial!",
-                price: 3500,
-                stock: 4,
-                discount: 0
-            },
-            {
-                id: 8,
-                name: "PAKRAHMATMAMAT",
-                image: "pakrah.jpg",
-                description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!",
-                price: 5000,
-                stock: 5,
-                discount: 0
-            },
-            {
-                id: 9,
-                name: "LA VACA SATURNO SATURNITA",
-                image: "noFilter (2).jpg",
-                description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!",
-                price: 7000,
-                stock: 3,
-                discount: 0
-            },
-            {
-                id: 10,
-                name: "LOS TIPI TACOS",
-                image: "Los_tipi_tacos.jpg",
-                description: "¡Los increíbles TIPI TACOS! ¡Súper sabrosos y geniales!",
-                price: 10000,
-                stock: 4,
-                discount: 0
-            }
-        ];
-
-        // ═══════════════════════════════════════════════════════════════
-        // 🚀 CÓDIGO AUTOMÁTICO - NO TOCAR 🚀
-        // ═══════════════════════════════════════════════════════════════
-
-        // Get all the elements we need
-        const catalogSection = document.getElementById('catalogSection');
-        const purchaseSection = document.getElementById('purchaseSection');
-        const productsGrid = document.getElementById('productsGrid');
-        const selectedProductInfo = document.getElementById('selectedProductInfo');
-        const backToCatalog = document.getElementById('backToCatalog');
-        const purchaseForm = document.getElementById('purchaseForm');
-        const successMessage = document.getElementById('successMessage');
-        const searchInput = document.getElementById('searchInput');
-        const clearSearch = document.getElementById('clearSearch');
-        const noResults = document.getElementById('noResults');
-
-        // Gift elements
-        const showGiftsBtn = document.getElementById('showGiftsBtn');
-        const giftsSection = document.getElementById('giftsSection');
-        const backToCatalogFromGifts = document.getElementById('backToCatalogFromGifts');
-        const giftForm = document.getElementById('giftForm');
-
-        let currentProduct = null;
-        let orders = [];
-        let filteredProducts = [...products];
-
-        // Inicializar Element SDK
-        async function initializeElementSDK() {
-            if (window.elementSdk) {
-                try {
-                    await window.elementSdk.init({
-                        defaultConfig,
-                        onConfigChange: async (config) => {
-                            // Actualizar título de la tienda
-                            const titleElement = document.getElementById('storeTitle');
-                            if (titleElement) {
-                                titleElement.textContent = config.store_title || defaultConfig.store_title;
-                            }
-                            
-                            // Actualizar subtítulo
-                            const subtitleElement = document.getElementById('storeSubtitle');
-                            if (subtitleElement) {
-                                subtitleElement.textContent = config.store_subtitle || defaultConfig.store_subtitle;
-                            }
-                        },
-                        mapToCapabilities: (config) => ({
-                            recolorables: [],
-                            borderables: [],
-                            fontEditable: undefined,
-                            fontSizeable: undefined
-                        }),
-                        mapToEditPanelValues: (config) => new Map([
-                            ["store_title", config.store_title || defaultConfig.store_title],
-                            ["store_subtitle", config.store_subtitle || defaultConfig.store_subtitle],
-                            ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number]
-                        ])
-                    });
-                } catch (error) {
-                    console.error("Error inicializando Element SDK:", error);
-                }
-            }
+    // ===== CONFIGURACIÓN =====
+    // CAMBIA AQUÍ TU NÚMERO DE WHATSAPP (sin + ni espacios)
+    var numeroWhatsApp = "+573245640954"; // CAMBIA ESTE NÚMERO POR EL TUYO
+    
+    // ===== CÓDIGOS PROMOCIONALES =====
+    // ¡AQUÍ PUEDES CONFIGURAR TUS CÓDIGOS FÁCILMENTE!
+    // Solo hay 2 tipos: 'descuento' y 'gratis'
+    
+    var codigos = {
+      // CÓDIGOS DE DESCUENTO (pon el % que quieras)
+      'DESCUENTO50': { tipo: 'descuento', valor: 50 },  // 50% de descuento
+      'DESCUENTO20': { tipo: 'descuento', valor: 20 },  // 20% de descuento
+      'DESCUENTO30': { tipo: 'descuento', valor: 30 },  // 30% de descuento
+      'OFERTA10':    { tipo: 'descuento', valor: 10 },  // 10% de descuento
+      
+      // CÓDIGOS DE PRODUCTO GRATIS
+      'GRATIS':      { tipo: 'gratis' },                // Producto completamente gratis
+      'REGALO':      { tipo: 'gratis' },                // Otro código para producto gratis
+      'PROMO':       { tipo: 'gratis' }                 // Otro código gratis
+    };
+    
+    // INSTRUCCIONES PARA AGREGAR CÓDIGOS:
+    // 1. Para descuento: 'TUCODIGO': { tipo: 'descuento', valor: 25 }
+    // 2. Para gratis:    'TUCODIGO': { tipo: 'gratis' }
+    // ¡Así de fácil!
+    
+    // ===== PRODUCTOS =====
+    var productos = [
+      { id: 1, nombre: "Pringles Original", precio: 3.99, descuento: 10, stock: true },
+      { id: 2, nombre: "Pringles Crema y Cebolla", precio: 3.99, descuento: 0, stock: true },
+      { id: 3, nombre: "Pringles BBQ", precio: 4.49, descuento: 15, stock: true },
+      { id: 4, nombre: "Pringles Queso", precio: 3.99, descuento: 0, stock: false },
+      { id: 5, nombre: "Pringles Pizza", precio: 4.49, descuento: 20, stock: true },
+      { id: 6, nombre: "Pringles Jalapeño", precio: 4.99, descuento: 0, stock: true }
+    ];
+    
+    var productosFiltrados = productos;
+    var productoSeleccionado = null;
+    var descuentoAplicado = 0;
+    var esGratis = false;
+    
+    // ===== MOSTRAR PRODUCTOS =====
+    function mostrarProductos() {
+      var contenedor = document.getElementById('products');
+      contenedor.innerHTML = '';
+      
+      for (var i = 0; i < productosFiltrados.length; i++) {
+        var producto = productosFiltrados[i];
+        var precioFinal = producto.descuento > 0 
+          ? (producto.precio * (1 - producto.descuento / 100)).toFixed(2)
+          : producto.precio.toFixed(2);
+        
+        var html = '<div class="product">';
+        
+        if (producto.descuento > 0) {
+          html += '<div class="discount">-' + producto.descuento + '%</div>';
         }
-
-        // Función para obtener número de WhatsApp
-        function getWhatsAppNumber() {
-            if (window.elementSdk && window.elementSdk.config) {
-                return window.elementSdk.config.whatsapp_number || defaultConfig.whatsapp_number;
-            }
-            return defaultConfig.whatsapp_number;
+        
+        html += '<div class="image-box">📷<br>Imagen del<br>producto</div>';
+        html += '<div class="product-name">' + producto.nombre + '</div>';
+        html += '<div class="price">';
+        
+        if (producto.descuento > 0) {
+          html += '<span class="old-price">$' + producto.precio.toFixed(2) + '</span>';
         }
-
-        // Utility functions
-        function formatPrice(price) {
-            return $${price.toLocaleString('es-CO')};
+        
+        html += '<span class="new-price">$' + precioFinal + '</span>';
+        html += '</div>';
+        
+        if (producto.stock) {
+          html += '<button class="buy-btn" onclick="comprar(' + producto.id + ')">Comprar</button>';
+        } else {
+          html += '<button class="buy-btn" disabled>Agotado</button>';
+          html += '<div class="out-of-stock">AGOTADO</div>';
         }
-
-        function calculateDiscountedPrice(originalPrice, discountPercent) {
-            return Math.round(originalPrice * (1 - discountPercent / 100));
+        
+        html += '</div>';
+        contenedor.innerHTML += html;
+      }
+    }
+    
+    // ===== COMPRAR PRODUCTO =====
+    function comprar(id) {
+      productoSeleccionado = productos.find(function(p) { return p.id === id; });
+      descuentoAplicado = 0;
+      esGratis = false;
+      mostrarCheckout();
+    }
+    
+    // ===== COMPRAR CON DESCUENTO =====
+    function comprarConDescuento(id, descuento) {
+      productoSeleccionado = productos.find(function(p) { return p.id === id; });
+      descuentoAplicado = descuento;
+      esGratis = false;
+      mostrarCheckout();
+    }
+    
+    // ===== COMPRAR GRATIS =====
+    function comprarGratis(id) {
+      productoSeleccionado = productos.find(function(p) { return p.id === id; });
+      descuentoAplicado = 0;
+      esGratis = true;
+      mostrarCheckout();
+    }
+    
+    // ===== MOSTRAR CHECKOUT =====
+    function mostrarCheckout() {
+      document.getElementById('main-section').style.display = 'none';
+      document.getElementById('checkout-section').style.display = 'block';
+      
+      var precioOriginal = productoSeleccionado.precio;
+      var precioFinal;
+      
+      if (esGratis) {
+        precioFinal = 0;
+      } else if (descuentoAplicado > 0) {
+        precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)).toFixed(2);
+      } else {
+        precioFinal = precioOriginal.toFixed(2);
+      }
+      
+      var infoHtml = '<h3>' + productoSeleccionado.nombre + '</h3>';
+      
+      if (esGratis) {
+        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">¡PRODUCTO GRATIS!</p>';
+      } else {
+        if (descuentoAplicado > 0) {
+          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + precioOriginal.toFixed(2) + '</span></p>';
+          infoHtml += '<p>Descuento aplicado: ' + descuentoAplicado + '%</p>';
         }
-
-        function showSuccessOnReturn() {
-            let isHidden = false;
-            
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    isHidden = true;
-                } else if (isHidden) {
-                    showSuccess();
-                    isHidden = false;
-                }
-            });
-
-            window.addEventListener('blur', function() {
-                isHidden = true;
-            });
-
-            window.addEventListener('focus', function() {
-                if (isHidden) {
-                    showSuccess();
-                    isHidden = false;
-                }
-            });
+        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + precioFinal + '</p>';
+      }
+      
+      document.getElementById('product-info').innerHTML = infoHtml;
+    }
+    
+    // ===== CONFIRMAR COMPRA =====
+    function confirmarCompra() {
+      var usuarioRoblox = document.getElementById('roblox-user').value.trim();
+      
+      if (!usuarioRoblox) {
+        alert('Por favor ingresa tu usuario de Roblox');
+        return;
+      }
+      
+      // Crear mensaje para WhatsApp
+      var fecha = new Date();
+      var fechaTexto = fecha.toLocaleDateString();
+      var horaTexto = fecha.toLocaleTimeString();
+      
+      var precioFinal;
+      if (esGratis) {
+        precioFinal = "GRATIS";
+      } else if (descuentoAplicado > 0) {
+        precioFinal = "$" + (productoSeleccionado.precio * (1 - descuentoAplicado / 100)).toFixed(2);
+      } else {
+        precioFinal = "$" + productoSeleccionado.precio.toFixed(2);
+      }
+      
+      var mensaje = "🛒 NUEVO PEDIDO\n\n";
+      mensaje += "📅 Fecha: " + fechaTexto + "\n";
+      mensaje += "🕐 Hora: " + horaTexto + "\n";
+      mensaje += "🎮 Usuario Roblox: " + usuarioRoblox + "\n";
+      mensaje += "🥔 Producto: " + productoSeleccionado.nombre + "\n";
+      mensaje += "💰 Precio: " + precioFinal + "\n";
+      
+      if (descuentoAplicado > 0) {
+        mensaje += "🎉 Descuento aplicado: " + descuentoAplicado + "%\n";
+      }
+      
+      // Abrir WhatsApp
+      var url = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
+      window.open(url, '_blank');
+      
+      // Volver al inicio
+      cancelarCompra();
+      mostrarMensaje('¡Pedido enviado! Te contactaremos pronto.', 'success');
+    }
+    
+    // ===== CANCELAR COMPRA =====
+    function cancelarCompra() {
+      document.getElementById('main-section').style.display = 'block';
+      document.getElementById('checkout-section').style.display = 'none';
+      document.getElementById('roblox-user').value = '';
+      productoSeleccionado = null;
+      descuentoAplicado = 0;
+      esGratis = false;
+    }
+    
+    // ===== MOSTRAR MENSAJE =====
+    function mostrarMensaje(texto, tipo) {
+      var mensaje = document.getElementById('mensaje');
+      mensaje.textContent = texto;
+      mensaje.className = 'message ' + tipo;
+      mensaje.style.display = 'block';
+      
+      setTimeout(function() {
+        mensaje.style.display = 'none';
+      }, 3000);
+    }
+    
+    // ===== CANJEAR CÓDIGO =====
+    function canjearCodigo() {
+      var input = document.getElementById('codigo');
+      var codigo = input.value.trim().toUpperCase();
+      
+      if (!codigo) {
+        mostrarMensaje('Por favor ingresa un código', 'error');
+        return;
+      }
+      
+      var codigoInfo = codigos[codigo];
+      
+      if (!codigoInfo) {
+        mostrarMensaje('Código inválido', 'error');
+        return;
+      }
+      
+      mostrarSelector(codigoInfo);
+    }
+    
+    // ===== MOSTRAR SELECTOR =====
+    function mostrarSelector(codigoInfo) {
+      var selector = document.getElementById('selector');
+      var titulo = document.getElementById('selector-titulo');
+      var opciones = document.getElementById('opciones');
+      
+      if (codigoInfo.tipo === 'gratis') {
+        titulo.textContent = 'Selecciona tu producto gratis:';
+      } else {
+        titulo.textContent = 'Selecciona el producto para el descuento:';
+      }
+      
+      opciones.innerHTML = '';
+      
+      var productosDisponibles = productos.filter(function(p) { return p.stock; });
+      
+      for (var i = 0; i < productosDisponibles.length; i++) {
+        var producto = productosDisponibles[i];
+        var precio;
+        
+        if (codigoInfo.tipo === 'gratis') {
+          precio = 'GRATIS';
+        } else {
+          var precioConDescuento = (producto.precio * (1 - codigoInfo.valor / 100)).toFixed(2);
+          precio = '$' + precioConDescuento;
         }
-
-        // Gift navigation
-        showGiftsBtn.addEventListener('click', () => {
-            catalogSection.classList.add('hidden');
-            giftsSection.classList.remove('hidden');
-        });
-
-        backToCatalogFromGifts.addEventListener('click', () => {
-            giftsSection.classList.add('hidden');
-            catalogSection.classList.remove('hidden');
-        });
-
-        // Search functionality
-        function filterProducts(searchTerm) {
-            if (!searchTerm.trim()) {
-                filteredProducts = [...products];
-            } else {
-                filteredProducts = products.filter(product => 
-                    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-            }
-            renderCatalog();
-        }
-
-        // Search event listeners
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value;
-            filterProducts(searchTerm);
-            
-            if (searchTerm.trim()) {
-                clearSearch.classList.remove('hidden');
-            } else {
-                clearSearch.classList.add('hidden');
-            }
-        });
-
-        clearSearch.addEventListener('click', () => {
-            searchInput.value = '';
-            clearSearch.classList.add('hidden');
-            filterProducts('');
-        });
-
-        // Navigation event listeners
-        backToCatalog.addEventListener('click', () => {
-            purchaseSection.classList.add('hidden');
-            catalogSection.classList.remove('hidden');
-            currentProduct = null;
-        });
-
-        // Render main catalog
-        function renderCatalog() {
-            const productsToShow = filteredProducts.length > 0 ? filteredProducts : products;
-            
-            if (productsToShow.length === 0) {
-                productsGrid.innerHTML = '';
-                noResults.classList.remove('hidden');
-                return;
-            } else {
-                noResults.classList.add('hidden');
-            }
-            
-            productsGrid.innerHTML = productsToShow.map((product, index) => {
-                const hasDiscount = product.discount > 0;
-                const originalPrice = product.price;
-                const discountedPrice = hasDiscount ? calculateDiscountedPrice(originalPrice, product.discount) : originalPrice;
-                const isOutOfStock = product.stock === 0;
-                
-                return `
-                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl bounce-in relative" style="animation-delay: ${index * 0.1}s">
-                    ${isOutOfStock ? `
-                        <div class="sold-out-overlay rounded-3xl">
-                            <div class="text-center">
-                                <div class="text-6xl mb-4">😵</div>
-                                <div class="text-3xl font-black text-red-400">AGOTADO</div>
-                            </div>
-                        </div>
-                    ` : ''}
-                    
-                    <!-- PRODUCT NAME -->
-                    <div class="p-6 pb-4">
-                        <h3 class="text-2xl font-black text-yellow-300 text-center">${product.name}</h3>
-                    </div>
-                    
-                    <!-- PRODUCT IMAGE -->
-                    <div class="relative overflow-hidden mx-6 mb-4">
-                        ${hasDiscount ? <div class="discount-badge">🔥 ${product.discount}% OFF</div> : ''}
-                        <div class="w-full h-56 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
-                            <div class="flex flex-col items-center justify-center text-white w-full h-full">
-                                <span class="text-4xl mb-2">🖼</span>
-                                <span class="font-bold text-center px-4">${product.name}</span>
-                            </div>
-                        </div>
-                        ${!hasDiscount && !isOutOfStock ? `
-                            <div class="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full font-black text-sm">
-                                ¡NUEVO!
-                            </div>
-                        ` : ''}
-                    </div>
-                    
-                    <!-- PRICE AND STOCK -->
-                    <div class="px-6 pb-4">
-                        <div class="text-center bg-green-500/20 rounded-xl py-3 mb-4">
-                            ${hasDiscount ? `
-                                <div class="text-lg font-bold text-red-400 line-through">${formatPrice(originalPrice)}</div>
-                                <div class="text-3xl font-black text-green-300">${formatPrice(discountedPrice)}</div>
-                            ` : `
-                                <span class="text-3xl font-black text-green-300">${formatPrice(originalPrice)}</span>
-                            `}
-                        </div>
-                        <div class="text-center mb-4">
-                            <span class="text-lg font-bold ${product.stock > 3 ? 'text-green-400' : product.stock > 0 ? 'text-yellow-400' : 'text-red-400'}">
-                                📦 Stock: ${product.stock} ${product.stock === 1 ? 'unidad' : 'unidades'}
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- BUY BUTTON -->
-                    <div class="p-6 pt-0">
-                        ${!isOutOfStock ? `
-                            <button onclick="buyProduct(${product.id})" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
-                                <span class="emoji-spin">💳</span> ¡COMPRAR AHORA!
-                            </button>
-                        ` : `
-                            <button disabled class="w-full bg-gray-600 px-6 py-4 rounded-xl font-black text-xl opacity-50 cursor-not-allowed">
-                                😵 AGOTADO
-                            </button>
-                        `}
-                    </div>
-                </div>
-            `;}).join('');
-        }
-
-        // Buy product directly
-        function buyProduct(productId) {
-            currentProduct = products.find(p => p.id === productId);
-            if (!currentProduct || currentProduct.stock === 0) return;
-            
-            const hasDiscount = currentProduct.discount > 0;
-            const originalPrice = currentProduct.price;
-            const discountedPrice = hasDiscount ? calculateDiscountedPrice(originalPrice, currentProduct.discount) : originalPrice;
-            
-            selectedProductInfo.innerHTML = `
-                <h3 class="text-3xl font-black text-yellow-300 mb-2">${currentProduct.name}</h3>
-                <p class="text-lg text-white mb-4">${currentProduct.description}</p>
-                ${hasDiscount ? `
-                    <div class="mb-2">
-                        <span class="text-lg text-red-400 line-through">${formatPrice(originalPrice)}</span>
-                        <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">🔥 ${currentProduct.discount}% OFF</span>
-                    </div>
-                    <p class="text-2xl font-bold text-green-400">${formatPrice(discountedPrice)}</p>
-                ` : `
-                    <p class="text-2xl font-bold text-green-400">${formatPrice(originalPrice)}</p>
-                `}
-                <p class="text-lg text-white mt-2">Stock disponible: ${currentProduct.stock} ${currentProduct.stock === 1 ? 'unidad' : 'unidades'}</p>
-            `;
-            
-            catalogSection.classList.add('hidden');
-            purchaseSection.classList.remove('hidden');
-            purchaseSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Handle gift form
-        giftForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const giftCode = document.getElementById('giftCode').value.toLowerCase();
-            const customerName = document.getElementById('giftCustomerName').value;
-            const robloxName = document.getElementById('giftRobloxName').value;
-            
-            const code = giftCodes.find(c => c.code.toLowerCase() === giftCode && c.stock > 0);
-            
-            if (!code) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
-                errorDiv.textContent = 'Código inválido o ya se acabó este regalo 😥';
-                giftForm.insertBefore(errorDiv, giftForm.firstChild);
-                setTimeout(() => errorDiv.remove(), 3000);
-                return;
-            }
-            
-            const product = products.find(p => p.id === code.productId);
-            
-            if (!product) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
-                errorDiv.textContent = 'Error: Producto no encontrado';
-                giftForm.insertBefore(errorDiv, giftForm.firstChild);
-                setTimeout(() => errorDiv.remove(), 3000);
-                return;
-            }
-            
-            const whatsappNumber = getWhatsAppNumber();
-            
-            const whatsappMessage = `🎁 REGALO CANJEADO - BRAINROT GRATIS 🎮
-
-📦 PRODUCTO: ${product.name}
-💰 PRECIO: GRATIS 🎉
-🎫 CÓDIGO CANJEADO: ${code.code}
-
-👤 DATOS DEL CLIENTE:
-• Nombre Real: ${customerName}
-• Usuario Roblox: ${robloxName}
-
-📅 Fecha del canje: ${new Date().toLocaleString('es-ES')}
-
-¡Hola! He canjeado este código de regalo 🚀`;
-
-            const whatsappLink = https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)};
-            
-            code.stock--;
-            
-            const order = {
-                id: gift_${Date.now()},
-                date: new Date().toISOString(),
-                product: product.name,
-                customer: customerName,
-                robloxUser: robloxName,
-                originalPrice: 0,
-                discount: 0,
-                finalPrice: 0,
-                hasDiscount: false,
-                isGift: true,
-                giftCode: code.code
+        
+        var opcion = document.createElement('div');
+        opcion.className = 'option';
+        opcion.innerHTML = '<div><strong>' + producto.nombre + '</strong></div><div style="color: #ff6b6b; font-weight: bold;">' + precio + '</div>';
+        
+        if (codigoInfo.tipo === 'gratis') {
+          opcion.onclick = (function(prod) {
+            return function() {
+              comprarGratis(prod.id);
+              document.getElementById('selector').style.display = 'none';
+              document.getElementById('codigo').value = '';
             };
-            
-            orders.push(order);
-            
-            try {
-                const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
-                
-                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-                    window.location.href = whatsappLink;
-                }
-            } catch (error) {
-                const link = document.createElement('a');
-                link.href = whatsappLink;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-            
-            giftForm.reset();
-            showSuccessOnReturn();
-            
-            setTimeout(() => {
-                giftsSection.classList.add('hidden');
-                catalogSection.classList.remove('hidden');
-            }, 3000);
-        });
-
-        // Handle purchase form
-        purchaseForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const customerName = document.getElementById('customerName').value;
-            const robloxName = document.getElementById('robloxName').value;
-            
-            if (!currentProduct) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
-                errorDiv.textContent = 'Error: No se ha seleccionado un producto.';
-                purchaseForm.insertBefore(errorDiv, purchaseForm.firstChild);
-                setTimeout(() => errorDiv.remove(), 3000);
-                return;
-            }
-
-            if (currentProduct.stock === 0) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
-                errorDiv.textContent = 'Lo sentimos, este producto está agotado.';
-                purchaseForm.insertBefore(errorDiv, purchaseForm.firstChild);
-                setTimeout(() => errorDiv.remove(), 3000);
-                return;
-            }
-            
-            const whatsappNumber = getWhatsAppNumber();
-            
-            const hasDiscount = currentProduct.discount > 0;
-            const originalPrice = currentProduct.price;
-            const discountedPrice = hasDiscount ? calculateDiscountedPrice(originalPrice, currentProduct.discount) : originalPrice;
-            
-            const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
-
-📦 PRODUCTO: ${currentProduct.name}
-💰 PRECIO ORIGINAL: ${formatPrice(originalPrice)}${hasDiscount ? `
-🔥 DESCUENTO APLICADO: ${currentProduct.discount}%
-💸 PRECIO FINAL: ${formatPrice(discountedPrice)}` : ''}
-
-👤 DATOS DEL CLIENTE:
-• Nombre Real: ${customerName}
-• Usuario Roblox: ${robloxName}
-
-📅 Fecha del pedido: ${new Date().toLocaleString('es-ES')}
-
-¡Hola! Quiero hacer este pedido de brainrot 🚀`;
-
-            const whatsappLink = https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)};
-            
-            currentProduct.stock--;
-            
-            const order = {
-                id: order_${Date.now()},
-                date: new Date().toISOString(),
-                product: currentProduct.name,
-                customer: customerName,
-                robloxUser: robloxName,
-                originalPrice: originalPrice,
-                discount: currentProduct.discount,
-                finalPrice: discountedPrice,
-                hasDiscount: hasDiscount,
-                isGift: false,
-                giftCode: null
+          })(producto);
+        } else {
+          opcion.onclick = (function(prod, info) {
+            return function() {
+              comprarConDescuento(prod.id, info.valor);
+              document.getElementById('selector').style.display = 'none';
+              document.getElementById('codigo').value = '';
             };
-            
-            orders.push(order);
-            
-            try {
-                const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
-                
-                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-                    window.location.href = whatsappLink;
-                }
-            } catch (error) {
-                const link = document.createElement('a');
-                link.href = whatsappLink;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-            
-            purchaseForm.reset();
-            showSuccessOnReturn();
-            
-            setTimeout(() => {
-                purchaseSection.classList.add('hidden');
-                catalogSection.classList.remove('hidden');
-                currentProduct = null;
-            }, 6000);
-        });
-
-        // Show success message
-        function showSuccess() {
-            successMessage.classList.remove('hidden');
-            
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-            }, 5000);
+          })(producto, codigoInfo);
         }
-
-        // Initialize the store
-        document.addEventListener('DOMContentLoaded', async () => {
-            await initializeElementSDK();
-            renderCatalog();
-        });
-
-        // Make buyProduct global
-        window.buyProduct = buyProduct;
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998161db927a3eeb',t:'MTc2MjA2MjkxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        
+        opciones.appendChild(opcion);
+      }
+      
+      selector.style.display = 'block';
+    }
+    
+    // ===== BÚSQUEDA =====
+    document.getElementById('search').addEventListener('input', function(e) {
+      var termino = e.target.value.toLowerCase();
+      productosFiltrados = productos.filter(function(producto) {
+        return producto.nombre.toLowerCase().indexOf(termino) !== -1;
+      });
+      mostrarProductos();
+    });
+    
+    // ===== ENTER EN CÓDIGO =====
+    document.getElementById('codigo').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        canjearCodigo();
+      }
+    });
+    
+    // ===== INICIALIZAR =====
+    mostrarProductos();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99858b44c7223eeb',t:'MTc2MjEwNjU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
