@@ -3,9 +3,8 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> BRAINROTS STORE 🎮</title>
+  <title>🧠 BRAINROTS STORE 🎮</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/_sdk/data_sdk.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
         body {
@@ -49,7 +48,7 @@
         }
         
         .dynamic-bg {
-            animation: colorShift 15s ease-in-out infinite;
+            animation: colorShift 10s ease-in-out infinite;
         }
         
         .float { animation: float 3s ease-in-out infinite; }
@@ -125,31 +124,38 @@
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="min-h-full dynamic-bg"><!-- Header -->
   <header class="text-center py-8 px-4">
    <div class="float">
-    <h1 class="text-6xl font-black text-transparent bg-clip-text rainbow-bg mb-4">BRAINROTS STORE 🎮</h1>
+    <h1 id="storeTitle" class="text-6xl font-black text-transparent bg-clip-text rainbow-bg mb-4">BRAINROTS STORE 🎮</h1>
    </div>
-   <p class="text-2xl text-white font-bold slide-in">La forma más fácil de conseguir tus brainrots favoritos🤑</p>
+   <p id="storeSubtitle" class="text-2xl text-white font-bold slide-in">La forma más fácil de conseguir tus brainrots favoritos🤑</p>
   </header><!-- Main Catalog Section -->
   <main id="catalogSection" class="container mx-auto px-4 pb-12">
    <div class="text-center mb-12">
-    <h2 class="text-4xl font-black text-yellow-300 mb-4 pulse-glow">👻 CATÁLOGO DE BRAINROTS 👻</h2>
+    <h2 class="text-4xl font-black text-yellow-300 mb-4 pulse-glow">👻 CATÁLOGO DE BRAINROTS 👻</h2><!-- Search Bar -->
+    <div class="max-w-md mx-auto mb-8">
+     <div class="relative"><input type="text" id="searchInput" placeholder="🔍 Buscar brainrots..." class="w-full px-6 py-4 pl-12 rounded-2xl bg-white/20 backdrop-blur-xl text-white placeholder-gray-300 border-2 border-purple-400 focus:border-yellow-300 focus:outline-none text-lg font-bold">
+      <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-2xl">
+       🔍
+      </div><button id="clearSearch" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl hover:scale-110 transition-transform hidden">❌</button>
+     </div>
+    </div>
    </div>
    <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"><!-- Products will be rendered here -->
+   </div><!-- No Results Message -->
+   <div id="noResults" class="hidden text-center py-12">
+    <div class="text-6xl mb-4">
+     😵
+    </div>
+    <h3 class="text-3xl font-black text-yellow-300 mb-2">¡No encontramos nada!</h3>
+    <p class="text-xl text-white">Intenta buscar con otro nombre 🔍</p>
    </div><!-- Gift Button at the bottom -->
    <div class="text-center mt-16"><button id="showGiftsBtn" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-8 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg"> <span class="emoji-spin">🎁</span> CANJEAR REGALOS </button>
    </div>
-  </main><!-- Product Versions Section -->
-  <section id="versionsSection" class="hidden container mx-auto px-4 pb-12">
-   <div class="text-center mb-8"><button id="backToCatalog" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
-    <div id="selectedProductHeader" class="mb-8"><!-- Selected product info will be shown here -->
-    </div>
-   </div>
-   <div id="versionsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><!-- Product versions will be rendered here -->
-   </div>
-  </section><!-- Gifts Section -->
+  </main><!-- Gifts Section -->
   <section id="giftsSection" class="hidden container mx-auto px-4 pb-12">
    <div class="max-w-2xl mx-auto">
     <div class="text-center mb-8"><button id="backToCatalogFromGifts" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
@@ -168,9 +174,9 @@
   </section><!-- Purchase Form Section -->
   <section id="purchaseSection" class="hidden container mx-auto px-4 pb-12">
    <div class="max-w-2xl mx-auto">
-    <div class="text-center mb-8"><button id="backToVersions" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER A VERSIONES </button>
+    <div class="text-center mb-8"><button id="backToCatalog" class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 px-6 py-3 rounded-xl font-black text-white btn-bounce mb-6"> ← VOLVER AL CATÁLOGO </button>
      <h2 class="text-4xl font-black text-yellow-300 mb-4">🛒 FINALIZAR COMPRA</h2>
-     <div id="selectedVersionInfo" class="bg-white/10 rounded-xl p-6 mb-8"><!-- Selected version info will be shown here -->
+     <div id="selectedProductInfo" class="bg-white/10 rounded-xl p-6 mb-8"><!-- Selected product info will be shown here -->
      </div>
     </div>
     <form id="purchaseForm" class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border-4 border-yellow-300">
@@ -194,356 +200,139 @@
         // 🎯 CONFIGURACIÓN SÚPER FÁCIL - CAMBIA AQUÍ TODO 🎯
         // ═══════════════════════════════════════════════════════════════
 
-        // 📱 TU NÚMERO DE WHATSAPP (CAMBIA AQUÍ)
-        const WHATSAPP_NUMBER = "573245640954"; // 🔥 PON TU NÚMERO AQUÍ
+        // Configuración por defecto
+        const defaultConfig = {
+            store_title: "BRAINROTS STORE 🎮",
+            store_subtitle: "La forma más fácil de conseguir tus brainrots favoritos🤑",
+            whatsapp_number: "573245640954"
+        };
 
         // 🎁 CÓDIGOS DE REGALO ACTIVOS (AGREGA/QUITA AQUÍ)
         let giftCodes = [
             {
-                id: "code_1",
                 code: "REGALO2024", // 🎫 NOMBRE DEL CÓDIGO
                 stock: 5, // 📦 CUÁNTAS VECES SE PUEDE USAR
-                originalStock: 5,
-                productId: 1, // 🎮 ID DEL PRODUCTO (VER ABAJO)
-                versionId: "1-base", // 🎯 VERSIÓN (base o mutada)
-                createdAt: new Date().toISOString(),
-                type: 'gift_code'
+                productId: 1 // 🎮 ID DEL PRODUCTO
             },
             {
-                id: "code_2",
                 code: "NAVIDAD", // 🎫 OTRO CÓDIGO
                 stock: 3, // 📦 STOCK
-                originalStock: 3,
-                productId: 6, // 🎮 JOB JOB JOB SAHUR
-                versionId: "6-mutada", // 🎯 VERSIÓN MUTADA
-                createdAt: new Date().toISOString(),
-                type: 'gift_code'
+                productId: 6 // 🎮 JOB JOB JOB SAHUR
             }
-            // 🔥 AGREGA MÁS CÓDIGOS COPIANDO EL FORMATO DE ARRIBA
         ];
 
         // ═══════════════════════════════════════════════════════════════
-        // 🎮 PRODUCTOS Y CONFIGURACIÓN - EDITA AQUÍ 🎮
+        // 🎮 PRODUCTOS SIMPLIFICADOS - EDITA AQUÍ 🎮
         // ═══════════════════════════════════════════════════════════════
 
-        // ┌─────────────────────────────────────────────────────────────┐
-        // │ 🎮 PRODUCTO 1: TRALALITA TRALALA                           │
-        // └─────────────────────────────────────────────────────────────┘
         let products = [
             {
                 id: 1,
                 name: "TRALALITA TRALALA",
+                image: "tralalita.jpg",
+                description: "¡El increíble TRALALITA TRALALA! ¡Un brainrot súper genial que te va a encantar!",
                 price: 3000,
-                image: "tralalita.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
-                stock: 4,
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-              
-              
-                ]
+                stock: 5,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 2: TRALALERO TRALALA                           │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 2,
                 name: "TRALALERO TRALALA",
-                image: "tralaleroTralala.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "tralaleroTralala.jpg",
                 description: "¡El genial TRALALERO TRALALA! ¡Súper divertido y único!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "2-base",
-                        name: "Base",
-                        price: 3000, // 💰 PRECIO BASE
-                        image: "tralalero-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 4, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "2-mutada",
-                        name: "Mutada",
-                        price: 4500, // 💰 PRECIO MUTADA
-                        image: "tralalero-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 2, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 3000,
+                stock: 4,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 3: LOS BOMBINITOS                               │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 3,
                 name: "LOS BOMBINITOS",
-                image: "los bombinitos.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "los bombinitos.jpg",
                 description: "¡Los increíbles BOMBINITOS! ¡Súper explosivos y geniales!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "3-base",
-                        name: "Base",
-                        price: 6000, // 💰 PRECIO BASE
-                        image: "bombinitos-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 6, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "3-mutada",
-                        name: "Mutada",
-                        price: 8000, // 💰 PRECIO MUTADA
-                        image: "bombinitos-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 0, // 📦 AGOTADO
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 6000,
+                stock: 0,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 4: LOS COCODRILITOS                             │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 4,
                 name: "LOS COCODRILITOS",
-                image: "noFilter.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "noFilter.jpg",
                 description: "¡Los fantásticos COCODRILITOS! ¡Súper salvajes y divertidos!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "4-base",
-                        name: "Base",
-                        price: 3500, // 💰 PRECIO BASE
-                        image: "cocodrilitos-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 7, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "4-mutada",
-                        name: "Mutada",
-                        price: 5000, // 💰 PRECIO MUTADA
-                        image: "cocodrilitos-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 1, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 3500,
+                stock: 7,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 5: LOS ORCALITOS                                │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 5,
                 name: "LOS ORCALITOS",
-                image: "noFilter (1).jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "noFilter (1).jpg",
                 description: "¡Los espectaculares ORCALITOS! ¡Súper marinos y geniales!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "5-base",
-                        name: "Base",
-                        price: 8000, // 💰 PRECIO BASE
-                        image: "orcalitos-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 3, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "5-mutada",
-                        name: "Mutada",
-                        price: 10000, // 💰 PRECIO MUTADA
-                        image: "orcalitos-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 2, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 8000,
+                stock: 3,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 6: JOB JOB JOB SAHUR                            │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 6,
                 name: "JOB JOB JOB SAHUR",
-                image: "job.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "job.jpg",
                 description: "¡El legendario JOB JOB JOB SAHUR! ¡El más épico de todos!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "6-base",
-                        name: "Base",
-                        price: 10000, // 💰 PRECIO BASE
-                        image: "job-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 2, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "6-mutada",
-                        name: "Mutada",
-                        price: 15000, // 💰 PRECIO MUTADA
-                        image: "job-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 1, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 10000,
+                stock: 2,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 7: MATEO                                        │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 7,
                 name: "MATEO",
-                image: "matteofr.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "matteofr.jpg",
                 description: "¡El increíble MATEO! ¡Súper único y especial!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "7-base",
-                        name: "Base",
-                        price: 3500, // 💰 PRECIO BASE
-                        image: "mateo-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 4, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "7-mutada",
-                        name: "Mutada",
-                        price: 5000, // 💰 PRECIO MUTADA
-                        image: "mateo-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 3, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 3500,
+                stock: 4,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 8: PAKRAHMATMAMAT                               │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 8,
                 name: "PAKRAHMATMAMAT",
-                image: "pakrah.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "pakrah.jpg",
                 description: "¡El asombroso PAKRAHMATMAMAT! ¡Súper misterioso y genial!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "8-base",
-                        name: "Base",
-                        price: 5000, // 💰 PRECIO BASE
-                        image: "pakrah-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 5, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "8-mutada",
-                        name: "Mutada",
-                        price: 7500, // 💰 PRECIO MUTADA
-                        image: "pakrah-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 2, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 5000,
+                stock: 5,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 9: LA VACA SATURNO SATURNITA                    │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 9,
                 name: "LA VACA SATURNO SATURNITA",
-                image: "noFilter (2).jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "noFilter (2).jpg",
                 description: "¡La increíble VACA SATURNO SATURNITA! ¡Súper espacial y genial!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "9-base",
-                        name: "Base",
-                        price: 7000, // 💰 PRECIO BASE
-                        image: "vaca-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 3, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "9-mutada",
-                        name: "Mutada",
-                        price: 9000, // 💰 PRECIO MUTADA
-                        image: "vaca-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 1, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 7000,
+                stock: 3,
+                discount: 0
             },
-
-            // ┌─────────────────────────────────────────────────────────────┐
-            // │ 🎮 PRODUCTO 10: LOS TIPI TACOS                              │
-            // └─────────────────────────────────────────────────────────────┘
             {
                 id: 10,
                 name: "LOS TIPI TACOS",
-                image: "Los_tipi_tacos.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
+                image: "Los_tipi_tacos.jpg",
                 description: "¡Los increíbles TIPI TACOS! ¡Súper sabrosos y geniales!",
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "10-base",
-                        name: "Base",
-                        price: 10000, // 💰 PRECIO BASE
-                        image: "tipi-base.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 4, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "10-mutada",
-                        name: "Mutada",
-                        price: 12000, // 💰 PRECIO MUTADA
-                        image: "tipi-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 2, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
-            },
-          {
-                id: 11,
-                name: "SIX SEVEN",
-                image: "six seven.jpg", // 🖼️ IMAGEN DEL CATÁLOGO
-                discount: 0, // 🔥 DESCUENTO DEL PRODUCTO (0-99%)
-                versions: [
-                    {
-                        id: "11-base",
-                        name: "Base",
-                        price: 10000, // 💰 PRECIO BASE
-                        image: "six seven.jpg", // 🖼️ IMAGEN VERSIÓN BASE
-                        stock: 1, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    },
-                    {
-                        id: "11-mutada",
-                        name: "Mutada",
-                        price: 12000, // 💰 PRECIO MUTADA
-                        image: "tipi-mutada.jpg", // 🖼️ IMAGEN VERSIÓN MUTADA
-                        stock: 2, // 📦 STOCK DISPONIBLE
-                        discount: 0 // 🔥 DESCUENTO ESPECÍFICO (0-99%)
-                    }
-                ]
+                price: 10000,
+                stock: 4,
+                discount: 0
             }
         ];
 
         // ═══════════════════════════════════════════════════════════════
-        // 🚀 NO TOQUES NADA DE AQUÍ PARA ABAJO (CÓDIGO AUTOMÁTICO) 🚀
+        // 🚀 CÓDIGO AUTOMÁTICO - NO TOCAR 🚀
         // ═══════════════════════════════════════════════════════════════
 
         // Get all the elements we need
         const catalogSection = document.getElementById('catalogSection');
-        const versionsSection = document.getElementById('versionsSection');
         const purchaseSection = document.getElementById('purchaseSection');
         const productsGrid = document.getElementById('productsGrid');
-        const versionsGrid = document.getElementById('versionsGrid');
-        const selectedProductHeader = document.getElementById('selectedProductHeader');
-        const selectedVersionInfo = document.getElementById('selectedVersionInfo');
+        const selectedProductInfo = document.getElementById('selectedProductInfo');
         const backToCatalog = document.getElementById('backToCatalog');
-        const backToVersions = document.getElementById('backToVersions');
         const purchaseForm = document.getElementById('purchaseForm');
         const successMessage = document.getElementById('successMessage');
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const noResults = document.getElementById('noResults');
 
         // Gift elements
         const showGiftsBtn = document.getElementById('showGiftsBtn');
@@ -552,64 +341,24 @@
         const giftForm = document.getElementById('giftForm');
 
         let currentProduct = null;
-        let currentVersion = null;
-        let orders = []; // Array para almacenar pedidos
-        let allData = []; // Todos los datos del SDK
+        let orders = [];
+        let filteredProducts = [...products];
 
-        // Configuración por defecto
-        const defaultConfig = {
-            store_title: "BRAINROTS STORE 🎮",
-            store_subtitle: "La forma más fácil de conseguir tus brainrots favoritos🤑",
-            whatsapp_number: WHATSAPP_NUMBER
-        };
-
-        // Data SDK Handler
-        const dataHandler = {
-            onDataChanged(data) {
-                allData = data;
-                
-                // Separar pedidos y códigos de regalo
-                orders = data.filter(item => item.type === 'order');
-                const serverGiftCodes = data.filter(item => item.type === 'gift_code');
-                
-                // Sincronizar códigos de regalo con el servidor
-                if (serverGiftCodes.length > 0) {
-                    giftCodes = serverGiftCodes;
-                }
-            }
-        };
-
-        // Inicializar SDKs
-        async function initializeSDKs() {
-            try {
-                // Inicializar Data SDK
-                if (window.dataSdk) {
-                    const initResult = await window.dataSdk.init(dataHandler);
-                    if (!initResult.isOk) {
-                        console.error("Error inicializando Data SDK:", initResult.error);
-                    }
-                    
-                    // Crear códigos de regalo iniciales si no existen
-                    if (giftCodes.length > 0 && allData.filter(item => item.type === 'gift_code').length === 0) {
-                        for (const code of giftCodes) {
-                            await window.dataSdk.create(code);
-                        }
-                    }
-                }
-
-                // Inicializar Element SDK
-                if (window.elementSdk) {
+        // Inicializar Element SDK
+        async function initializeElementSDK() {
+            if (window.elementSdk) {
+                try {
                     await window.elementSdk.init({
                         defaultConfig,
                         onConfigChange: async (config) => {
                             // Actualizar título de la tienda
-                            const titleElement = document.querySelector('h1');
+                            const titleElement = document.getElementById('storeTitle');
                             if (titleElement) {
                                 titleElement.textContent = config.store_title || defaultConfig.store_title;
                             }
                             
                             // Actualizar subtítulo
-                            const subtitleElement = document.querySelector('header p');
+                            const subtitleElement = document.getElementById('storeSubtitle');
                             if (subtitleElement) {
                                 subtitleElement.textContent = config.store_subtitle || defaultConfig.store_subtitle;
                             }
@@ -626,48 +375,41 @@
                             ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number]
                         ])
                     });
+                } catch (error) {
+                    console.error("Error inicializando Element SDK:", error);
                 }
-            } catch (error) {
-                console.error("Error inicializando SDKs:", error);
             }
         }
 
         // Función para obtener número de WhatsApp
         function getWhatsAppNumber() {
             if (window.elementSdk && window.elementSdk.config) {
-                return window.elementSdk.config.whatsapp_number || WHATSAPP_NUMBER;
+                return window.elementSdk.config.whatsapp_number || defaultConfig.whatsapp_number;
             }
-            return WHATSAPP_NUMBER;
+            return defaultConfig.whatsapp_number;
         }
 
         // Utility functions
         function formatPrice(price) {
-            return `$${price.toLocaleString('es-CO')}`;
+            return $${price.toLocaleString('es-CO')};
         }
 
         function calculateDiscountedPrice(originalPrice, discountPercent) {
             return Math.round(originalPrice * (1 - discountPercent / 100));
         }
 
-        function getEffectiveDiscount(product, version) {
-            return Math.max(product.discount || 0, version.discount || 0);
-        }
-
         function showSuccessOnReturn() {
-            // Detectar cuando el usuario regresa de WhatsApp
             let isHidden = false;
             
             document.addEventListener('visibilitychange', function() {
                 if (document.hidden) {
                     isHidden = true;
                 } else if (isHidden) {
-                    // Usuario regresó a la página
                     showSuccess();
                     isHidden = false;
                 }
             });
 
-            // También detectar con focus
             window.addEventListener('blur', function() {
                 isHidden = true;
             });
@@ -691,81 +433,64 @@
             catalogSection.classList.remove('hidden');
         });
 
+        // Search functionality
+        function filterProducts(searchTerm) {
+            if (!searchTerm.trim()) {
+                filteredProducts = [...products];
+            } else {
+                filteredProducts = products.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            renderCatalog();
+        }
+
+        // Search event listeners
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value;
+            filterProducts(searchTerm);
+            
+            if (searchTerm.trim()) {
+                clearSearch.classList.remove('hidden');
+            } else {
+                clearSearch.classList.add('hidden');
+            }
+        });
+
+        clearSearch.addEventListener('click', () => {
+            searchInput.value = '';
+            clearSearch.classList.add('hidden');
+            filterProducts('');
+        });
+
         // Navigation event listeners
         backToCatalog.addEventListener('click', () => {
-            versionsSection.classList.add('hidden');
+            purchaseSection.classList.add('hidden');
             catalogSection.classList.remove('hidden');
             currentProduct = null;
         });
 
-        backToVersions.addEventListener('click', () => {
-            purchaseSection.classList.add('hidden');
-            versionsSection.classList.remove('hidden');
-            currentVersion = null;
-        });
-
-        // Render main catalog (only image + name + "Me interesa" button)
+        // Render main catalog
         function renderCatalog() {
-            productsGrid.innerHTML = products.map((product, index) => {
+            const productsToShow = filteredProducts.length > 0 ? filteredProducts : products;
+            
+            if (productsToShow.length === 0) {
+                productsGrid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+            
+            productsGrid.innerHTML = productsToShow.map((product, index) => {
                 const hasDiscount = product.discount > 0;
-                return `
-                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl bounce-in" style="animation-delay: ${index * 0.1}s">
-                    <!-- PRODUCT NAME -->
-                    <div class="p-6 pb-4">
-                        <h3 class="text-2xl font-black text-yellow-300 text-center">${product.name}</h3>
-                    </div>
-                    
-                    <!-- PRODUCT IMAGE -->
-                    <div class="relative overflow-hidden mx-6 mb-4 cursor-pointer" onclick="showVersions(${product.id})">
-                        ${hasDiscount ? `<div class="discount-badge">🔥 ${product.discount}% OFF</div>` : ''}
-                        <div class="w-full h-56 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
-                            <div class="flex flex-col items-center justify-center text-white w-full h-full">
-                                <span class="text-4xl mb-2">🖼</span>
-                                <span class="font-bold text-center px-4">${product.name}</span>
-                            </div>
-                        </div>
-                        ${!hasDiscount ? `
-                            <div class="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full font-black text-sm">
-                                ¡NUEVO!
-                            </div>
-                        ` : ''}
-                    </div>
-                    
-                    <!-- ME INTERESA BUTTON -->
-                    <div class="p-6 pt-0">
-                        <button onclick="showVersions(${product.id})" class="w-full bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
-                            <span class="emoji-spin">👀</span> ¡ME INTERESA!
-                        </button>
-                    </div>
-                </div>
-            `;}).join('');
-        }
-
-        // Show product versions
-        function showVersions(productId) {
-            currentProduct = products.find(p => p.id === productId);
-            if (!currentProduct) return;
-
-            // Update header
-            selectedProductHeader.innerHTML = `
-                <div class="bg-white/10 rounded-xl p-6">
-                    <h2 class="text-4xl font-black text-yellow-300 mb-2">${currentProduct.name}</h2>
-                    <p class="text-lg text-white">${currentProduct.description}</p>
-                    <p class="text-xl text-green-400 font-bold mt-4">¡Elige tu versión favorita!</p>
-                </div>
-            `;
-
-            // Render versions
-            versionsGrid.innerHTML = currentProduct.versions.map(version => {
-                const effectiveDiscount = getEffectiveDiscount(currentProduct, version);
-                const originalPrice = version.price;
-                const discountedPrice = effectiveDiscount > 0 ? calculateDiscountedPrice(originalPrice, effectiveDiscount) : originalPrice;
-                const hasDiscount = effectiveDiscount > 0;
+                const originalPrice = product.price;
+                const discountedPrice = hasDiscount ? calculateDiscountedPrice(originalPrice, product.discount) : originalPrice;
+                const isOutOfStock = product.stock === 0;
                 
                 return `
-                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl relative">
-                    ${version.stock === 0 ? `
+                <div class="card-hover bg-gradient-to-br from-purple-800/80 to-pink-800/80 backdrop-blur-xl rounded-3xl overflow-hidden border-4 border-yellow-300 shadow-2xl bounce-in relative" style="animation-delay: ${index * 0.1}s">
+                    ${isOutOfStock ? `
                         <div class="sold-out-overlay rounded-3xl">
                             <div class="text-center">
                                 <div class="text-6xl mb-4">😵</div>
@@ -774,24 +499,24 @@
                         </div>
                     ` : ''}
                     
-                    <!-- VERSION NAME -->
+                    <!-- PRODUCT NAME -->
                     <div class="p-6 pb-4">
-                        <h3 class="text-3xl font-black text-center ${version.name === 'Base' ? 'text-blue-300' : 'text-purple-300'}">${version.name.toUpperCase()}</h3>
+                        <h3 class="text-2xl font-black text-yellow-300 text-center">${product.name}</h3>
                     </div>
                     
-                    <!-- VERSION IMAGE -->
+                    <!-- PRODUCT IMAGE -->
                     <div class="relative overflow-hidden mx-6 mb-4">
-                        ${hasDiscount ? `<div class="discount-badge">🔥 ${effectiveDiscount}% OFF</div>` : ''}
-                        <div class="w-full h-64 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
-                            <img src="${version.image}" alt="${currentProduct.name} - ${version.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
+                        ${hasDiscount ? <div class="discount-badge">🔥 ${product.discount}% OFF</div> : ''}
+                        <div class="w-full h-56 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-all duration-500 hover:scale-110 rounded-xl absolute inset-0" onload="this.style.opacity='1'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="opacity: 0; transition: opacity 0.5s;">
                             <div class="flex flex-col items-center justify-center text-white w-full h-full">
                                 <span class="text-4xl mb-2">🖼</span>
-                                <span class="font-bold text-center px-4">${currentProduct.name}<br>${version.name}</span>
+                                <span class="font-bold text-center px-4">${product.name}</span>
                             </div>
                         </div>
-                        ${version.name === 'Mutada' && !hasDiscount ? `
-                            <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full font-black text-sm">
-                                ✨ ESPECIAL
+                        ${!hasDiscount && !isOutOfStock ? `
+                            <div class="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full font-black text-sm">
+                                ¡NUEVO!
                             </div>
                         ` : ''}
                     </div>
@@ -807,16 +532,16 @@
                             `}
                         </div>
                         <div class="text-center mb-4">
-                            <span class="text-lg font-bold ${version.stock > 3 ? 'text-green-400' : version.stock > 0 ? 'text-yellow-400' : 'text-red-400'}">
-                                📦 Stock: ${version.stock} ${version.stock === 1 ? 'unidad' : 'unidades'}
+                            <span class="text-lg font-bold ${product.stock > 3 ? 'text-green-400' : product.stock > 0 ? 'text-yellow-400' : 'text-red-400'}">
+                                📦 Stock: ${product.stock} ${product.stock === 1 ? 'unidad' : 'unidades'}
                             </span>
                         </div>
                     </div>
                     
                     <!-- BUY BUTTON -->
                     <div class="p-6 pt-0">
-                        ${version.stock > 0 ? `
-                            <button onclick="buyVersion('${version.id}')" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
+                        ${!isOutOfStock ? `
+                            <button onclick="buyProduct(${product.id})" class="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 px-6 py-4 rounded-xl font-black text-xl btn-bounce shadow-lg">
                                 <span class="emoji-spin">💳</span> ¡COMPRAR AHORA!
                             </button>
                         ` : `
@@ -827,79 +552,72 @@
                     </div>
                 </div>
             `;}).join('');
-
-            // Show versions section
-            catalogSection.classList.add('hidden');
-            versionsSection.classList.remove('hidden');
-            versionsSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Buy specific version
-        function buyVersion(versionId) {
-            const version = currentProduct.versions.find(v => v.id === versionId);
-            if (!version || version.stock === 0) return;
-
-            currentVersion = version;
+        // Buy product directly
+        function buyProduct(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            if (!currentProduct || currentProduct.stock === 0) return;
             
-            const effectiveDiscount = getEffectiveDiscount(currentProduct, version);
-            const originalPrice = version.price;
-            const discountedPrice = effectiveDiscount > 0 ? calculateDiscountedPrice(originalPrice, effectiveDiscount) : originalPrice;
-            const hasDiscount = effectiveDiscount > 0;
+            const hasDiscount = currentProduct.discount > 0;
+            const originalPrice = currentProduct.price;
+            const discountedPrice = hasDiscount ? calculateDiscountedPrice(originalPrice, currentProduct.discount) : originalPrice;
             
-            selectedVersionInfo.innerHTML = `
+            selectedProductInfo.innerHTML = `
                 <h3 class="text-3xl font-black text-yellow-300 mb-2">${currentProduct.name}</h3>
-                <p class="text-xl font-bold ${version.name === 'Base' ? 'text-blue-400' : 'text-purple-400'} mb-2">Versión: ${version.name}</p>
+                <p class="text-lg text-white mb-4">${currentProduct.description}</p>
                 ${hasDiscount ? `
                     <div class="mb-2">
                         <span class="text-lg text-red-400 line-through">${formatPrice(originalPrice)}</span>
-                        <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">🔥 ${effectiveDiscount}% OFF</span>
+                        <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">🔥 ${currentProduct.discount}% OFF</span>
                     </div>
                     <p class="text-2xl font-bold text-green-400">${formatPrice(discountedPrice)}</p>
                 ` : `
                     <p class="text-2xl font-bold text-green-400">${formatPrice(originalPrice)}</p>
                 `}
-                <p class="text-lg text-white mt-2">Stock disponible: ${version.stock} ${version.stock === 1 ? 'unidad' : 'unidades'}</p>
+                <p class="text-lg text-white mt-2">Stock disponible: ${currentProduct.stock} ${currentProduct.stock === 1 ? 'unidad' : 'unidades'}</p>
             `;
             
-            // Show purchase section
-            versionsSection.classList.add('hidden');
+            catalogSection.classList.add('hidden');
             purchaseSection.classList.remove('hidden');
             purchaseSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         // Handle gift form
-        giftForm.addEventListener('submit', async (e) => {
+        giftForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const giftCode = document.getElementById('giftCode').value.toLowerCase();
             const customerName = document.getElementById('giftCustomerName').value;
             const robloxName = document.getElementById('giftRobloxName').value;
             
-            // Buscar código
             const code = giftCodes.find(c => c.code.toLowerCase() === giftCode && c.stock > 0);
             
             if (!code) {
-                alert('Código inválido o ya se acabó este regalo 😥');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
+                errorDiv.textContent = 'Código inválido o ya se acabó este regalo 😥';
+                giftForm.insertBefore(errorDiv, giftForm.firstChild);
+                setTimeout(() => errorDiv.remove(), 3000);
                 return;
             }
             
-            // Buscar producto y versión
             const product = products.find(p => p.id === code.productId);
-            const version = product.versions.find(v => v.id === code.versionId);
             
-            if (!product || !version) {
-                alert('Error: Producto no encontrado');
+            if (!product) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
+                errorDiv.textContent = 'Error: Producto no encontrado';
+                giftForm.insertBefore(errorDiv, giftForm.firstChild);
+                setTimeout(() => errorDiv.remove(), 3000);
                 return;
             }
             
-            // Tu número de WhatsApp
             const whatsappNumber = getWhatsAppNumber();
             
-            // Crear mensaje de WhatsApp para regalo
             const whatsappMessage = `🎁 REGALO CANJEADO - BRAINROT GRATIS 🎮
 
 📦 PRODUCTO: ${product.name}
-🎯 VERSIÓN: ${version.name}
 💰 PRECIO: GRATIS 🎉
 🎫 CÓDIGO CANJEADO: ${code.code}
 
@@ -911,27 +629,14 @@
 
 ¡Hola! He canjeado este código de regalo 🚀`;
 
-            // Crear enlace de WhatsApp
-            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappLink = https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)};
             
-            // Reducir stock del código y guardar
             code.stock--;
             
-            // Actualizar código en la base de datos
-            if (window.dataSdk) {
-                const codeData = allData.find(item => item.type === 'gift_code' && item.code === code.code);
-                if (codeData) {
-                    codeData.stock = code.stock;
-                    await window.dataSdk.update(codeData);
-                }
-            }
-            
-            // Registrar pedido de regalo
             const order = {
-                id: `gift_${Date.now()}`,
+                id: gift_${Date.now()},
                 date: new Date().toISOString(),
                 product: product.name,
-                version: version.name,
                 customer: customerName,
                 robloxUser: robloxName,
                 originalPrice: 0,
@@ -939,18 +644,11 @@
                 finalPrice: 0,
                 hasDiscount: false,
                 isGift: true,
-                giftCode: code.code,
-                type: 'order'
+                giftCode: code.code
             };
             
-            // Guardar pedido en la base de datos
-            if (window.dataSdk) {
-                await window.dataSdk.create(order);
-            } else {
-                orders.push(order);
-            }
+            orders.push(order);
             
-            // Abrir WhatsApp
             try {
                 const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
                 
@@ -968,11 +666,8 @@
             }
             
             giftForm.reset();
-            
-            // Activar detección de regreso para mostrar mensaje
             showSuccessOnReturn();
             
-            // Volver al catálogo después de 3 segundos
             setTimeout(() => {
                 giftsSection.classList.add('hidden');
                 catalogSection.classList.remove('hidden');
@@ -980,39 +675,41 @@
         });
 
         // Handle purchase form
-        purchaseForm.addEventListener('submit', async (e) => {
+        purchaseForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const customerName = document.getElementById('customerName').value;
             const robloxName = document.getElementById('robloxName').value;
             
-            // Verificación crítica
-            if (!currentProduct || !currentVersion) {
-                alert("Error: No se ha seleccionado un producto o versión.");
+            if (!currentProduct) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
+                errorDiv.textContent = 'Error: No se ha seleccionado un producto.';
+                purchaseForm.insertBefore(errorDiv, purchaseForm.firstChild);
+                setTimeout(() => errorDiv.remove(), 3000);
                 return;
             }
 
-            if (currentVersion.stock === 0) {
-                alert("Lo sentimos, este producto está agotado.");
+            if (currentProduct.stock === 0) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-500 text-white p-4 rounded-xl mb-4 text-center font-bold';
+                errorDiv.textContent = 'Lo sentimos, este producto está agotado.';
+                purchaseForm.insertBefore(errorDiv, purchaseForm.firstChild);
+                setTimeout(() => errorDiv.remove(), 3000);
                 return;
             }
             
-            // Tu número de WhatsApp
             const whatsappNumber = getWhatsAppNumber();
             
-            // Calcular precios con descuento
-            const effectiveDiscount = getEffectiveDiscount(currentProduct, currentVersion);
-            const originalPrice = currentVersion.price;
-            const discountedPrice = effectiveDiscount > 0 ? calculateDiscountedPrice(originalPrice, effectiveDiscount) : originalPrice;
-            const hasDiscount = effectiveDiscount > 0;
+            const hasDiscount = currentProduct.discount > 0;
+            const originalPrice = currentProduct.price;
+            const discountedPrice = hasDiscount ? calculateDiscountedPrice(originalPrice, currentProduct.discount) : originalPrice;
             
-            // Crear mensaje de WhatsApp
             const whatsappMessage = `🧠 NUEVO PEDIDO BRAINROT 🎮
 
 📦 PRODUCTO: ${currentProduct.name}
-🎯 VERSIÓN: ${currentVersion.name}
 💰 PRECIO ORIGINAL: ${formatPrice(originalPrice)}${hasDiscount ? `
-🔥 DESCUENTO APLICADO: ${effectiveDiscount}%
+🔥 DESCUENTO APLICADO: ${currentProduct.discount}%
 💸 PRECIO FINAL: ${formatPrice(discountedPrice)}` : ''}
 
 👤 DATOS DEL CLIENTE:
@@ -1023,37 +720,26 @@
 
 ¡Hola! Quiero hacer este pedido de brainrot 🚀`;
 
-            // Crear enlace de WhatsApp
-            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappLink = https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)};
             
-            // Reducir stock
-            currentVersion.stock--;
+            currentProduct.stock--;
             
-            // Registrar pedido
             const order = {
-                id: `order_${Date.now()}`,
+                id: order_${Date.now()},
                 date: new Date().toISOString(),
                 product: currentProduct.name,
-                version: currentVersion.name,
                 customer: customerName,
                 robloxUser: robloxName,
                 originalPrice: originalPrice,
-                discount: effectiveDiscount,
+                discount: currentProduct.discount,
                 finalPrice: discountedPrice,
                 hasDiscount: hasDiscount,
                 isGift: false,
-                giftCode: null,
-                type: 'order'
+                giftCode: null
             };
             
-            // Guardar pedido en la base de datos
-            if (window.dataSdk) {
-                await window.dataSdk.create(order);
-            } else {
-                orders.push(order);
-            }
+            orders.push(order);
             
-            // Abrir WhatsApp
             try {
                 const newWindow = window.open(whatsappLink, '_blank', 'noopener,noreferrer');
                 
@@ -1071,16 +757,12 @@
             }
             
             purchaseForm.reset();
-            
-            // Activar detección de regreso para mostrar mensaje
             showSuccessOnReturn();
             
-            // Volver al catálogo después de 6 segundos
             setTimeout(() => {
                 purchaseSection.classList.add('hidden');
                 catalogSection.classList.remove('hidden');
                 currentProduct = null;
-                currentVersion = null;
             }, 6000);
         });
 
@@ -1095,10 +777,12 @@
 
         // Initialize the store
         document.addEventListener('DOMContentLoaded', async () => {
-            await initializeSDKs();
+            await initializeElementSDK();
             renderCatalog();
         });
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994c727df52af77e',t:'MTc2MTUwNzg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
 
+        // Make buyProduct global
+        window.buyProduct = buyProduct;
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998161db927a3eeb',t:'MTc2MjA2MjkxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
