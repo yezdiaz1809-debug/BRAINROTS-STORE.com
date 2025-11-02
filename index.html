@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRAINROTS STORE</title>
+  <title>Pringles Store</title>
   <style>
     body {
       box-sizing: border-box;
@@ -110,9 +110,10 @@
     
     .product-image {
       width: 100%;
-      height: 160px;
+      height: auto;
+      max-height: 200px;
       border-radius: 15px;
-      object-fit: cover;
+      object-fit:contain;
       margin-bottom: 15px;
       transition: all 0.3s ease;
     }
@@ -465,8 +466,8 @@
   <div class="container"><!-- Sección Principal -->
    <div id="main-section"><!-- Título -->
     <div class="header">
-     <h1>BRAINROTS STORE</h1>
-     <p>LA FORMA MAS FACIL DE CONSEGUIR TUS BRAINROTS FAVORITOS</p>
+     <h1>🥔 Pringles Store</h1>
+     <p>Los mejores sabores para ti</p>
     </div><!-- Búsqueda -->
     <div class="search-box"><input type="text" id="search" placeholder="Buscar productos...">
     </div><!-- Productos -->
@@ -516,14 +517,17 @@
     // - precio: Cambia el precio (ej: 4.99)
     // - descuento: Porcentaje de descuento (ej: 15 para 15% de descuento, 0 para sin descuento)
     // - stock: true (disponible) o false (agotado)
-    // - imagen: Pon la URL de tu imagen aquí (ej: "https://ejemplo.com/imagen.jpg")
+    // - imagen: Pon SOLO el nombre del archivo (ej: "pringles1.jpg", "producto2.png")
+    
+    // CONFIGURACIÓN DE CARPETA DE IMÁGENES
+    var carpetaImagenes = "imagenes/"; // Cambia "imagenes/" por el nombre de tu carpeta
     
     var productos = [
-      { id: 1, nombre: "alessio oro", precio: 6.000, descuento: 0, stock: true, imagen:"alessio oro.jpg"},
-      { id: 2, nombre: "Pringles Crema y Cebolla", precio: 3.99, descuento: 0, stock: true, imagen: "URL_AQUI" },
-      { id: 3, nombre: "Pringles BBQ", precio: 4.49, descuento: 15, stock: true, imagen: "URL_AQUI" },
-      { id: 4, nombre: "Pringles Queso", precio: 3.99, descuento: 0, stock: false, imagen: "URL_AQUI" },
-      { id: 5, nombre: "Pringles Pizza", precio: 4.49, descuento: 20, stock: true, imagen: "URL_AQUI" },
+      { id: 1, nombre: "alessio oro", precio: 3.99, descuento: 10, stock: true, imagen: "alessio oro.jpg" },
+      { id: 2, nombre: "Pringles Crema y Cebolla", precio: 3.99, descuento: 0, stock: true, imagen: "aquanaut oro.jpg" },
+      { id: 3, nombre: "Pringles BBQ", precio: 4.49, descuento: 15, stock: true, imagen: "pringles3.jpg" },
+      { id: 4, nombre: "Pringles Queso", precio: 3.99, descuento: 0, stock: false, imagen: "pringles4.jpg" },
+      { id: 5, nombre: "Pringles Pizza", precio: 4.49, descuento: 20, stock: true, imagen: "pringles5.jpg" },
       { id: 6, nombre: "Pringles Jalapeño", precio: 4.99, descuento: 0, stock: true, imagen: "URL_AQUI" },
       { id: 7, nombre: "Pringles Paprika", precio: 4.29, descuento: 5, stock: true, imagen: "URL_AQUI" },
       { id: 8, nombre: "Pringles Cheddar", precio: 4.19, descuento: 0, stock: true, imagen: "URL_AQUI" },
@@ -844,8 +848,9 @@
         }
         
         // Mostrar imagen si existe, sino mostrar placeholder
-        if (producto.imagen && producto.imagen !== "URL_AQUI") {
-          html += '<img src="' + producto.imagen + '" alt="' + producto.nombre + '" class="product-image" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">';
+        if (producto.imagen && producto.imagen !== "URL_AQUI" && producto.imagen !== "") {
+          var rutaCompleta = carpetaImagenes + producto.imagen;
+          html += '<img src="' + rutaCompleta + '" alt="' + producto.nombre + '" class="product-image" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">';
           html += '<div class="image-placeholder" style="display: none;">📷<br>Imagen del<br>producto</div>';
         } else {
           html += '<div class="image-placeholder">📷<br>Imagen del<br>producto</div>';
@@ -1087,11 +1092,5 @@
     // ===== INICIALIZAR =====
     mostrarProductos();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9986726537e03eeb',t:'MTc2MjExNjAyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9987171404d83eeb',t:'MTc2MjEyMjc3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
-
