@@ -632,20 +632,6 @@
     var descuentoAplicado = 0;
     var esGratis = false;
 
-   // AÑADIR ESTA FUNCIÓN PARA FORMATO DE PRECIOS EN PESO COLOMBIANO
-function formatearPrecio(numero) {
-    // 1. Aseguramos que es un número (evita errores si se pasa una cadena)
-    var num = parseFloat(numero);
-    
-    // 2. Usamos toLocaleString para el formato regional (es-CO = Español de Colombia)
-    return num.toLocaleString('es-CO', {
-        style: 'currency',
-        currency: 'COP', // Define la moneda
-        minimumFractionDigits: 0, // Generalmente, los precios en COP no llevan decimales
-        maximumFractionDigits: 0
-    });
-}
-    
     // ===== MOSTRAR PRODUCTOS =====
     function mostrarProductos() {
       var contenedor = document.getElementById('products');
