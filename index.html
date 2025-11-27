@@ -523,11 +523,11 @@
     var carpetaImagenes = "imagenes/"; // Cambia "imagenes/" por el nombre de tu carpeta
     
     var productos = [
-      { id: 1, nombre: "67,oro", precio:15, descuento: 10, stock: true, imagen: "67, oro.jpg" },
-      { id: 2, nombre: "agarrini la palini,estela y sombrero", precio:18, descuento: 0, stock: true, imagen: "agarrini la palini,estela y sombrero.jpg" },
-      { id: 3, nombre: "aquanaut, oro", precio: 6, descuento: 0, stock: true, imagen: "aquanaut, oro.jpg" },
-      { id: 4, nombre: "belula beluga,radioactive", precio: 10.000, descuento: 0, stock: true, imagen: "belula beluga,radioactive.jpg" },
-      { id: 5, nombre: "bisonte guipetere ying yang", precio:8.000, descuento: 0, stock: true, imagen: "bisonte giuppitere,ying yang.jpg" },
+      { id: 1, nombre: "67,oro", precio:15000, descuento: 10, stock: true, imagen: "67, oro.jpg" },
+      { id: 2, nombre: "agarrini la palini,estela y sombrero", precio:18000, descuento: 10, stock: true, imagen: "agarrini la palini,estela y sombrero.jpg" },
+      { id: 3, nombre: "aquanaut, oro", precio: 6000, descuento: 5, stock: true, imagen: "aquanaut, oro.jpg" },
+      { id: 4, nombre: "belula beluga,radioactive", precio: 10000, descuento: 0, stock: true, imagen: "belula beluga,radioactive.jpg" },
+      { id: 5, nombre: "bisonte guipetere ying yang", precio:8000, descuento: 0, stock: true, imagen: "bisonte giuppitere,ying yang.jpg" },
       { id: 6, nombre: "blackhole goat ying yang", precio:10.000, descuento: 0, stock: true, imagen: "blackhole goat, yingyang.jpg" },
       { id: 7, nombre: "blackhole goat", precio:4.000, descuento: 0, stock: true, imagen: "blackhole goat.jpg" },
       { id: 8, nombre: "boatito auratito,oro", precio:3.600, descuento: 0, stock: true, imagen: "boatito auratito,oro.jpg" },
@@ -631,23 +631,53 @@
     var productoSeleccionado = null;
     var descuentoAplicado = 0;
     var esGratis = false;
+
+   // AÑADIR ESTA FUNCIÓN PARA FORMATO DE PRECIOS EN PESO COLOMBIANO
+function formatearPrecio(numero) {
+    // 1. Aseguramos que es un número (evita errores si se pasa una cadena)
+    var num = parseFloat(numero);
+    
+    // 2. Usamos toLocaleString para el formato regional (es-CO = Español de Colombia)
+    return num.toLocaleString('es-CO', {
+        style: 'currency',
+        currency: 'COP', // Define la moneda
+        minimumFractionDigits: 0, // Generalmente, los precios en COP no llevan decimales
+        maximumFractionDigits: 0
+    });
+}
     
     // ===== MOSTRAR PRODUCTOS =====
     function mostrarProductos() {
       var contenedor = document.getElementById('products');
       contenedor.innerHTML = '';
       
-      for (var i = 0; i < productosFiltrados.length; i++) {
-        var producto = productosFiltrados[i];
-        var precioFinal = producto.descuento > 0 
-          ? (producto.precio * (1 - producto.descuento / 100)).toFixed(3)
-          : producto.precio.toFixed(3);
-        
-        var html = '<div class="product">';
-        
-        if (producto.descuento > 0) {
-          html += '<div class="discount">-' + producto.descuento + '%</div>';
-        }
+for (var i = 0; i < productosFiltrados.length; i++) {
+    var producto = productosFiltrados[i];
+    
+    // EL CÁLCULO ES AHORA UN NÚMERO PRECISO
+    var precioFinalNumerico = producto.descuento > 0 
+        ? (producto.precio * (1 - producto.descuento / 100))
+        : producto.precio;
+
+    // APLICAR FORMATO PARA MOSTRAR
+    var precioFinal = formatearPrecio(precioFinalNumerico); 
+    
+    var html = '<div class="product">';
+    // ...
+
+    html += '<div class="price">';
+    
+    if (producto.descuento > 0) {
+        // USAR formatearPrecio() Y QUITAR EL '$' DEL HTML
+        html += '<span class="old-price">' + formatearPrecio(producto.precio) + '</span>'; 
+    }
+    
+    // USAR precioFinal (ya tiene el formato COP)
+    html += '<span class="new-price">' + precioFinal + '</span>'; 
+    html += '</div>';
+    
+    // ...
+}
         
         // Mostrar imagen si existe, sino mostrar placeholder
         if (producto.imagen && producto.imagen !== "URL_AQUI" && producto.imagen !== "") {
@@ -710,30 +740,35 @@
       document.getElementById('checkout-section').style.display = 'block';
       
       var precioOriginal = productoSeleccionado.precio;
-      var precioFinal;
+     
+var precioFinal;
       
-      if (esGratis) {
-        precioFinal = 0;
-      } else if (descuentoAplicado > 0) {
-        precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)).toFixed(3);
-      } else {
-        precioFinal = precioOriginal.toFixed(3);
-      }
+if (esGratis) {
+    precioFinal = 0;
+} else if (descuentoAplicado > 0) {
+    // Cálculo preciso
+    precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)); // Quitar .toFixed(2)
+} else {
+    precioFinal = precioOriginal; // Quitar .toFixed(2)
+}
+
+// FORMATO PARA MOSTRAR
+var precioFinalFormateado = formatearPrecio(precioFinal);
       
-      var infoHtml = '<h3>' + productoSeleccionado.nombre + '</h3>';
+var infoHtml = '<h3>' + productoSeleccionado.nombre + '</h3>';
       
-      if (esGratis) {
-        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">¡PRODUCTO GRATIS!</p>';
-      } else {
-        if (descuentoAplicado > 0) {
-          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + precioOriginal.toFixed(3) + '</span></p>';
-          infoHtml += '<p>Descuento aplicado: ' + descuentoAplicado + '%</p>';
-        }
-        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + precioFinal + '</p>';
-      }
-      
-      document.getElementById('product-info').innerHTML = infoHtml;
+if (esGratis) {
+    // ...
+} else {
+    if (descuentoAplicado > 0) {
+        // USAR formatearPrecio()
+        infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">' + formatearPrecio(precioOriginal) + '</span></p>';
+        infoHtml += '<p>Descuento aplicado: ' + descuentoAplicado + '%</p>';
     }
+    // USAR precioFinalFormateado
+    infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: ' + precioFinalFormateado + '</p>';
+}
+// ...
     
     // ===== CONFIRMAR COMPRA =====
     function confirmarCompra() {
@@ -749,14 +784,23 @@
       var fechaTexto = fecha.toLocaleDateString();
       var horaTexto = fecha.toLocaleTimeString();
       
-      var precioFinal;
-      if (esGratis) {
-        precioFinal = "GRATIS";
-      } else if (descuentoAplicado > 0) {
-        precioFinal = "$" + (productoSeleccionado.precio * (1 - descuentoAplicado / 100)).toFixed(3);
-      } else {
-        precioFinal = "$" + productoSeleccionado.precio.toFixed(3);
-      }
+var precioFinal;
+if (esGratis) {
+    precioFinal = "GRATIS";
+} else if (descuentoAplicado > 0) {
+    // Calcular y formatear
+    var precioNumerico = productoSeleccionado.precio * (1 - descuentoAplicado / 100);
+    precioFinal = formatearPrecio(precioNumerico);
+} else {
+    // Formatear
+    precioFinal = formatearPrecio(productoSeleccionado.precio);
+}
+
+var mensaje = "🛒 NUEVO PEDIDO\n\n";
+// ...
+mensaje += "💰 Precio: " + precioFinal + "\n"; // Ya tiene el formato correcto
+
+// ...
       
       var mensaje = "🛒 NUEVO PEDIDO\n\n";
       mensaje += "📅 Fecha: " + fechaTexto + "\n";
@@ -896,6 +940,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9987171404d83eeb',t:'MTc2MjEyMjc3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
