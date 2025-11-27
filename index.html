@@ -493,6 +493,16 @@
    </div>
   </div>
   <script>
+   // ===== FORMATEAR PRECIO =====
+
+function formatearPrecio (precio) {
+
+}
+
+var precioRedondeado = Math.round(precio);
+
+return precioRedondeado.toLocaleString('es-CO');
+   
     // ===== CONFIGURACIÓN =====
     // CAMBIA AQUÍ TU NÚMERO DE WHATSAPP (sin + ni espacios)
     var numeroWhatsApp = "+573245640954"; // CAMBIA ESTE NÚMERO POR EL TUYO
@@ -640,8 +650,8 @@
          for (var i = 0; i < productosFiltrados.length; i++) {
         var producto = productosFiltrados[i];
         var precioFinal = producto.descuento > 0 
-          ? (producto.precio * (1 - producto.descuento / 100)).toFixed(3)
-          : producto.precio.toFixed(3);
+          ? Math.round(producto.precio * (1 - producto.descuento / 100))
+          : Math.round(producto.precio);
         
         var html = '<div class="product">';
         
@@ -663,10 +673,10 @@
         html += '<div class="price">';
         
         if (producto.descuento > 0) {
-          html += '<span class="old-price">$' + producto.precio.toFixed(3) + '</span>';
+          html += '<span class="old-price">$' + formatearPrecio(producto.precio) + '</span>';
         }
         
-        html += '<span class="new-price">$' + precioFinal + '</span>';
+        html += '<span class="new-price">$' + formatearPrecio(precioFinal) + '</span>';
         html += '</div>';
         
         if (producto.stock) {
@@ -717,9 +727,9 @@
         if (esGratis) {
         precioFinal = 0;
       } else if (descuentoAplicado > 0) {
-        precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)).toFixed(2);
+        precioFinal = Math.round(precioOriginal * (1 - descuentoAplicado / 100));
       } else {
-        precioFinal = precioOriginal.toFixed(2);
+        precioFinal = Math.round(precioOriginal);
       }
       
       var infoHtml = '<h3>' + productoSeleccionado.nombre + '</h3>';
@@ -728,10 +738,10 @@
         infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">¡PRODUCTO GRATIS!</p>';
       } else {
         if (descuentoAplicado > 0) {
-          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + precioOriginal.toFixed(2) + '</span></p>';
+          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + formatearPrecio(precioOriginal) + '</span></p>';
           infoHtml += '<p>Descuento aplicado: ' + descuentoAplicado + '%</p>';
         }
-        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + precioFinal + '</p>';
+        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + formatearPrecio(precioFinal) + '</p>';
       }
       
       document.getElementById('product-info').innerHTML = infoHtml;
@@ -755,9 +765,9 @@
       if (esGratis) {
         precioFinal = "GRATIS";
       } else if (descuentoAplicado > 0) {
-        precioFinal = "$" + (productoSeleccionado.precio * (1 - descuentoAplicado / 100)).toFixed(2);
+        precioFinal = "$" + formatearPrecio(Math.round(productoSeleccionado.precio * (1 - descuentoAplicado / 100));
       } else {
-        precioFinal = "$" + productoSeleccionado.precio.toFixed(2);
+        precioFinal = "$" + formatearPrecio(Math.round(productoSeleccionado.precio);
       }
 
       
@@ -846,8 +856,8 @@
         if (codigoInfo.tipo === 'gratis') {
           precio = 'GRATIS';
         } else {
-          var precioConDescuento = (producto.precio * (1 - codigoInfo.valor / 100)).toFixed(3);
-          precio = '$' + precioConDescuento;
+          var precioConDescuento = Math.round(producto.precio * (1 - codigoInfo.valor / 100));
+          precio = '$' + formatearPrecio(precioConDescuento);
         }
         
         var opcion = document.createElement('div');
@@ -899,6 +909,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9987171404d83eeb',t:'MTc2MjEyMjc3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
