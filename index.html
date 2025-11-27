@@ -493,16 +493,6 @@
    </div>
   </div>
   <script>
-   // ===== FORMATEAR PRECIO =====
-
-function formatearPrecio(precio) {
-
-}
-
-var precioRedondeado = Math.round(precio);
-
-return precioRedondeado.toLocaleString('es-CO');
-   
     // ===== CONFIGURACIÓN =====
     // CAMBIA AQUÍ TU NÚMERO DE WHATSAPP (sin + ni espacios)
     var numeroWhatsApp = "+573245640954"; // CAMBIA ESTE NÚMERO POR EL TUYO
@@ -524,7 +514,7 @@ return precioRedondeado.toLocaleString('es-CO');
     // ===== PRODUCTOS (300 PRODUCTOS LISTOS PARA CONFIGURAR) =====
     // INSTRUCCIONES:
     // - nombre: Cambia el nombre del producto
-    // - precio: Cambia el precio (ej: 4.99)
+    // - precio: Cambia el precio (ej: 4000)
     // - descuento: Porcentaje de descuento (ej: 15 para 15% de descuento, 0 para sin descuento)
     // - stock: true (disponible) o false (agotado)
     // - imagen: Pon SOLO el nombre del archivo (ej: "pringles1.jpg", "producto2.png")
@@ -533,107 +523,107 @@ return precioRedondeado.toLocaleString('es-CO');
     var carpetaImagenes = "imagenes/"; // Cambia "imagenes/" por el nombre de tu carpeta
     
     var productos = [
-      { id: 1, nombre: "67,oro", precio:15.000, descuento: 10, stock: true, imagen: "67, oro.jpg" },
-      { id: 2, nombre: "agarrini la palini,estela y sombrero", precio:18.000, descuento: 10, stock: true, imagen: "agarrini la palini,estela y sombrero.jpg" },
-      { id: 3, nombre: "aquanaut, oro", precio: 6.000, descuento: 5, stock: true, imagen: "aquanaut, oro.jpg" },
-      { id: 4, nombre: "belula beluga,radioactive", precio: 10.000, descuento: 0, stock: true, imagen: "belula beluga,radioactive.jpg" },
-      { id: 5, nombre: "bisonte guipetere ying yang", precio:8.000, descuento: 0, stock: true, imagen: "bisonte giuppitere,ying yang.jpg" },
-      { id: 6, nombre: "blackhole goat ying yang", precio:10.000, descuento: 0, stock: true, imagen: "blackhole goat, yingyang.jpg" },
-      { id: 7, nombre: "blackhole goat", precio:4.000, descuento: 0, stock: true, imagen: "blackhole goat.jpg" },
-      { id: 8, nombre: "boatito auratito,oro", precio:3.600, descuento: 0, stock: true, imagen: "boatito auratito,oro.jpg" },
-      { id: 9, nombre: "boatito auratito,radioactive", precio: 15.000, descuento: 0, stock: true, imagen: "boatito auratito,radioactive.jpg" },
-      { id: 10, nombre: "bombini tortini,lapida y taco.jpg", precio:9.000, descuento: 0, stock: true, imagen: "bombini tortini,lapida y taco.jpg" },
-      { id: 11, nombre: "cappuccino clowninno, lapida y taco", precio: 10.000, descuento: 0, stock: true, imagen: "cappuccino clowninno, lapida y taco.jpg" },
-      { id: 12, nombre: "cappuccino clownino, chicle.jpg", precio: 8.000, descuento: 0, stock: true, imagen: "cappuccino clownino, chicle.jpg" },
-      { id: 13, nombre: "cappuccino clownino, oro,cangrejo y fuego.jpg", precio: 14.000, descuento: 0, stock: true, imagen: "cappuccino clownino, oro,cangrejo y fuego.jpg" },
-      { id: 14, nombre: "cappuccino clownino,oro y halloween.jpg", precio: 12.000, descuento: 0, stock: true, imagen: "cappuccino clownino,oro y halloween.jpg" },
-      { id: 15, nombre: "cappuccino clownino,oro y taco", precio: 9.000, descuento:0, stock: true, imagen: "cappuccino clownino,oro y taco.jpg" },
-      { id: 16, nombre: "chachechi,oro.jpg", precio: 12.000, descuento: 0, stock: true, imagen: "chachechi,oro.jpg" },
-      { id: 17, nombre: "chicleteira bicileteira,diamante", precio: 19.000, descuento: 0, stock: true, imagen: "chicleteira bicileteira,diamante.jpg" },
-      { id: 18, nombre: "pumpkini spyderini, taco,cangrejo,araña,bitz", precio: 32.000, descuento: 0, stock: true, imagen: "pumpkini spyderini, taco,cangrejo,araña,bitz.jpg" },
-      { id: 19, nombre: "crabbo limonetta,oro,gato y taco", precio:8.000, descuento: 0, stock: true, imagen: "crabbo limonetta,oro,gato y taco.jpg" },
-      { id: 20, nombre: "crabbo limonetta,radioactive.jpg", precio: 7.000, descuento: 0, stock: true, imagen: "crabbo limonetta,radioactive.jpg" },
-      { id: 21, nombre: "dul dul dul,oro.jpg", precio:4.000, descuento: 0, stock: true, imagen: "dul dul dul,oro.jpg" },
-      { id: 22, nombre: "sammyni spyderini,ying yang,luna y sombrero", precio:38.000, descuento: 0, stock: true, imagen: "sammyni spyderini,ying yang,luna y sombrero.jpg" },
-      { id: 23, nombre: "extinct tralalero,radioactive.jpg", precio: 6.000, descuento: 0, stock: true, imagen: "extinct tralalero,radioactive.jpg" },
-      { id: 24, nombre: "extinct tralalero.jpg", precio: 3.000, descuento: 0, stock: true, imagen: "extinct tralalero.jpg" },
-      { id: 25, nombre: "frankentteo.jpg", precio: 12.000, descuento: 0, stock: true, imagen: "frankentteo.jpg" },
-      { id: 26, nombre: "gattito tacoto, cangrejo y mexico", precio: 5.000, descuento: 0, stock: true, imagen: "gattirotacoto, cangrejo y mexico.jpg" },
-      { id: 27, nombre: "gattito tacoto, cangrejo,gato y mexico", precio: 7.000, descuento: 0, stock: true, imagen: "gattito tacoto, cangrejo,gato y mexico.jpg" },
-      { id: 28, nombre: "gattito tacoto, rainbow y corbata", precio: 10.000, descuento: 0, stock: true, imagen: "gattito tacoto, rainbow y corbata.jpg" },
-      { id: 29, nombre: "gattito tacoto,galaxy y corbata", precio: 8.000, descuento: 0, stock: true, imagen: "gattito tacoto,galaxy y corbata.jpg" },
-      { id: 30, nombre: "gattito tacoto,gato", precio:3.000, descuento: 0, stock: true, imagen: "gattito tacoto,gato.jpg" },
-      { id: 31, nombre: "graipuss medussi,oro y lapida", precio:8.000, descuento: 0, stock: true, imagen: "graipuss medussi,oro y lapida.jpg" },
-      { id: 32, nombre: "graipuss medussi,oro", precio: 6.000, descuento: 0, stock: true, imagen: "graipuss medussi,oro.jpg" },
-      { id: 33, nombre: "guerriro digitale,diamante", precio: 11.000, descuento: 0, stock: true, imagen: "guerriro digitale,diamante.jpg" },
-      { id: 34, nombre: "horegini boom,fuego", precio: 38.000, descuento: 0, stock: true, imagen: "horegini boom,fuego.jpg" },
-      { id: 35, nombre: "hospt pumkin", precio: 40.000, descuento: 0, stock: true, imagen: "host pumkin.jpg" },
-      { id: 36, nombre: "job job job sahur, diamante y fuego", precio: 24.000, descuento: 0, stock: true, imagen: "job job job sahur, diamante y fuego.jpg" },
-      { id: 37, nombre: "jacko jack jack", precio: 2.000, descuento: 0, stock: true, imagen: "jacko jack jack.jpg" },
-      { id: 38, nombre: "job job job sahur,diamante y estela", precio: 19.000, descuento: 0, stock: true, imagen: "job job job sahur,diamante y estela.jpg" },
-      { id: 39, nombre: "job job job sahur,oro", precio: 17.000, descuento: 0, stock: true, imagen: "job job job sahur,oro.jpg" },
-      { id: 40, nombre: "karkerkar kurkur, cangrejo", precio: 6.000, descuento: 0, stock: true, imagen: "karkerkar kurkur, cangrejo.jpg" },
-      { id: 41, nombre: "karkerkar kurkur, taco", precio:4.000, descuento: 0, stock: true, imagen: "karkerkar kurkur, taco.jpg" },
-      { id: 42, nombre: "krupuk pagi pagi,rainbow", precio: 8.000, descuento: 0, stock: true, imagen: "krupuk pagi pagi,rainbow.jpg" },
-      { id: 43, nombre: "la cucaracha, diamante y gato", precio: 8.000, descuento: 0, stock: true, imagen: "la cucaracha, diamante y gato.jpg" },
-      { id: 44, nombre: "la cucaracha,galaxy", precio: 8.500, descuento: 0, stock: true, imagen: "la cucaracha,galaxy.jpg" },
-      { id: 45, nombre: "la cucaracha,radioactive", precio:12.000, descuento: 0, stock: true, imagen: "la cucaracha,radioactive.jpg" },
-      { id: 46, nombre: "la karkerkar combinasion,chicle", precio:13.000, descuento: 0, stock: true, imagen: "la karkerkar combinasion,chicle.jpg" },
-      { id: 47, nombre: "la karkerkar kurkur,diamante", precio: 4.000, descuento: 0, stock: true, imagen: "la karkerkar kurkur,diamante.jpg" },
-      { id: 48, nombre: "la vacca saturno saturnita, oro", precio: 3.000, descuento: 0, stock: true, imagen: "la vacca saturno saturnita, oro.jpg" },
-      { id: 49, nombre: "la vacca saturno saturnita, rainbow", precio: 5.000, descuento: 0, stock: true, imagen: "la vacca saturno saturnita, rainbow.jpg" },
-      { id: 50, nombre: "la vacca saturno saturnita, sombrero", precio: 3.000, descuento: 0, stock: true, imagen: "la vacca saturno saturnita, sombrero.jpg" },
-      { id: 51, nombre: "la vacca saturno saturnita", precio: 1.000, descuento: 0, stock: true, imagen: "la vacca saturno saturnita.jpg" },
-      { id: 52, nombre: "las tralaleritas,radioactive", precio: 15.000, descuento: 0, stock: true, imagen: "las tralaleritas,radioactive.jpg" },
-      { id: 53, nombre: "las tralaleritas", precio: 2.000, descuento: 0, stock: true, imagen: "las tralaleritas.jpg" },
-      { id: 54, nombre: "las vaquitas saturnitas,luna y estrella", precio: 25.000, descuento: 0, stock: true, imagen: "las vaquitas saturnitas,luna y estrella.jpg" },
-      { id: 55, nombre: "los bombinitos,bloodrot", precio:2.000, descuento: 0, stock: true, imagen: "los bombinitos,bloodrot.jpg" },
-      { id: 56, nombre: "los bombinitos,radioactive", precio: 7.000, descuento: 0, stock: true, imagen: "los bombinitos,radioactive.jpg" },
-      { id: 57, nombre: "los bombinitos,taco,bitz y fuego", precio:10.000, descuento: 0, stock: true, imagen: "los bombinitos,taco,bitz y fuego.jpg" },
-      { id: 58, nombre: "los bombinitos,ying yang y bruja", precio: 11.000, descuento: 0, stock: true, imagen: "los bombinitos,ying yang y bruja.jpg" },
-      { id: 59, nombre: "los bombinitos,ying yang,gato y sombrero", precio:11.500 , descuento: 0, stock: true, imagen: "los bombinitos,ying yang,gato y sombrero.jpg" },
-      { id: 60, nombre: "los jobcitos,bandera", precio: 29.000, descuento: 0, stock: true, imagen: "los jobcitos,bandera.jpg" },
-      { id: 61, nombre: "los karkeritos,oro", precio: 8.000, descuento: 0, stock: true, imagen: "los karkeritos,oro.jpg" },
-      { id: 62, nombre: "los karkeritos,sombrero", precio: 8.000, descuento: 0, stock: true, imagen: "los karkeritos,sombrero.jpg" },
-      { id: 63, nombre: "los orcalitos, oro y cangrejo", precio: 7.000, descuento: 0, stock: true, imagen: "los orcalitos, oro y cangrejo.jpg" },
-      { id: 64, nombre: "los orcalitos,diamante y chicle", precio: 8.000, descuento: 0, stock: true, imagen: "los orcalitos,diamante y chicle.jpg" },
-      { id: 65, nombre: "los orcalitos,mexico,chicle y fuego", precio: 8.500, descuento: 0, stock: true, imagen: "los orcalitos,mexico,chicle y fuego.jpg" },
-      { id: 66, nombre: "los orcalitos,oro y fuego", precio:6.000, descuento: 0, stock: true, imagen: "los orcalitos,oro y fuego.jpg" },
-      { id: 67, nombre: "los orcalitos,oro,cangrejo y fuego", precio: 8.000, descuento: 0, stock: true, imagen: "los orcalitos,oro,cangrejo y fuego.jpg" },
-      { id: 68, nombre: "los orcalitos,radioactive", precio: 12.000, descuento: 0, stock: true, imagen: "los orcalitos,radioactive.jpg" },
-      { id: 69, nombre: "los orcalitos,ying yang", precio: 5.000, descuento: 0, stock: true, imagen: "los orcalitos,ying yang.jpg" },
-      { id: 70, nombre: "los spyderinis", precio:5.000, descuento: 0, stock: true, imagen: "los spyderinis.jpg" },
-      { id: 71, nombre: "los tipi tacos, diamante y gato", precio: 5.000, descuento: 0, stock: true, imagen: "los tipi tacos, diamante y gato.jpg" },
-      { id: 72, nombre: "los tipi tacos, oro y taco", precio: 5.000, descuento: 0, stock: true, imagen: "los tipi tacos, oro y taco.jpg" },
-      { id: 73, nombre: "los tipi tacos,diamante y halloween", precio: 7.000, descuento: 0, stock: true, imagen: "los tipi tacos,diamante y halloween.jpg" },
-      { id: 74, nombre: "los tipi tacos,oro,cangrejo y gato", precio: 6.000, descuento: 0, stock: true, imagen: "los tipi tacos,oro,cangrejo y gato.jpg" },
-      { id: 75, nombre: "los tortus, fuego", precio: 9.000, descuento: 0, stock: true, imagen: "los tortus, fuego.jpg" },
-      { id: 76, nombre: "los tortus,diamante", precio: 8.000, descuento: 0, stock: true, imagen: "los tortus,diamante.jpg" },
-      { id: 77, nombre: "los tortus,radioactive", precio: 17.000, descuento: 0, stock: true, imagen: "los tortus,radioactive.jpg" },
-      { id: 78, nombre: "los tortus", precio: 5.000, descuento: 0, stock: true, imagen: "los tortus.jpg" },
-      { id: 79, nombre: "los tralaleritos,radioactive", precio:11.000, descuento: 0, stock: true, imagen: "los tralaleritos,radioactive.jpg" },
-      { id: 80, nombre: "los tung tungcitos,diamante,taco y sombrero", precio: 12.000, descuento: 0, stock: true, imagen: "los tung tungcitos,diamante,taco y sombrero.jpg" },
-      { id: 81, nombre: "los tung tungcitos,diamante", precio: 11.000, descuento: 0, stock: true, imagen: "los tung tungcitos,diamante.jpg" },
-      { id: 82, nombre: "los tung tungcitos,ying yang", precio:10.000, descuento: 0, stock: true, imagen: "los tung tungcitos,ying yang.jpg" },
-      { id: 83, nombre: "los tungtungcitos,chicle y taco", precio: 10.000, descuento: 0, stock: true, imagen: "los tungtungcitos,chicle y taco.jpg" },
-      { id: 84, nombre: "matteo,galaxy", precio: 8.000, descuento: 0, stock: true, imagen: "matteo,galaxy.jpg" },
-      { id: 85, nombre: "vulturino skeletono,candy y bruja", precio: 22.000, descuento: 0, stock: true, imagen: "vulturino skeletono,candy y bruja.jpg" },
-      { id: 86, nombre: "matteo,rainbow", precio: 6.000, descuento: 0, stock: true, imagen: "matteo,rainbow.jpg" },
-      { id: 87, nombre: "matteo", precio: 4.000, descuento: 0, stock: true, imagen: "matteo.jpg" },
-      { id: 88, nombre: "mieteteira bicileteira", precio: 80.000, descuento: 0, stock: true, imagen: "mieteteira bicileteira.jpg" },
-      { id: 89, nombre: "mummy ambalabu,radioactive", precio: 6.000, descuento: 0, stock: true, imagen: "mummy ambalabu,radioactive.jpg" },
-      { id: 90, nombre: "mummy ambalabu,ying yang", precio: 5.000, descuento: 0, stock: true, imagen: "mummy ambalabu,ying yang.jpg" },
-      { id: 91, nombre: "noo la polizia", precio:26.000, descuento: 0, stock: true, imagen: "noo la polizia.jpg" },
-      { id: 92, nombre: "odin din din dun,rainbow,bandera y blitz", precio: 14.000, descuento: 0, stock: true, imagen: "odin din din dun,rainbow,bandera y blitz.jpg" },
-      { id: 93, nombre: "odin din din dun,ying yang", precio: 5.000, descuento: 0, stock: true, imagen: "odin din din dun,ying yang.jpg" },
-      { id: 94, nombre: "orcalero orcala,ying yang", precio:6.000, descuento: 0, stock: true, imagen: "orcalero orcala,ying yang.jpg" },
-      { id: 95, nombre: "orcalita orcala,radioactive", precio: 8.000, descuento: 0, stock: true, imagen: "orcalita orcala,radioactive.jpg" },
-      { id: 96, nombre: "pakrahmatmamat, lapida y taco", precio: 12.000, descuento: 0, stock: true, imagen: "pakrahmatmamat, lapida y taco.jpg" },
-      { id: 97, nombre: "pakrahmatmamat,oro,cangrejo y taco", precio: 16.000, descuento: 0, stock: true, imagen: "pakrahmatmamat,oro,cangrejo y taco.jpg" },
-      { id: 98, nombre: "pakrahmatmamat,rainbow", precio: 10.000, descuento: 0, stock: true, imagen: "pakrahmatmamat,rainbow.jpg" },
-      { id: 99, nombre: "pakrahmatmatina, fuego", precio: 7.000, descuento: 0, stock: true, imagen: "pakrahmatmatina, fuego.jpg" },
-      { id: 100, nombre: "pop pop sahur,orogato y halloween", precio: 14.000, descuento: 0, stock: true, imagen: "pop pop sahur,orogato y halloween.jpg" }
-     
+      { id: 1, nombre: "alessio oro", precio:6.000, descuento: 0, stock: true, imagen: "alessio oro.jpg" },
+      { id: 2, nombre: "aquanaut oro", precio:6.000, descuento: 0, stock: true, imagen: "aquanaut oro.jpg" },
+      { id: 3, nombre: "ballerino lololo", precio: 6.000, descuento: 0, stock: true, imagen: "ballerino lololo.jpg" },
+      { id: 4, nombre: "bambu bambu sahur oro", precio: 7.000, descuento: 0, stock: true, imagen: "bambu bambu sahur oro.jpg" },
+      { id: 5, nombre: "bisonte guipetere ying yang", precio:8.000, descuento: 20, stock: true, imagen: "bisonte guipetere ying yang.jpg" },
+      { id: 6, nombre: "blackhole goat ying yang", precio:10.000, descuento: 5, stock: true, imagen: "blackhole goat ying yang.jpg" },
+      { id: 7, nombre: "bombardini tortini diamante", precio:6.000, descuento: 5, stock: true, imagen: "bombardini tortini diamante.jpg" },
+      { id: 8, nombre: "bombardini tortini rip,taco", precio:7.000, descuento: 0, stock: true, imagen: "bombardini tortini rip,taco.jpg" },
+      { id: 9, nombre: "cappccino clownino oro,cangrejo,fuego", precio: 12.000, descuento: 15, stock: true, imagen: "cappccino clownino oro,cangrejo,fuego.jpg" },
+      { id: 10, nombre: "cappccino clownino oro,halloween", precio:14.000, descuento: 10, stock: true, imagen: "cappccino clownino oro,halloween.jpg" },
+      { id: 11, nombre: "cappuccino clownino chicle", precio: 13.000, descuento: 5, stock: true, imagen: "cappuccino clownino chicle.jpg" },
+      { id: 12, nombre: "cappuccino clownino oro,taco", precio: 10.000, descuento: 0, stock: true, imagen: "cappuccino clownino oro,taco.jpg" },
+      { id: 13, nombre: "cappuccino clownino oro", precio: 7.000, descuento: 5, stock: true, imagen: "cappuccino clownino oro.jpg" },
+      { id: 14, nombre: "ceabbo limonetta ying yang,aleta", precio: 13.000, descuento: 10, stock: true, imagen: "ceabbo limonetta ying yang,aleta.jpg" },
+      { id: 15, nombre: "chachechi oro", precio: 6.000, descuento:0, stock: true, imagen: "chachechi oro.jpg" },
+      { id: 16, nombre: "extinct tralalero", precio: 12.000, descuento: 5, stock: true, imagen: "extinct tralalero.jpg" },
+      { id: 17, nombre: "frankentteo", precio: 18.000, descuento: 10, stock: true, imagen: "frankentteo.jpg" },
+      { id: 18, nombre: "gattito tacoto cangrejo,mexico", precio: 12.000, descuento: 0, stock: true, imagen: "gattito tacoto cangrejo,mexico.jpg" },
+      { id: 19, nombre: "gattito tacoto diamante", precio:6.000, descuento: 0, stock: true, imagen: "gattito tacoto diamante.jpg" },
+      { id: 20, nombre: "gattito tacotto diamante,taco", precio: 7.000, descuento: 0, stock: true, imagen: "gattito tacotto diamante,taco.jpg" },
+      { id: 21, nombre: "gattito tacotto rainbow,corbata ", precio:9.000, descuento: 15, stock: true, imagen: "gattito tacotto rainbow,corbata.jpg" },
+      { id: 22, nombre: "gattitto tacoto cangrejo,gato,mexico", precio:11.000, descuento: 5, stock: true, imagen: "gattitto tacoto cangrejo,gato,mexico.jpg" },
+      { id: 23, nombre: "hospt pumkin", precio: 40.000, descuento: 10, stock: true, imagen: "hospt pumkin.jpg" },
+      { id: 24, nombre: "jacko jack jack", precio: 6.000, descuento: 0, stock: true, imagen: "jacko jack jack.jpg" },
+      { id: 25, nombre: "job job job sahur diamante,fuego", precio: 22.000, descuento: 10, stock: true, imagen: "job job job sahur diamante,fuego.jpg" },
+      { id: 26, nombre: "job job sahur oro", precio: 20.000, descuento: 5, stock: true, imagen: "job job sahur oro.jpg" },
+      { id: 27, nombre: "karkerkar kurkur cangrejo", precio: 13.000, descuento: 5, stock: true, imagen: "karkerkar kurkur cangrejo.jpg" },
+      { id: 28, nombre: "karkerkar kurkur diamante", precio: 12.000, descuento: 0, stock: true, imagen: "karkerkar kurkur diamante.jpg" },
+      { id: 29, nombre: "karkerkar kurkur taco", precio: 14.000, descuento: 5, stock: true, imagen: "karkerkar kurkur taco.jpg" },
+      { id: 30, nombre: "la cucaracha diamante,gato", precio:18.000, descuento: 10, stock: true, imagen: "la cucaracha diamante,gato.jpg" },
+      { id: 31, nombre: "la cucaracha galaxy", precio:16.000, descuento: 10, stock: true, imagen: "la cucaracha galaxy.jpg" },
+      { id: 32, nombre: "la karkerkar combinasion chicle", precio: 24.000, descuento: 5, stock: true, imagen: "la karkerkar combinasion chicle.jpg" },
+      { id: 33, nombre: "la vaca saturno saturnita sombrero", precio: 15.000, descuento: 10, stock: true, imagen: "la vaca saturno saturnita sombrero.jpg" },
+      { id: 34, nombre: "la vacca saturno saturnita oro", precio: 16.000, descuento: 0, stock: true, imagen: "la vacca saturno saturnita oro.jpg" },
+      { id: 35, nombre: "la vacca saturno saturnita rainbow", precio: 19.000, descuento: 15, stock: true, imagen: "la vacca saturno saturnita rainbow.jpg" },
+      { id: 36, nombre: "la vacca saturno saturnita", precio: 20.000, descuento: 0, stock: true, imagen: "la vacca saturno saturnita.jpg" },
+      { id: 37, nombre: "las tralalelitas", precio: 8.000, descuento: 25, stock: true, imagen: "las tralalelitas.jpg" },
+      { id: 38, nombre: "los bombinitos blood", precio: 9.000, descuento: 0, stock: true, imagen: "los bombinitos blood.jpg" },
+      { id: 39, nombre: "los bombinitos ying yang,gato,sombrero", precio: 14.000, descuento: 5, stock: true, imagen: "los bombinitos ying yang,gato,sombrero.jpg" },
+      { id: 40, nombre: "los bombinitos", precio: 6.000, descuento: 5, stock: true, imagen: "los bombinitos.jpg" },
+      { id: 41, nombre: "los karkeritos oro", precio:22.000, descuento: 10, stock: true, imagen: "los karkeritos oro.jpg" },
+      { id: 42, nombre: "los orcalitos cangrejo", precio: 16.000, descuento: 5, stock: true, imagen: "los orcalitos cangrejo.jpg" },
+      { id: 43, nombre: "los orcalitos diamante y chicle", precio: 22.000, descuento: 5, stock: true, imagen: "los orcalitos diamante y chicle.jpg" },
+      { id: 44, nombre: "los orcalitos diamante", precio: 20.000, descuento: 0, stock: true, imagen: "los orcalitos diamante.jpg" },
+      { id: 45, nombre: "los orcalitos mexico", precio:18.000, descuento: 10, stock: true, imagen: "los orcalitos mexico.jpg" },
+      { id: 46, nombre: "los orcalitos oro,cangrejo", precio:19.000, descuento: 0, stock: true, imagen: "los orcalitos oro,cangrejo.jpg" },
+      { id: 47, nombre: "los orcalitos ying yang", precio: 21.000, descuento: 0, stock: true, imagen: "los orcalitos ying yang.jpg" },
+      { id: 48, nombre: "los orcalitos", precio: 20.000, descuento: 0, stock: true, imagen: "los orcalitos.jpg" },
+      { id: 49, nombre: "los tipi tacos cangrejo y gato", precio: 23.000, descuento: 5, stock: true, imagen: "los tipi tacos cangrejo y gato.jpg" },
+      { id: 50, nombre: "los tipi tacos diamante,gato", precio: 24.000, descuento: 0, stock: true, imagen: "los tipi tacos diamante,gato.jpg" },
+      { id: 51, nombre: "los tipi tacos oro,taco", precio: 19.000, descuento: 0, stock: true, imagen: "los tipi tacos oro,taco.jpg" },
+      { id: 52, nombre: "los tipi tacos", precio: 9.000, descuento: 0, stock: true, imagen: "los tipi tacos.jpg" },
+      { id: 53, nombre: "los tortus diamante", precio: 18.000, descuento: 0, stock: true, imagen: "los tortus diamante.jpg" },
+      { id: 54, nombre: "los tortus fuego", precio: 22.000, descuento: 15, stock: true, imagen: "los tortus fuego.jpg" },
+      { id: 55, nombre: "los tortus", precio:12.000, descuento: 5, stock: true, imagen: "los tortus.jpg" },
+      { id: 56, nombre: "los tungtuncitos", precio: 12.000, descuento: 5, stock: true, imagen: "los tungtuncitos.jpg" },
+      { id: 57, nombre: "los tungtungtuncitos diamante y sombrero", precio:14.000, descuento: 20, stock: true, imagen: "los tungtungtuncitos diamante y sombrero.jpg" },
+      { id: 58, nombre: "los tungtungtuncitos", precio: 6.000, descuento: 0, stock: true, imagen: "los tungtungtuncitos.jpg" },
+      { id: 59, nombre: "mateo rainbow", precio:15.000 , descuento: 15, stock: true, imagen: "mateo rainbow.jpg" },
+      { id: 60, nombre: "mummy ambalabu ying yang", precio: 23.000, descuento: 20, stock: true, imagen: "mummy ambalabu ying yang.jpg" },
+      { id: 61, nombre: "odin din din dun diamante", precio: 8.000, descuento: 0, stock: true, imagen: "odin din din dun diamante.jpg" },
+      { id: 62, nombre: "orcalero orcala ying yang", precio: 24.000, descuento: 10, stock: true, imagen: "orcalero orcala ying yang.jpg" },
+      { id: 63, nombre: "pakrahmatmamat rainbow", precio: 32.000, descuento: 25, stock: true, imagen: "pakrahmatmamat rainbow.jpg" },
+      { id: 64, nombre: "pakrahmatmamat rip,taco", precio: 33.000, descuento: 10, stock: true, imagen: "pakrahmatmamat rip,taco.jpg" },
+      { id: 65, nombre: "pakrahmatmatina fuego", precio: 70.000, descuento: 10, stock: true, imagen: "pakrahmatmatina fuego.jpg" },
+      { id: 66, nombre: "pakrahmatmatina", precio:8.000, descuento: 0, stock: true, imagen: "pakrahmatmatina.jpg" },
+      { id: 67, nombre: "phakaramamat oro y cangrejo", precio: 85.000, descuento: 10, stock: true, imagen: "phakaramamat oro y cangrejo.jpg" },
+      { id: 68, nombre: "phakaramamat rainbow", precio: 100.000, descuento: 5, stock: true, imagen: "phakaramamat rainbow.jpg" },
+      { id: 69, nombre: "pop pop sahur oro,gato,halloween", precio: 185.000, descuento: 15, stock: true, imagen: "pop pop sahur oro,gato,halloween.jpg" },
+      { id: 70, nombre: "pumpkini spyderini taco,cangrejo,araña,bits", precio:360.000, descuento: 20, stock: true, imagen: "pumpkini spyderini taco,cangrejo,araña,bits.jpg" },
+      { id: 71, nombre: "pumpkini spyderini taco,chicle", precio: 220.000, descuento: 25, stock: true, imagen: "pumpkini spyderini taco,chicle.jpg" },
+      { id: 72, nombre: "pumpkini spyderini taco", precio: 120.000, descuento: 10, stock: true, imagen: "pumpkini spyderini taco.jpg" },
+      { id: 73, nombre: "sammyni spyderini oro,fuego", precio: 130.000, descuento: 10, stock: true, imagen: "sammyni spyderini oro,fuego.jpg" },
+      { id: 74, nombre: "sammyni spyderini oro", precio: 25.000, descuento: 5, stock: true, imagen: "sammyni spyderini oro.jpg" },
+      { id: 75, nombre: "samynny spyderini", precio: 10.000, descuento: 5, stock: true, imagen: "samynny spyderini.jpg" },
+      { id: 76, nombre: "skull skull skull rainbow", precio: 160.000, descuento: 10, stock: true, imagen: "skull skull skull rainbow.jpg" },
+      { id: 77, nombre: "skull skull skull ying yang", precio: 120.000, descuento: 15, stock: true, imagen: "skull skull skull ying yang.jpg" },
+      { id: 78, nombre: "snailenzo diamante", precio: 80.000, descuento: 5, stock: true, imagen: "snailenzo diamante.jpg" },
+      { id: 79, nombre: "tartaruga cisterna ying yang", precio:200.000, descuento: 25, stock: true, imagen: "tartaruga cisterna ying yang.jpg" },
+      { id: 80, nombre: "telemorte", precio: 125.000, descuento: 5, stock: true, imagen: "telemorte.jpg" },
+      { id: 81, nombre: "tentacolo tecnico brasil,oro", precio: 120.000, descuento: 10, stock: true, imagen: "tentacolo tecnico brasil,oro.jpg" },
+      { id: 82, nombre: "tentacolo tecnico", precio:10.000, descuento: 0, stock: true, imagen: "tentacolo tecnico.jpg" },
+      { id: 83, nombre: "tigroligre frutonni cangrejo,taco y chicle", precio: 30.000, descuento: 20, stock: true, imagen: "tigroligre frutonni cangrejo,taco y chicle.jpg" },
+      { id: 84, nombre: "tipi topi taco fuego", precio: 15.000, descuento: 5, stock: true, imagen: "tipi topi taco fuego.jpg" },
+      { id: 85, nombre: "to to to sahur oro", precio: 180.000, descuento: 15, stock: true, imagen: "to to to sahur oro.jpg" },
+      { id: 86, nombre: "tortugini dragonfrutini diamante taco", precio: 80.000, descuento: 0, stock: true, imagen: "tortugini dragonfrutini diamante taco.jpg" },
+      { id: 87, nombre: "tractoro dinosaurio", precio: 8.000, descuento: 10, stock: true, imagen: "tractoro dinosaurio.jpg" },
+      { id: 88, nombre: "tralalita tralala oro", precio: 6.000, descuento: 0, stock: true, imagen: "tralalita tralala oro.jpg" },
+      { id: 89, nombre: "trenostruzo turbo 3000 oro,corbata", precio: 70.000, descuento: 30, stock: true, imagen: "trenostruzo turbo 3000 oro,corbata.jpg" },
+      { id: 90, nombre: "trenostruzo turbo 3000", precio: 6.000, descuento: 0, stock: true, imagen: "trenostruzo turbo 3000.jpg" },
+      { id: 91, nombre: "trickolino cangrejo,taco", precio:250.000, descuento: 20, stock: true, imagen: "trickolino cangrejo,taco.jpg" },
+      { id: 92, nombre: "trickolino diamante", precio: 100.000, descuento: 0, stock: true, imagen: "trickolino diamante.jpg" },
+      { id: 93, nombre: "trickolino halloween", precio: 170.000, descuento: 15, stock: true, imagen: "trickolino halloween.jpg" },
+      { id: 94, nombre: "trippi tropopi troppa trippa", precio:6.000, descuento: 0, stock: true, imagen: "trippi tropopi troppa trippa.jpg" },
+      { id: 95, nombre: "urubini flamenguini ying yang", precio: 120.000, descuento: 25, stock: true, imagen: "urubini flamenguini ying yang.jpg" },
+      { id: 96, nombre: "vampira cappucina cangrejo,mexico", precio: 80.000, descuento: 0, stock: true, imagen: "vampira cappucina cangrejo,mexico.jpg" },
+      { id: 97, nombre: "vulturino skeletono halloween", precio: 130.000, descuento: 10, stock: true, imagen: "vulturino skeletono halloween.jpg" },
+      { id: 98, nombre: "vulturino skeletono", precio: 30.000, descuento: 0, stock: true, imagen: "vulturino skeletono.jpg" },
+      { id: 99, nombre: "zombie tralala oro", precio: 60.000, descuento: 20, stock: true, imagen: "zombie tralala oro.jpg" },
+      { id: 100, nombre: "zombie tralala", precio: 30.000, descuento: 0, stock: true, imagen: "zombie tralala.jpg" }
+    
 ];
 
     
@@ -641,24 +631,23 @@ return precioRedondeado.toLocaleString('es-CO');
     var productoSeleccionado = null;
     var descuentoAplicado = 0;
     var esGratis = false;
-
+    
     // ===== MOSTRAR PRODUCTOS =====
     function mostrarProductos() {
       var contenedor = document.getElementById('products');
       contenedor.innerHTML = '';
       
-         for (var i = 0; i < productosFiltrados.length; i++) {
+      for (var i = 0; i < productosFiltrados.length; i++) {
         var producto = productosFiltrados[i];
         var precioFinal = producto.descuento > 0 
-          ? Math.round(producto.precio * (1 - producto.descuento / 100))
-          : Math.round(producto.precio);
+          ? (producto.precio * (1 - producto.descuento / 100)).toFixed(3)
+          : producto.precio.toFixed(3);
         
         var html = '<div class="product">';
         
         if (producto.descuento > 0) {
           html += '<div class="discount">-' + producto.descuento + '%</div>';
         }
-
         
         // Mostrar imagen si existe, sino mostrar placeholder
         if (producto.imagen && producto.imagen !== "URL_AQUI" && producto.imagen !== "") {
@@ -673,10 +662,10 @@ return precioRedondeado.toLocaleString('es-CO');
         html += '<div class="price">';
         
         if (producto.descuento > 0) {
-          html += '<span class="old-price">$' + formatearPrecio(producto.precio) + '</span>';
+          html += '<span class="old-price">$' + producto.precio.toFixed(3) + '</span>';
         }
         
-        html += '<span class="new-price">$' + formatearPrecio(precioFinal) + '</span>';
+        html += '<span class="new-price">$' + precioFinal + '</span>';
         html += '</div>';
         
         if (producto.stock) {
@@ -694,7 +683,7 @@ return precioRedondeado.toLocaleString('es-CO');
     // ===== COMPRAR PRODUCTO =====
     function comprar(id) {
       productoSeleccionado = productos.find(function(p) { return p.id === id; });
-      descuentoAplicado = 0;
+      descuentoAplicado = productoSeleccionado.descuento;
       esGratis = false;
       mostrarCheckout();
     }
@@ -719,17 +708,16 @@ return precioRedondeado.toLocaleString('es-CO');
     function mostrarCheckout() {
       document.getElementById('main-section').style.display = 'none';
       document.getElementById('checkout-section').style.display = 'block';
-      
+    
       var precioOriginal = productoSeleccionado.precio;
-     
-       var precioFinal;
+      var precioFinal;
       
-        if (esGratis) {
+      if (esGratis) {
         precioFinal = 0;
       } else if (descuentoAplicado > 0) {
-        precioFinal = Math.round(precioOriginal * (1 - descuentoAplicado / 100));
+        precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)).toFixed(3);
       } else {
-        precioFinal = Math.round(precioOriginal);
+        precioFinal = precioOriginal.toFixed(3);
       }
       
       var infoHtml = '<h3>' + productoSeleccionado.nombre + '</h3>';
@@ -738,10 +726,10 @@ return precioRedondeado.toLocaleString('es-CO');
         infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">¡PRODUCTO GRATIS!</p>';
       } else {
         if (descuentoAplicado > 0) {
-          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + formatearPrecio(precioOriginal) + '</span></p>';
+          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + precioOriginal.toFixed(3) + '</span></p>';
           infoHtml += '<p>Descuento aplicado: ' + descuentoAplicado + '%</p>';
         }
-        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + formatearPrecio(precioFinal) + '</p>';
+        infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + precioFinal + '</p>';
       }
       
       document.getElementById('product-info').innerHTML = infoHtml;
@@ -755,27 +743,28 @@ return precioRedondeado.toLocaleString('es-CO');
         alert('Por favor ingresa tu usuario de Roblox');
         return;
       }
+    
+     
       
       // Crear mensaje para WhatsApp
       var fecha = new Date();
       var fechaTexto = fecha.toLocaleDateString();
       var horaTexto = fecha.toLocaleTimeString();
       
-         var precioFinal;
+      var precioFinal;
       if (esGratis) {
         precioFinal = "GRATIS";
       } else if (descuentoAplicado > 0) {
-        precioFinal = "$" + formatearPrecio(Math.round(productoSeleccionado.precio * (1 - descuentoAplicado / 100)));
+        precioFinal = "$" + (productoSeleccionado.precio * (1 - descuentoAplicado / 100)).toFixed(3);
       } else {
-        precioFinal = "$" + formatearPrecio(Math.round(productoSeleccionado.precio));
+        precioFinal = "$" + productoSeleccionado.precio.toFixed(3);
       }
-
       
       var mensaje = "🛒 NUEVO PEDIDO\n\n";
       mensaje += "📅 Fecha: " + fechaTexto + "\n";
       mensaje += "🕐 Hora: " + horaTexto + "\n";
       mensaje += "🎮 Usuario Roblox: " + usuarioRoblox + "\n";
-      mensaje += "🥔 Producto: " + productoSeleccionado.nombre + "\n";
+     mensaje += "🥔 Producto: " + productoSeleccionado.nombre + "\n";
       mensaje += "💰 Precio: " + precioFinal + "\n";
       
       if (descuentoAplicado > 0) {
@@ -856,8 +845,8 @@ return precioRedondeado.toLocaleString('es-CO');
         if (codigoInfo.tipo === 'gratis') {
           precio = 'GRATIS';
         } else {
-          var precioConDescuento = Math.round(producto.precio * (1 - codigoInfo.valor / 100));
-          precio = '$' + formatearPrecio(precioConDescuento);
+          var precioConDescuento = (producto.precio * (1 - codigoInfo.valor / 100)).toFixed(3);
+          precio = '$' + precioConDescuento;
         }
         
         var opcion = document.createElement('div');
@@ -909,34 +898,3 @@ return precioRedondeado.toLocaleString('es-CO');
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9987171404d83eeb',t:'MTc2MjEyMjc3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
