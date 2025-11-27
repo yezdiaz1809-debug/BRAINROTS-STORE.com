@@ -662,7 +662,7 @@
         html += '<div class="price">';
         
         if (producto.descuento > 0) {
-          html += '<span class="old-price">$' + producto.precio.toFixed(2) + '</span>';
+          html += '<span class="old-price">$' + producto.precio.toFixed(3) + '</span>';
         }
         
         html += '<span class="new-price">$' + precioFinal + '</span>';
@@ -715,9 +715,9 @@
       if (esGratis) {
         precioFinal = 0;
       } else if (descuentoAplicado > 0) {
-        precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)).toFixed(2);
+        precioFinal = (precioOriginal * (1 - descuentoAplicado / 100)).toFixed(3);
       } else {
-        precioFinal = precioOriginal.toFixed(2);
+        precioFinal = precioOriginal.toFixed(3);
       }
       
       var infoHtml = '<h3>' + productoSeleccionado.nombre + '</h3>';
@@ -726,7 +726,7 @@
         infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">¡PRODUCTO GRATIS!</p>';
       } else {
         if (descuentoAplicado > 0) {
-          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + precioOriginal.toFixed(2) + '</span></p>';
+          infoHtml += '<p>Precio original: <span style="text-decoration: line-through;">$' + precioOriginal.toFixed(3) + '</span></p>';
           infoHtml += '<p>Descuento aplicado: ' + descuentoAplicado + '%</p>';
         }
         infoHtml += '<p style="color: #27ae60; font-size: 20px; font-weight: bold;">Precio final: $' + precioFinal + '</p>';
@@ -753,9 +753,9 @@
       if (esGratis) {
         precioFinal = "GRATIS";
       } else if (descuentoAplicado > 0) {
-        precioFinal = "$" + (productoSeleccionado.precio * (1 - descuentoAplicado / 100)).toFixed(2);
+        precioFinal = "$" + (productoSeleccionado.precio * (1 - descuentoAplicado / 100)).toFixed(3);
       } else {
-        precioFinal = "$" + productoSeleccionado.precio.toFixed(2);
+        precioFinal = "$" + productoSeleccionado.precio.toFixed(3);
       }
       
       var mensaje = "🛒 NUEVO PEDIDO\n\n";
@@ -843,7 +843,7 @@
         if (codigoInfo.tipo === 'gratis') {
           precio = 'GRATIS';
         } else {
-          var precioConDescuento = (producto.precio * (1 - codigoInfo.valor / 100)).toFixed(2);
+          var precioConDescuento = (producto.precio * (1 - codigoInfo.valor / 100)).toFixed(3);
           precio = '$' + precioConDescuento;
         }
         
@@ -896,6 +896,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9987171404d83eeb',t:'MTc2MjEyMjc3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
